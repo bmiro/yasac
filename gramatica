@@ -1,0 +1,140 @@
+PROGRAMA:
+	pc_procedure ENCAP pc_is
+		DECLARACIONS
+	pc_begin
+		SENTENCIES
+	pc_end identificador s_punt_i_coma
+
+ENCAP:
+	  identificador
+	| identificador s_parentesi_obert PARAMETRES s_parentesi_tancat
+
+PARAMETRES:
+	  PARAMETRES s_punt_i_coma PARAMETRE
+	| PARAMETRE
+	
+PARAMETRE:
+	identificador s_dos_punts MODE identificador 
+
+MODE:
+	  pc_in
+	| pc_out
+	| pc_in pc_out
+
+DECLARACIONS: 
+      DECLARACIO DECLARACIONS
+	| lambda
+
+DECLARACIO:
+	  DEC_CONST
+	| DEC_VAR
+	| DEC_PROCEDURE
+	| DEC_TIPUS
+
+DEC_TIPUS:
+	  DEC_ARRAY
+	| DEC_RECORD
+	| DEC_SUBRANG
+
+DEC_CONST: 
+	identificador s_dos_punts pc_constant identificador s_assignacio V_CONST s_punt_i_coma
+
+V_CONST:
+	  s_mes literal 
+	| s_menys literal
+	| literal 
+
+DEC_VAR: 
+	LLISTA_ID s_dos_punts identificador s_punt_i_coma
+
+LLISTA_ID:  
+	identificador IDENTIFICADOR
+
+IDENTIFICADOR:
+	  s_coma identificador IDENTIFICADOR
+	| lamba
+
+DEC_ARRAY: 
+	pc_type identificador pc_is pc_array 
+    s_parentesi_obert LLISTA_IDX s_parentesi_tancat pc_of identificador s_punt_i_coma
+
+LLISTA_IDX: 
+	  LLISTA_IDX s_coma RANG
+	| RANG
+
+RANG: 
+	LIM s_puntpunt LIM  
+
+LIM: 		identificador
+		|	literal
+
+DEC_PROCEDURE: 
+	PROGRAMA
+
+DEC_RECORD: 
+	pc_type identificador pc_is pc_record CAMPS pc_end pc_record s_punt_i_coma
+
+CAMPS: 
+	  CAMPS identificador s_dos_punts identificador s_punt_i_coma  
+	| identificador s_dos_punts identificador s_punt_i_coma
+
+DEC_SUBRANG: pc_type identificador pc_is pc_new identificador pc_range RANG s_punt_i_coma
+		
+SENTENCIES:
+	  SENTENCIA SENTENCIES
+	| SENTENCIA
+
+SENTENCIA: 
+	  SENT_BUCLES
+	| SENT_FLUXE
+	| SENT_PROCEDURE
+	| SENT_ASSIGNACIO
+
+SENT_BUCLUES: 
+	  pc_while EXPRESIO pc_loop SENTENCIES pc_end pc_loop s_punt_i_coma
+	| pc_for identificador pc_in RANG pc_loop SENTENCIES pc_end pc_loop s_punt_i_coma
+	
+SENT_FLUXE:
+	  pc_if EXPRESIO pc_then SENTENCIES pc_end pc_if s_punt_i_coma
+	| pc_if EXPRESIO pc_then SENTENCIES pc_else SENTENCIES pc_end pc_if s_punt_i_coma
+
+	
+EXPRESIO: 
+	  EXPRESIO OP EXPRESIO
+	| EXPRESIO SIMBOL EXPRESIO
+	| s_menys EXPRESIO
+	| s_parentesi_obert EXPRESIO s_parentesi_tancat
+	| R
+	| literal
+
+OP:	
+	  s_mes
+	| s_menys
+	| s_producte
+	| s_divisio
+	| pc_mod
+	
+SIMBOL: 
+	  pc_and
+	| pc_or
+	| s_igual
+	| s_major
+	| s_menor
+	| s_major_igual
+	| s_menor_igual
+	| s_distint
+
+R:		
+	  identificador s_punt identificador
+	| identificador s_parentesi_obert INDEXOS s_parentesi_tancat
+	| identificador
+
+INDEXOS: 
+	  INDEXOS s_coma EXPRESSIO
+	| EXPRESSIO 
+
+SENT_ASSIGNACIO: 
+	R s_assignacio EXPRESIO s_punt_i_coma
+
+SENT_PROCEDURE: 
+	R s_punt_i_coma
