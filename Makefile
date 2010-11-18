@@ -21,6 +21,9 @@ tnoms:
 	gnatmake proves_tnoms.adb
 	./proves_tnoms
 
+tar:
+	tar cvjf compiladors_`date +%Y%m%d-%H%M`.tar.bz2 * --exclude=$(CURDIR)"/.git*"
+
 clean:
 	rm proves_tnoms &
 	rm principal &
@@ -33,5 +36,5 @@ clean:
 	rm AFLEXNAT/aflex &
 	rm AFLEXNAT/*.ali &
 	rm AFLEXNAT/*.o &
-	
+	rm *.tar.bz2	
 
