@@ -13,12 +13,12 @@ package decls.datribut is
             col: natural;
             case tipus is    
                 when at_atom => null;
-                when at_lit_enter =>    tle: tipus_subjacent := enter;
-                                        vale: integer; -- sera el valor enter
-                when at_lit_caracter => tlc: tipus_subjacent := caracter;
-                                        valc: integer; -- sera el codi ASCII
-                when at_lit_string =>   tls: tipus_subjacent := cadena;
-                                        vals: integer; -- sera id_string de la taula de noms
+                when at_lit_enter =>    vale: integer; -- sera el valor enter
+					tle: tipus_subjacent := enter;
+                when at_lit_caracter => valc: integer; -- sera el codi ASCII
+					tlc: tipus_subjacent := caracter;
+                when at_lit_string =>   vals: integer; -- sera id_string de la taula de noms
+					tls: tipus_subjacent := cadena;
                 when at_identificador => id_n: id_nom;        
                 when others => null;
             end case;

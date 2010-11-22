@@ -21,6 +21,9 @@ tnoms:
 	gnatmake proves_tnoms.adb
 	./proves_tnoms
 
+edit:
+	kate decls.ads decls-datribut.adb decls-datribut.ads decls-dtnoms.adb decls-dtnoms.ads decls-generals.ads gramatica lexic.l Makefile
+
 tar:
 	tar cvjf compiladors_`date +%Y%m%d-%H%M`.tar.bz2 * --exclude=$(CURDIR)"/.git*"
 
@@ -36,5 +39,4 @@ clean:
 	rm AFLEXNAT/aflex &
 	rm AFLEXNAT/*.ali &
 	rm AFLEXNAT/*.o &
-	rm *.tar.bz2	
-
+	rm *.tar.bz2
