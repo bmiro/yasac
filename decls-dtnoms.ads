@@ -1,3 +1,4 @@
+with Ada.Strings; use Ada.Strings;
 with decls.generals; use decls.generals;    
 package decls.dtnoms is
         
@@ -14,7 +15,7 @@ private
     subtype index_tcaracters is id_string;
 
     type taula_dispersio is array(0..tam_tdispersio) of id_nom;
-    type taula_caracters is array(index_tcaracters) of character;
+    subtype taula_caracters is string(id_string);
     type bloc is record
         ptblocs: id_nom;    --posicio que apunta dins la mateixa taula de blocs 
         ptcaracters: index_tcaracters;  --posicio que apunta a la taula de caracters

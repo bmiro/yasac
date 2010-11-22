@@ -16,12 +16,8 @@ package body decls.dtnoms is
     end tbuida;
     
     function hash(k: in string) return natural is
-        comptador : natural := 0;
     begin
-        for i in k'first..k'last loop
-            comptador := comptador + character'POS(k(i));
-        end loop;
-        return comptador mod tam_tdispersio;
+        return Ada.Strings.hash(k)'natural;
     end hash;
 
     --Insereix un string dins la taula de caracters

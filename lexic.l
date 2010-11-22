@@ -25,6 +25,7 @@ for 	  { rl_atom(yylval, yytext, tok_begin_line, tok_begin_col); return pc_for;}
 while 	  { rl_atom(yylval, yytext, tok_begin_line, tok_begin_col); return pc_while;}
 loop 	  { rl_atom(yylval, yytext, tok_begin_line, tok_begin_col); return pc_loop;}
 and   	  { rl_atom(yylval, yytext, tok_begin_line, tok_begin_col); return pc_and;}
+not       { rl_atom(yylval, yytext, tok_begin_line, tok_begin_col); return pc_not;}
 or 	  { rl_atom(yylval, yytext, tok_begin_line, tok_begin_col); return pc_or;}
 mod 	  { rl_atom(yylval, yytext, tok_begin_line, tok_begin_col); return pc_mod;}
 
@@ -47,7 +48,7 @@ mod 	  { rl_atom(yylval, yytext, tok_begin_line, tok_begin_col); return pc_mod;}
 "("  { rl_atom(yylval, yytext, tok_begin_line, tok_begin_col); return s_parentesi_obert;}
 ")"  { rl_atom(yylval, yytext, tok_begin_line, tok_begin_col); return s_parentesi_tancat;}
 
-{lletra}+({lletdig}*_?{lletdig})* { rl_id(yylval, yytext, tok_begin_line, tok_begin_col); return identificador;} --identificador
+{lletra}(_?{lletdig})*            { rl_id(yylval, yytext, tok_begin_line, tok_begin_col); return identificador;} --identificador
 
 {digit}+                          { rl_lit_enter(yylval, yytext, tok_begin_line, tok_begin_col); return literal;} --digit
 
@@ -57,7 +58,7 @@ mod 	  { rl_atom(yylval, yytext, tok_begin_line, tok_begin_col); return pc_mod;}
 
 "--"[^\n]*                        {null;}	--comentaris
 
-[\t|\n|\ ]                        {null;}  	--separadors
+[\t|\r|\ ]+                       {null;}  	--separadors
 
 . 	                          {return Error;}
 
@@ -68,7 +69,7 @@ with decls.datribut; use decls.datribut;
 package a_lexic is
 	yylval : atribut;
 	type token is(Error, End_Of_Input, pc_and, pc_array, pc_begin, pc_constant, pc_else,
-		      pc_end, pc_for, pc_if, pc_in, pc_is, pc_loop, pc_mod, pc_new, pc_of,
+		      pc_end, pc_for, pc_if, pc_in, pc_is, pc_loop, pc_mod, pc_new, pc_not, pc_of,
 		      pc_or, pc_out, pc_procedure, pc_range, pc_record, pc_then, pc_type,
 		      pc_while, s_mes, s_menys, s_producte, s_divisio, s_igual, s_dos_punts,
 		      s_punt, s_puntpunt, s_coma, s_punt_i_coma, s_major, s_menor, s_major_igual,
