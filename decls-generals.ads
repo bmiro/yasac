@@ -9,7 +9,7 @@ package decls.generals is
     tam_tdispersio: constant natural := maxid;
 
     type id_nom is new natural range 0..maxid;
-    type id_string is new natural range 1..tam_tcaracters;
+    subtype id_string is natural range 1..tam_tcaracters; --Sino tenim problemes al teclara tc com string si feim el new natural
 
 end decls.generals;
 

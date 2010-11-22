@@ -22,7 +22,7 @@ MODE:
 	| pc_in pc_out
 
 DECLARACIONS: 
-      DECLARACIO DECLARACIONS
+      DECLARACIONS DECLARACIO
 	| lambda
 
 DECLARACIO:
@@ -40,32 +40,26 @@ DEC_CONST:
 	identificador s_dos_punts pc_constant identificador s_assignacio V_CONST s_punt_i_coma
 
 V_CONST:
-	  s_mes literal 
 	| s_menys literal
 	| literal 
 
 DEC_VAR: 
 	LLISTA_ID s_dos_punts identificador s_punt_i_coma
 
-LLISTA_ID:  
-	identificador IDENTIFICADOR
-
-IDENTIFICADOR:
-	  s_coma identificador IDENTIFICADOR
-	| lamba
+LLISTA_ID:
+	LLISTA_ID s_coma identificador
+	| identificador
 
 DEC_ARRAY: 
 	pc_type identificador pc_is pc_array 
     s_parentesi_obert LLISTA_IDX s_parentesi_tancat pc_of identificador s_punt_i_coma
 
 LLISTA_IDX: 
-	  LLISTA_IDX s_coma RANG
-	| RANG
-
-RANG: 
-	LIM s_puntpunt LIM  
+	  LLISTA_IDX s_coma identificador
+	| identificador
 
 LIM: 		identificador
+                |       s_menys literal
 		|	literal
 
 DEC_PROCEDURE: 
@@ -79,7 +73,10 @@ CAMPS:
 	| identificador s_dos_punts identificador s_punt_i_coma
 
 DEC_SUBRANG: pc_type identificador pc_is pc_new identificador pc_range RANG s_punt_i_coma
-		
+
+RANG: 
+        LIM s_puntpunt LIM  
+
 SENTENCIES:
 	  SENTENCIA SENTENCIES
 	| SENTENCIA
