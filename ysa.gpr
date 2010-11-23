@@ -1,0 +1,14 @@
+project Ysa is
+
+   package Make is
+      for Makefile use "Makefile";
+   end Make;
+
+   package Ide is
+      for Vcs_Kind use "Git";
+   end Ide;
+
+   for Object_Dir use ".";
+
+end Ysa;
+
