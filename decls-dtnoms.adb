@@ -17,7 +17,7 @@ package body decls.dtnoms is
     
     function hash(k: in string) return natural is
     begin
-        return Ada.Strings.hash(k)'natural;
+        return natural(Ada.Strings.hash(k));
     end hash;
 
     --Insereix un string dins la taula de caracters

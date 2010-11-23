@@ -32,7 +32,8 @@ package body decls.datribut is
 
     procedure rl_lit_caracter(yylval : out atribut; yytext : in string; lin, col : in natural) is
     begin
-	yylval := (at_lit_caracter, lin, col, yytext(yytext'first+1), caracter);
+	yylval := (at_lit_caracter, lin, col, integer(character'pos(yytext(yytext'first+1))),
+                  caracter);
     end rl_lit_caracter;
 
 end decls.datribut;
