@@ -10,11 +10,11 @@ begin
 
     Open_Input("codi.ysa");
     inicialitzacio;
-		    
+    
     loop
-	x := yylex;
-	put(token'image(x)); new_line;
-	exit when x = End_Of_Input;
+      x := yylex;
+      put(token'image(x)); new_line;
+      exit when x = End_Of_Input;
     end loop;	
 
 end principal;
