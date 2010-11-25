@@ -121,9 +121,9 @@ SIMBOL:
 	| s_menor_igual
 	| s_distint
 
-R:		
-	  identificador s_punt identificador
-	| identificador s_parentesi_obert INDEXOS s_parentesi_tancat
+REF:		
+	  REF s_punt REF
+	| REF s_parentesi_obert INDEXOS s_parentesi_tancat
 	| identificador
 
 INDEXOS: 

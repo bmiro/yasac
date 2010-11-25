@@ -1,0 +1,57 @@
+EXPRESIO:
+	EXP_BOOL
+	| EXP_COMP
+	| EXP_MAT
+	| (EXPRESIO)
+	| REFERENCIA
+	| literal
+
+EXP_MAT:
+	- EXP_MAT
+	| EXP_MAT OPAD TERM
+	| TERM
+
+OPAD:
+	+
+	| -
+
+TERM:
+	TERM OPPR FACT
+	| FACT
+
+OPPR:
+	*
+	| /
+	| %
+
+FACT:
+	(EXPR_MAT)
+	| literal
+
+EXP_BOOL:
+	EXP_MAT or TERMB
+	| TERMB
+
+TERMB:
+	TERMB and FACTB
+	| FACTB
+
+FACTB:
+	! FACTB
+	| (EXP_BOOL)
+	| literal
+
+EXP_COMP:
+	EXP_MAT OPCM EXP_MAT
+	| EXP_BOOL OPC EXP_BOOL
+
+OPCM:
+	OPC
+	| >
+	| <
+	| <=
+	| >=
+	
+OPC:
+	=
+	| !=
