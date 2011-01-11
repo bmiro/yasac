@@ -5,7 +5,7 @@ all: aflex ayacc
 	gnatchop -w lexic.a
 	gnatchop -w lexic_dfa.a
 	gnatchop -w lexic_io.a
-	./ayacc sintactic.y off off on off off
+	./ayacc sintactic.y off off on on
 	gnatchop -w sintactic.a
 	rm *.a
 	rm aflex ayacc

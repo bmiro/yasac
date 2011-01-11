@@ -46,23 +46,23 @@
 %token literal
 %token identificador
 		
-%left pc_or
-%left pc_and
+%nonassoc pc_and
+          pc_or 
 
 %nonassoc s_igual
-		  s_menor
-		  s_major
-		  s_menor_igual
-		  s_major_igual
-		  s_distint	  
+          s_menor
+          s_major
+          s_menor_igual
+          s_major_igual
+          s_diferent	  
 
 %left s_mes
-	  s_menys
+      s_menys
 
 %left s_producte
-	  s_divisio
-	  s_mod
-
+      s_divisio
+      s_modul
+      
 %with decls.datribut;
 %use decls.datribut;
 {
@@ -122,28 +122,22 @@ DEC_CONST:
           ;
 
 V_CONST:
-        | s_menys literal
+          s_menys literal
         | literal
         ;
 
 DEC_VAR: 
-        LLISTA_ID s_dos_punts identificador s_punt_i_coma
+        identificador s_dos_punts identificador s_punt_i_coma
         ;
+
+DEC_ARRAY: 
+            pc_type identificador pc_is pc_array s_parentesi_obert LLISTA_ID s_parentesi_tancat pc_of identificador s_punt_i_coma
+            ;
 
 LLISTA_ID:
             LLISTA_ID s_coma identificador
             | identificador
             ;
-
-DEC_ARRAY: 
-            pc_type identificador pc_is pc_array 
-    s_parentesi_obert LLISTA_IDX s_parentesi_tancat pc_of identificador s_punt_i_coma
-    ;
-
-LLISTA_IDX: 
-            LLISTA_IDX s_coma identificador
-          | identificador
-          ;
 
 DEC_PROCEDURE: 
                PROGRAMA
@@ -199,8 +193,7 @@ SENT_FLUXE:
         ;
 
 EXPRESSIO:
-        pc_not EXPRESSIO
-        | EXPRESSIO pc_and EXPRESSIO
+          EXPRESSIO pc_and EXPRESSIO
         | EXPRESSIO pc_or EXPRESSIO
         | EXPRESSIO s_major EXPRESSIO
         | EXPRESSIO s_menor EXPRESSIO
@@ -208,22 +201,28 @@ EXPRESSIO:
         | EXPRESSIO s_menor_igual EXPRESSIO
         | EXPRESSIO s_igual EXPRESSIO
         | EXPRESSIO s_diferent EXPRESSIO
+        | EXPRESSIO s_mes EXPRESSIO
+        | EXPRESSIO s_menys EXPRESSIO
         | EXPRESSIO s_producte EXPRESSIO
         | EXPRESSIO s_divisio EXPRESSIO
         | EXPRESSIO s_modul EXPRESSIO
-        | s_menys EXPRESSIO
-        | EXPRESSIO s_mes EXPRESSIO
-        | EXPRESSIO s_menys EXPRESSIO
+        | pc_not EXPRESSIO %prec s_menys
+        | s_menys EXPRESSIO 
         | s_parentesi_obert EXPRESSIO s_parentesi_tancat
         | REF
         | literal
         ;
 
+---REF:
+---          REF s_punt REF
+---        | identificador REF_ARRAY
+---        ;
 
 REF:
-          REF s_punt REF
-        | identificador REF_ARRAY
-        ;
+      identificador s_punt REF
+      | identificador REF_ARRAY s_punt REF
+      | identificador REF_ARRAY
+      ;
 
 REF_ARRAY:
             REF_ARRAY s_parentesi_obert REF s_parentesi_tancat
