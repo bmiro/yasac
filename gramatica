@@ -96,30 +96,63 @@ SENT_FLUXE:
 	| pc_if EXPRESIO pc_then SENTENCIES pc_else SENTENCIES pc_end pc_if s_punt_i_coma
 
 	
-EXPRESIO: 
-	  EXPRESIO OP EXPRESIO
-	| EXPRESIO SIMBOL EXPRESIO
-	| s_menys EXPRESIO
-	| s_parentesi_obert EXPRESIO s_parentesi_tancat
-	| R
-	| literal
+EXPRESIO:
+        EXP_BOOL
+        | EXP_COMP
+        | EXP_ARIT
+        | (EXPRESIO)
+        | REFERENCIA
+        | literal
 
-OP:	
-	  s_mes
-	| s_menys
-	| s_producte
-	| s_divisio
-	| pc_mod
-	
-SIMBOL: 
-	  pc_and
-	| pc_or
-	| s_igual
-	| s_major
-	| s_menor
-	| s_major_igual
-	| s_menor_igual
-	| s_distint
+EXP_ARIT:
+        s_menys EXP_ARIT
+        | EXP_MAT OPAD TERM
+        | TERM
+
+OPAD:
+        s_mes
+        | s_menys
+
+TERM:
+        TERM OPPR FACT
+        | FACT
+
+OPPR:
+        s_producte
+        | s_divisio
+        | s_modul
+
+FACT:
+        (EXPR_MAT)
+        | literal
+
+EXP_BOOL:
+        EXP_BOOL pc_or TERMB
+        | TERMB
+
+TERMB:
+        TERMB pc_and FACTB
+        | FACTB
+
+FACTB:
+        ! FACTB
+        | (EXP_BOOL)
+        | literal
+
+EXP_COMP:
+        EXP_MAT OPCM EXP_MAT
+        | EXP_BOOL OPC EXP_BOOL
+
+OPCM:
+        OPC
+        | s_major
+        | s_menor
+        | s_major_igual
+        | s_menor_igual
+        
+OPC:
+        s_igual
+        | s_distint
 
 REF:		
 	  REF s_punt REF

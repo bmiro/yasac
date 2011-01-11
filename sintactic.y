@@ -244,7 +244,9 @@ end analitzador_sintactic;
 with ada.text_io; use ada.text_io;
 with decls.generals, decls.datribut; use decls.generals, decls.datribut; 
 with a_lexic, lexic_dfa, lexic_io; use a_lexic, lexic_dfa, lexic_io;
-with sintactic_tokens, sintactic_goto, sintactic_shift_reduce; use sintactic_tokens, sintactic_goto, sintactic_shift_reduce;
+with sintactic_tokens, sintactic_goto; use sintactic_tokens, sintactic_goto;
+with sintactic_shift_reduce; use sintactic_shift_reduce;
+
 package body analitzador_sintactic is
 
 	procedure yyerror(s: in string) is
