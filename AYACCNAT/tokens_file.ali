@@ -1,0 +1,134 @@
+V "GNAT Lib v4.4"
+P SS ZX
+R nnnnnnnnnnnnnnnvvnvnnnvnnnnnnnnnnnnnnnvnnnnnnnnnnnnnnnnvnnnnnnnnnnnnnnnnnnnnn
+
+U tokens_file%b		tokens_file.adb		b841f741 NE OO PK
+W ada.exceptions%s	a-except.adb		a-except.ali
+W ada.tags%s		a-tags.adb		a-tags.ali
+W ayacc_file_names%s	ayacc_file_names.adb	ayacc_file_names.ali
+W source_file%s		source_file.adb		source_file.ali
+W string_pkg%s		string_pkg.adb		string_pkg.ali
+W symbol_table%s	symbol_table.adb	symbol_table.ali
+W system.img_int%s	s-imgint.adb		s-imgint.ali
+W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+W system.soft_links%s	s-soflin.adb		s-soflin.ali
+W system.string_ops%s	s-strops.adb		s-strops.ali
+W system.string_ops_concat_3%s  s-sopco3.adb	s-sopco3.ali
+W system.string_ops_concat_5%s  s-sopco5.adb	s-sopco5.ali
+W text_io%s		text_io.ads		text_io.ali
+
+U tokens_file%s		tokens_file.ads		8fafde9d EE NE OO PK
+
+D ada.ads		20070406091342 9c7dd3ea
+D a-except.ads		20090409232307 b54b55de
+D a-finali.ads		20090409232307 9eaacebd
+D a-filico.ads		20090409232307 9299732a
+D a-ioexce.ads		20070406091342 be0900a0
+D a-stream.ads		20090409232307 34aca5be
+D a-tags.ads		20090409232307 bfa07446
+D a-textio.ads		20090409232307 fe8af46e
+D a-unccon.ads		20070406091342 51e09df2
+D ayacc_file_names.ads	20091116144814 12783ddc
+D interfac.ads		20090409232307 a69cad5c
+D i-cstrea.ads		20090409232307 e1e064a9
+D source_file.ads	20091116144814 6f1e4db3
+D string_pkg.ads	20091116144814 f317ddf3
+D symbol_table.ads	20091116144814 87923b0e
+D system.ads		20100911234204 15e10948
+D s-crtl.ads		20090409232307 997234a1
+D s-exctab.ads		20090409232307 5c1c61ae
+D s-ficobl.ads		20090409232307 8bb681e5
+D s-finimp.ads		20090409232307 9449f4cb
+D s-finroo.ads		20090409232307 1408f9d1
+D s-imgint.ads		20090409232307 f77d133c
+D s-parame.ads		20090409232307 f32e56e9
+D s-secsta.ads		20090409232307 7bae3621
+D s-soflin.ads		20090409232307 0c6fd39d
+D s-stache.ads		20090409232307 257b3be8
+D s-stalib.ads		20090409232307 52b793d5
+D s-stoele.ads		20090409232307 ed966df3
+D s-stoele.adb		20090409232307 e9998c78
+D s-stratt.ads		20090409232307 fef7c1da
+D s-strops.ads		20090409232307 845f72d2
+D s-sopco3.ads		20090409232307 72ce1063
+D s-sopco4.ads		20090409232307 bc112723
+D s-sopco5.ads		20090409232307 191315e8
+D s-traent.ads		20090409232307 bd5f2753
+D s-unstyp.ads		20090409232307 c0f9fae5
+D s-wchcon.ads		20090409232307 ab028799
+D text_io.ads		20070406091342 7c37c8ff
+D tokens_file.ads	20091116144814 8fafde9d
+D tokens_file.adb	20091116144814 423a77b1
+X 8 a-textio.ads
+51P9*File_Type(369R9) 40|70r21 160r27 161r27
+52n32*Out_File{52E9} 40|75r24 181r30 200r33
+86U14*Create 40|75r9 181r9 200r9
+98U14*Close 40|101r9 238r9 239r9
+165U14*New_Line 40|188r9 189r9 191r9 193r9 195r9 204r9 216r17 221r9
+241U14*Put 40|107r9 209r17 210r17 213r17 215r17
+259U14*Put_Line 40|113r9 183r9 185r9 186r9 187r9 190r9 192r9 194r9 196r9
+. 197r9 198r9 202r9 211r17 220r9 223r9 224r9 225r9 226r9 227r9 228r9 229r9
+. 230r9 231r9 232r9 237r9
+263U14*Put_Line 40|78r19
+294X4*Name_Error 40|77r19
+295X4*Use_Error 40|77r32
+X 10 ayacc_file_names.ads
+58K9*Ayacc_File_Names 95e21 40|56w6 75r34 78r56 91r30 152r26 181r40 183r43
+. 184r44 185r45 187r41 190r50 200r43 203r35 237r41
+71V15*Get_Tokens_File_Name{string} 40|75r51 78r73
+76V15*Get_C_Lex_File_Name{string} 40|181r57
+77V15*Get_Include_File_Name{string} 40|200r60
+82V12*C_Lex_Unit_Name{string} 40|185r62 187r58 190r67 237r58
+85V12*Tokens_Unit_Name{string} 40|91r47 152r43 183r60 184r61 203r52
+X 13 source_file.ads
+45K9*Source_File 90e16 40|56w24 165r36
+69V14*Maximum_Line_Length{natural} 40|165r48
+X 14 string_pkg.ads
+14K9*string_pkg 597e15 40|58w6 121r13
+95P10*string_type(string)
+255V14*Mixed{95P10} 40|136r30 141r30 147r22
+390V14*value{string} 40|136r23 141r23 147r15
+X 15 symbol_table.ads
+45K9*Symbol_Table 79e17 40|56w37 122r13 158r13
+47n51*Terminal{47E11} 40|134r31 134r54 147r57 206r31 206r54
+49I11*Grammar_Symbol<short_integer> 40|211r50
+64V14*Get_Symbol_Name{string} 40|136r37 141r37 147r29 207r33
+66V14*First_Symbol{49I11} 40|134r18 206r18
+67V14*Last_Symbol{49I11} 40|134r42 147r45 206r42
+X 38 text_io.ads
+24K9*Text_IO=24:29 40|56w51 70r13 73r13 99r13 105r13 111r13 158r27
+X 39 tokens_file.ads
+45K9*Tokens_File 62l5 62e16 40|59b14 242l5 242t16
+47U15*Open 40|72b15 80l9 80t13
+49U15*Start_Tokens_Package 40|88b15 95l9 95t29 127r9
+50V14*Tokens_Package_Header_Has_Been_Generated{boolean} 40|83b14 86l9 86t49
+53U15*Complete_Tokens_Package 40|118b15 154l9 154t32
+55U15*Make_C_Lex_Package 40|157b15 240t8
+57U15*Close 40|98b15 102l9 102t14
+59U15*Write 59>22 40|104b15 108l9 108t14 132r9 136r17 138r17 141r17 142r17
+. 147r9
+59s22 S{string} 40|104b21 107r20
+60U15*Writeln 60>23 40|91r9 92r9 110b15 114l9 114t16 130r9 131r9 137r17 148r9
+. 149r9 150r9 151r9 152r9
+60s23 S{string} 40|110b23 113r25
+X 40 tokens_file.adb
+61a3 SCCS_ID{string}
+65a3 Rcs_ID{string}
+67b3 Package_Header_Generated{boolean} 85r14 90r14 93m9 126r14
+70p5 T_File{8|51P9} 75m16 101m15 107r13 113r18
+120i9 Tokens_On_Line{natural} 135r16 139m17 144m13 144r31
+134i13 I<short_integer> 136r53 141r53
+160p9 The_Define_File{8|51P9} 200m16 202r18 204r19 209r21 210r21 211r26 239m15
+161p9 The_Ada_File{8|51P9} 181m16 183r18 185r18 186r18 187r18 188r18 189r18
+. 190r18 191r18 192r18 193r18 194r18 195r18 196r18 197r18 198r18 213r21 215r21
+. 216r26 220r18 221r18 223r18 224r18 225r18 226r18 227r18 228r18 229r18 230r18
+. 231r18 232r18 237r18 238m15
+163R14 Symbol_Rec 167e23 169r20 171r45 172r22
+165a17 Name{string} 174m20 208m25 210m47 214m58 215m44
+166i17 Length{natural} 175m20 210r64 215r61
+169r9 Sym_Name{163R14} 207m13 208r16 210r38 210r55 214r49 215r35 215r52
+171V18 Convert{163R14} 171b18 171>26 177t12 207r25
+171s26 S{string} 174r28 174r41 175r30
+172r13 Result{163R14} 174m13 175m13 176r20
+206i13 I<short_integer> 207r49 211r71
+

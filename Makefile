@@ -1,17 +1,21 @@
-all: aflex
+all: aflex ayacc
 	cp AFLEXNAT/aflex .
+	cp AYACCNAT/ayacc .
 	./aflex -E lexic.l
 	gnatchop -w lexic.a
 	gnatchop -w lexic_dfa.a
 	gnatchop -w lexic_io.a
+	./ayacc sintactic.y off off on off off
+	gnatchop -w sintactic.a
 	rm *.a
-	rm aflex 	
+	rm aflex ayacc
 	gnatmake principal.adb
 
 aflex:
 	cd AFLEXNAT && gnatmake aflex
 
-
+ayacc:
+	cd AYACCNAT && gnatmake ayacc
 
 principal: 
 	gnatmake principal.adb

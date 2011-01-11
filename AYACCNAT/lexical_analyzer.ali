@@ -1,0 +1,156 @@
+V "GNAT Lib v4.4"
+P SS ZX
+R nnnnnnnvnnnnnnnnnnvnnnvnnnnnnnnnnnnnnnvnnvnnnnnnnnnnnnnvnnnnvvnnnnnnnnnnnnnnn
+
+U lexical_analyzer%b	lexical_analyzer.adb	8c2c2dce OO PK
+W actions_file%s	actions_file.adb	actions_file.ali
+W ada.exceptions%s	a-except.adb		a-except.ali
+W source_file%s		source_file.adb		source_file.ali
+W str_pack%s		str_pack.adb		str_pack.ali
+W system.img_int%s	s-imgint.adb		s-imgint.ali
+W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+W system.string_ops%s	s-strops.adb		s-strops.ali
+W system.string_ops_concat_3%s  s-sopco3.adb	s-sopco3.ali
+W text_io%s		text_io.ads		text_io.ali
+W tokens_file%s		tokens_file.adb		tokens_file.ali
+
+U lexical_analyzer%s	lexical_analyzer.ads	7c8b3211 EE OO PK
+W ada.tags%s		a-tags.adb		a-tags.ali
+W source_file%s		source_file.adb		source_file.ali
+W system%s		system.ads		system.ali
+W system.exception_table%s  s-exctab.adb	s-exctab.ali
+W system.standard_library%s  s-stalib.adb	s-stalib.ali
+
+D actions_file.ads	20091116144814 7639caf4
+D ada.ads		20070406091342 9c7dd3ea
+D a-except.ads		20090409232307 b54b55de
+D a-finali.ads		20090409232307 9eaacebd
+D a-filico.ads		20090409232307 9299732a
+D a-ioexce.ads		20070406091342 be0900a0
+D a-stream.ads		20090409232307 34aca5be
+D a-tags.ads		20090409232307 bfa07446
+D a-textio.ads		20090409232307 fe8af46e
+D a-unccon.ads		20070406091342 51e09df2
+D interfac.ads		20090409232307 a69cad5c
+D i-cstrea.ads		20090409232307 e1e064a9
+D lexical_analyzer.ads	20091116144814 13957fa2
+D lexical_analyzer.adb	20091116144814 dae50d51
+D source_file.ads	20091116144814 6f1e4db3
+D str_pack.ads		20091116144814 afe3ce18
+D system.ads		20100911234204 15e10948
+D s-crtl.ads		20090409232307 997234a1
+D s-exctab.ads		20090409232307 5c1c61ae
+D s-ficobl.ads		20090409232307 8bb681e5
+D s-finimp.ads		20090409232307 9449f4cb
+D s-finroo.ads		20090409232307 1408f9d1
+D s-imgint.ads		20090409232307 f77d133c
+D s-parame.ads		20090409232307 f32e56e9
+D s-secsta.ads		20090409232307 7bae3621
+D s-soflin.ads		20090409232307 0c6fd39d
+D s-stache.ads		20090409232307 257b3be8
+D s-stalib.ads		20090409232307 52b793d5
+D s-stoele.ads		20090409232307 ed966df3
+D s-stoele.adb		20090409232307 e9998c78
+D s-stratt.ads		20090409232307 fef7c1da
+D s-strops.ads		20090409232307 845f72d2
+D s-sopco3.ads		20090409232307 72ce1063
+D s-sopco4.ads		20090409232307 bc112723
+D s-sopco5.ads		20090409232307 191315e8
+D s-traent.ads		20090409232307 bd5f2753
+D s-unstyp.ads		20090409232307 c0f9fae5
+D s-wchcon.ads		20090409232307 ab028799
+D text_io.ads		20070406091342 7c37c8ff
+D tokens_file.ads	20091116144814 8fafde9d
+X 1 actions_file.ads
+48K9*Actions_File 77e17 14|44w6 45r6 213r9 214r9 215r9 216r9 217r9 222r21
+. 230r21 233r25 239r21 243r25 245r25 251r21 255r25 269r29 271r29 280r21 287r21
+. 291r9
+62U15*Write 14|222r34 230r34 233r38 239r34 243r38 245r38 287r34
+63U15*Write 14|214r22 216r22 255r38 269r42 271r42
+64U15*Writeln 14|213r22 215r22 217r22 251r34 280r34 291r22
+X 9 a-textio.ads
+263U14*Put_Line 14|264r29 275r25
+X 13 lexical_analyzer.ads
+45K9*Lexical_Analyzer 78l5 78e21 14|46b14 332l5 332t21
+48V14*Get_Lexeme_Text{string} 14|62b14 65l9 65t24
+51E10*Ayacc_Token 57e26 60r31 14|93r31
+52n10*Token{51E10} 14|143r36
+52n17*Start{51E10} 14|145r36
+53n10*Left{51E10} 14|147r36
+53n16*Right{51E10} 14|149r36
+53n23*Nonassoc{51E10} 14|151r36
+53n33*Prec{51E10} 14|153r36
+54n10*With_Clause{51E10} 14|155r36
+54n23*Use_Clause{51E10} 14|157r36
+55n10*Identifier{51E10} 14|200r28
+55n22*Character_Literal{51E10} 14|181r32
+56n10*Comma{51E10} 14|124r28
+56n17*Colon{51E10} 14|118r28
+56n24*Semicolon{51E10} 14|121r28
+56n35*Vertical_Bar{51E10} 14|164r28
+56n49*Left_Brace{51E10} 14|167r28
+57n10*Mark{51E10} 14|130r32
+57n16*Eof_Token{51E10} 14|169r28
+60V14*Get_Token{51E10} 14|93b14 205l9 205t18
+63V14*Line_Number{natural} 14|68b14 71l9 71t20
+66U15*Handle_Action 66>29 66>35 14|209b15 292l9 292t22
+66i29 Rule{integer} 14|209b29 214r52
+66i35 Rule_Length{integer} 14|209b35 263r35 267r40
+69U15*Print_Context_Lines=69:55
+72U15*Dump_Declarations 14|294b15 330l9 330t26
+75X5*Illegal_Token 14|114r31 159r35 177r35 202r27 265r35 276r31 317r46
+X 14 lexical_analyzer.adb
+48a3 SCCS_ID{string}
+52a3 Rcs_ID{string}
+54N5 Max_Lexeme_Length 58r23
+56i5 Current_Line_Number{natural} 83m17 83r40 101m21 101r44 216r55 281m21
+. 281r44 324m32 324r55
+58r5 Lexeme_Text{16|52R10} 64r25 97m30 117m38 120m38 123m38 126m38 129m42
+. 139m46 141m36 142r37 144r40 146r40 148r40 150r40 152r40 154r41 156r41 163m38
+. 166m38 171m38 174m42 179m46 184m38 193m46 199m32
+74U15 Skip_Comment 74b15 87l9 87t21 112r25
+75e9 Ch{character} 78m22 79r16 80r28 82r19
+94e9 Ch{character} 99m26 100r20 103r27 104r27 105r27 108r18 110m30 111r24
+. 117r28 120r28 123r28 126r28 128m34 129r32 133m38 134r32 135r32 136r44 139r36
+. 163r28 166r28 171r28 172m30 173r24 173r38 174r32 175m34 176r28 179r36 184r28
+. 186m34 187r28 188r28 189r28 190r28 191r28 193r36 195r40
+210e9 Char{character} 219m22 220r16 222r40 223m30 224r31 228r18 230r40 232m34
+. 233r44 234r35 239r40 241m32 243r44 244m34 245r44 247r36 253m30 254r24 256r27
+. 257r47 259m38 261r51 287r40
+211i9 Base{integer} 257m25 260m29 260r37 263r28 264r78 267m25 267r33 268r28
+. 272r50
+295e9 Ch{character} 300m22 301r23 303r18 304r39 307m49 308r47 313r39 315m45
+. 316r39 316r52 319r43 320r46 326r39
+296r9 Text{16|52R10} 298m26 304m49 308m57 313m49 319m53 322r61 323m49 326m49
+. 329r38
+X 15 source_file.ads
+45K9*Source_File 13|44w6 69r43 14|44w20 45r20 296r20 15|90e16
+60U16*Get_Char 14|78r13 99r17 110r21 128r25 133r29 172r21 175r25 186r25 219r13
+. 223r21 232r25 241r23 244r25 253r21 259r29 300r13 307r40 315r36
+61U16*Unget_Char 14|80r17 136r33 195r29 247r25
+63V16*Peek_Next_Char{character} 14|127r24 220r36 240r24 242r26 258r31 305r35
+. 309r50 310r50
+65V16*Source_Line_Number{natural} 14|70r16
+69V14*Maximum_Line_Length{natural} 14|296r32
+71e5*Eof{character} 14|79r21 168r22 173r30 310r67 316r57 325r22
+72e5*Eoln{character} 14|82r24 100r25 104r33 173r44 224r38 279r22 309r67 316r44
+. 322r22
+75U15*Print_Context_Lines 13|69r55
+X 16 str_pack.ads
+45K9*STR_Pack 14|44w33 45r33 16|85e13
+52R10*STR 14|58r19 296r16 16|83e19
+55V15*Value_of{string} 14|64r16 142r28 144r31 146r31 148r31 150r31 152r31
+. 154r31 156r31 322r52 329r29
+59U15*Assign 14|97r13 298r9 323r32
+59r44 To{52R10} 14|97r24 298r20 323r43
+62U15*Append 14|117r21 120r21 123r21 126r21 129r25 139r29 163r21 166r21 171r21
+. 174r25 179r29 184r21 193r29 304r32 308r40 313r32 319r36 326r32
+62r43 To{52R10} 14|117r32 120r32 123r32 126r32 129r36 139r40 163r32 166r32
+. 171r32 174r36 179r40 184r32 193r40 304r43 308r51 313r43 319r47 326r43
+66U15*Upper_Case 14|141r25 199r21
+X 39 text_io.ads
+24K9*Text_IO=24:29 14|44w56 45r56
+X 40 tokens_file.ads
+45K9*Tokens_File 14|44w43 45r43 322r32 329r9 40|62e16
+60U15*Writeln 14|322r44 329r21
+
