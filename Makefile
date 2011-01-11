@@ -43,4 +43,7 @@ clean:
 	rm AFLEXNAT/aflex &
 	rm AFLEXNAT/*.ali &
 	rm AFLEXNAT/*.o &
+	rm AYACCNAT/ayacc &
+	rm AYACCNAT/*.ali &
+	rm AYACCNAT/*.o &
 	rm *.tar.bz2
