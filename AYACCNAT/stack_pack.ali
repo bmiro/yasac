@@ -1,0 +1,53 @@
+V "GNAT Lib v4.4"
+P ZX
+R nnnvnnnnnnnnnnnnnnvnnnnnnnnnvnnnnnnnnnnnnvnnnnnnnnnnvnnvnnnnnnnnnnnnnnnnnnnnn
+
+U stack_pack%b		stack_pack.adb		f66445d0 NE OO PK GE
+W unchecked_deallocation%s
+
+U stack_pack%s		stack_pack.ads		fbcfa6da BN EE NE OO PK GE
+
+D stack_pack.ads	20091116144814 fbcfa6da
+D stack_pack.adb	20091116144814 6b1c1e23
+D system.ads		20100911234204 15e10948
+D unchdeal.ads		20070406091342 66b7fd29
+X 1 stack_pack.ads
+58+10 Element 66r45 72r47 74r48 2|11r21 15r45 37r47 52r48
+60k9*Stack_Pack 58z10 92l5 92e15 2|3b14 91l5 91t15
+62R10*Stack 66r31 68r36 70r33 72r30 74r30 76r36 85c10 90e19 2|15r31 25r36
+. 31r33 37r30 52r30 85r36
+64X5*Stack_Underflow 2|18r19 56r19
+66V14*Top_Value{58+10} 66>25 2|15b14 22l9 22t18
+66r25 S{62R10} 2|15b25 17r12 20r20
+68V14*Depth_of_Stack{natural} 68>30 2|25b14 28l9 28t23
+68r30 S{62R10} 2|25b30 27r16
+70U15*Make_Stack 70<26 2|31b15 34l9 34t19
+70r26 S{62R10} 2|31b26 33m9
+72U15*Push 72=20 72>37 2|37b15 49l9 49t13
+72r20 S{62R10} 2|37b20 40m9 40r18 41r12 44r25 45m13 45r25 47r50 48m9
+72*37 Value{58+10} 2|37b37 47r35
+74U15*Pop 74=20 74<37 2|52b15 67l9 67t12
+74r20 S{62R10} 2|52b20 55r12 59r18 61r23 62m9 62r23 63m9 63r23 64m9 66m9
+. 66r18
+74*37 Value{58+10} 2|52b37 59m9
+76U15*Free_Stack 76=26 2|85b15 89l9 89t19
+76r26 S{62R10} 2|85b26 87m19 88m19
+80R10 Node 82r25 2|9c10 13e19 42r29 69r50
+82P10 Link(80R10) 83r23 88r22 89r22 2|12r21 38r20 53r16 69r56 74r38 75r16
+87i13 Tos{natural} 2|27r18 33r15 40m11 40r20 55r14 66m11 66r20
+88p13 Top{82P10} 2|17r14 20r21 20m22 33r25 47r52 48m11 59r19 59m20 61r24
+. 61m25 62r10 62m11 63r25 64m11 87m21
+89p13 Extras{82P10} 2|33r31 41r14 44r27 45m15 45r26 45m27 62r25 63m11 88m21
+X 2 stack_pack.adb
+5a3 SCCS_ID{string}
+11*13 Datum{1|58+10} 20r26 47r26 59r24
+12p13 Next{1|82P10} 45r34 47r42 61r29 62m15 79r26
+38p9 New_Node{1|82P10} 42m13 44m13 47r9 48r18
+53p9 Temp{1|82P10} 61m9 64r23
+69U15 Free[4|20] 80r13
+74U15 Free_List 74b15 74=25 83l9 83t18 87r9 88r9
+74p25 List{1|82P10} 77r17 79m13 79r21 81r21
+75p9 Temp{1|82P10} 77m9 78r15 80m18 81m13
+X 4 unchdeal.ads
+20u11*Unchecked_Deallocation 2|2w6 69r27
+

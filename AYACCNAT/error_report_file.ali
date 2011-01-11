@@ -1,0 +1,131 @@
+V "GNAT Lib v4.4"
+P SS ZX
+R nnnnnnnnnnnnnnnnnnnnnnvnnnnnnnnnnnnnnnvnnnnnnnnnnnnnnnnvnnnnnnnnnnnnnnnnnnnnn
+
+U error_report_file%b	error_report_file.adb	6f51dd88 NE OO PK
+W ada.tags%s		a-tags.adb		a-tags.ali
+W ayacc_file_names%s	ayacc_file_names.adb	ayacc_file_names.ali
+W source_file%s		source_file.adb		source_file.ali
+W str_pack%s		str_pack.adb		str_pack.ali
+W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+W system.string_ops%s	s-strops.adb		s-strops.ali
+W system.string_ops_concat_3%s  s-sopco3.adb	s-sopco3.ali
+W system.string_ops_concat_4%s  s-sopco4.adb	s-sopco4.ali
+W text_io%s		text_io.ads		text_io.ali
+
+U error_report_file%s	error_report_file.ads	183ab992 EE NE OO PK
+
+D ada.ads		20070406091342 9c7dd3ea
+D a-except.ads		20090409232307 b54b55de
+D a-finali.ads		20090409232307 9eaacebd
+D a-filico.ads		20090409232307 9299732a
+D a-ioexce.ads		20070406091342 be0900a0
+D a-stream.ads		20090409232307 34aca5be
+D a-tags.ads		20090409232307 bfa07446
+D a-textio.ads		20090409232307 fe8af46e
+D a-unccon.ads		20070406091342 51e09df2
+D ayacc_file_names.ads	20091116144814 12783ddc
+D error_report_file.ads	20091116144814 183ab992
+D error_report_file.adb	20091116144814 d9d91292
+D interfac.ads		20090409232307 a69cad5c
+D i-cstrea.ads		20090409232307 e1e064a9
+D source_file.ads	20091116144814 6f1e4db3
+D str_pack.ads		20091116144814 afe3ce18
+D system.ads		20100911234204 15e10948
+D s-crtl.ads		20090409232307 997234a1
+D s-exctab.ads		20090409232307 5c1c61ae
+D s-ficobl.ads		20090409232307 8bb681e5
+D s-finimp.ads		20090409232307 9449f4cb
+D s-finroo.ads		20090409232307 1408f9d1
+D s-parame.ads		20090409232307 f32e56e9
+D s-secsta.ads		20090409232307 7bae3621
+D s-soflin.ads		20090409232307 0c6fd39d
+D s-stache.ads		20090409232307 257b3be8
+D s-stalib.ads		20090409232307 52b793d5
+D s-stoele.ads		20090409232307 ed966df3
+D s-stoele.adb		20090409232307 e9998c78
+D s-stratt.ads		20090409232307 fef7c1da
+D s-strops.ads		20090409232307 845f72d2
+D s-sopco3.ads		20090409232307 72ce1063
+D s-sopco4.ads		20090409232307 bc112723
+D s-sopco5.ads		20090409232307 191315e8
+D s-traent.ads		20090409232307 bd5f2753
+D s-unstyp.ads		20090409232307 c0f9fae5
+D s-wchcon.ads		20090409232307 ab028799
+D text_io.ads		20070406091342 7c37c8ff
+X 8 a-textio.ads
+51P9*File_Type(369R9) 12|32r14
+52n32*Out_File{52E9} 12|240r22
+86U14*Create 12|240r5
+98U14*Close 12|341r5
+259U14*Put_Line 12|127r9
+X 10 ayacc_file_names.ads
+58K9*Ayacc_File_Names 95e21 12|3w6 4r5
+73V15*Get_Error_Report_File_Name{string} 12|240r32
+74V15*Get_Listing_File_Name{string} 12|314r13
+87V12*Error_Report_Unit_Name{string} 12|241r29 264r25 282r34 340r25
+X 11 error_report_file.ads
+10K9*Error_Report_File 31l5 31e22 12|7b14 348l5 348t22
+29U19*Write_File 12|234b13 342l7 342t17
+X 12 error_report_file.adb
+30i3 max_line_length{integer} 34r22 64r16
+32p3 The_File{8|51P9} 127r18 240m12 341m11
+34a3 Text{string} 71m31 73r19 77m17 77r36 83r19 87m17 87r36 93r19 100r19
+. 107r19 145r22 272r30 274r29
+35i3 Length{natural} 71m37 72r12 76m17 76r27 77r25 78r41 82r12 86m17 86r27
+. 87r25 88r41 92r12 99r12 106r12 145r30 272r38 274r37
+39E8 user_defined_thing 45e41 57r43 139r42 163r41 178r43 192r43 235r21
+39n31 with_thing{39E8} 85r26 271r26
+40n31 use_thing{39E8} 75r26 273r29
+41n31 init_thing{39E8} 95r24 288r26
+42n31 report_thing{39E8} 109r23 294r29
+43n31 finish_thing{39E8} 102r24 291r29
+44n31 line_thing{39E8} 113r18 144r30 235r43 275r29
+45n31 eof_thing{39E8} 66r20 67r20 287r28
+57U13 get_next_thing 57b13 57=28 114l7 114t21 143r11 270r7 298r9
+57e28 thing{39E8} 66r12 67m11 75m17 85m17 95m15 102m15 109m14 113m9
+59a5 with_string{string} 82r22 83r27 84r44 86r36 87r42 88r50
+60a5 use_string{string} 72r22 73r27 74r44 76r36 77r42 78r50
+61a5 init_string{string} 92r22 93r27 94r54
+62a5 finish_string{string} 99r22 100r27 101r53
+63a5 report_string{string} 106r22 107r27 108r53
+64r5 temp{16|52R10} 73m47 74r35 83m48 84r35 93m48 94r45 100m50 101r44 107m50
+. 108r44
+125U15 Write_Line 125b15 125>26 128l9 128t19 145r11 148r9 149r9 150r9 152r7
+. 165r7 180r7 194r7 195r7 196r7 197r7 198r7 199r7 241r5 242r5 243r5 244r5
+. 245r5 246r5 247r5 248r5 249r5 250r5 251r5 252r5 253r5 254r5 255r5 256r5
+. 257r5 258r5 259r5 260r5 261r5 262r5 263r5 264r5 265r5 266r5 267r5 272r9
+. 274r9 281r5 282r5 283r5 284r5 285r5 310r5 311r5 312r5 313r5 315r5 316r5
+. 317r5 318r5 319r5 320r5 321r5 322r5 323r5 324r5 325r5 326r5 327r5 328r5
+. 329r5 330r5 331r5 332r5 333r5 334r5 335r5 336r5 337r5 338r5 339r5 340r5
+125s26 S{string} 127r28
+138U15 write_thing 138b15 138>27 139=27 153l9 153t20 166r7 181r7 200r7
+138b27 user{boolean} 141r10
+139e27 thing{39E8} 143m26 144r21
+162U15 write_init 162b15 162>26 163=26 167l9 167t19 289r9 302r7
+162b26 user{boolean} 166r19
+163e26 thing{39E8} 166m25
+177U15 write_finish 177b15 177>28 178=28 182l9 182t21 292r9 305r7
+177b28 user{boolean} 181r19
+178e28 thing{39E8} 181m25
+191U15 write_report 191b15 191>28 192=28 201l9 201t21 295r9 308r7
+191b28 user{boolean} 200r19
+192e28 thing{39E8} 200m25
+235e5 current_thing{39E8} 270m22 271r10 273r13 275r13 287r11 288r10 289m26
+. 291r13 292m28 294r13 295m28 298m24 302m25 305m27 308m27
+236b5 wrote_init{boolean} 290m9 301r12
+237b5 wrote_finish{boolean} 293m9 304r12
+238b5 wrote_report{boolean} 296m9 307r12
+X 15 source_file.ads
+45K9*Source_File 12|3w33 66r38 71r9 15|90e16
+64V16*Is_End_of_File{boolean} 12|66r50
+80U15*Read_Line 12|71r21
+X 16 str_pack.ads
+45K9*STR_Pack 12|3w46 58r9 94r25 101r24 108r24 16|85e13
+52R10*STR 12|64r12 16|83e19
+55V15*Value_of{string} 12|74r15 84r15 94r16 101r15 108r15
+59U15*Assign 12|73r12 83r12 93r12 100r12 107r12
+69V15*Upper_Case{52R10} 12|74r24 84r24 94r34 101r33 108r33
+X 38 text_io.ads
+24K9*Text_IO=24:29 12|3w24 4r23
+

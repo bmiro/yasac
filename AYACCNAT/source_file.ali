@@ -1,0 +1,113 @@
+V "GNAT Lib v4.4"
+P SS ZX
+R nnnnnnnnnnnnnnnvvnvnnnvnnnvnnnnnnnnnnnvnnvnnnnnnnnnnnnnvnnnnvvnnnnnnnnnnnnnnn
+
+U source_file%b		source_file.adb		96c22f79 OO PK
+W ada.exceptions%s	a-except.adb		a-except.ali
+W ayacc_file_names%s	ayacc_file_names.adb	ayacc_file_names.ali
+W system.img_int%s	s-imgint.adb		s-imgint.ali
+W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+W system.soft_links%s	s-soflin.adb		s-soflin.ali
+W system.string_ops%s	s-strops.adb		s-strops.ali
+W system.string_ops_concat_3%s  s-sopco3.adb	s-sopco3.ali
+W text_io%s		text_io.ads		text_io.ali
+
+U source_file%s		source_file.ads		6f1e4db3 EE OO PK
+W ada.tags%s		a-tags.adb		a-tags.ali
+W system%s		system.ads		system.ali
+W system.exception_table%s  s-exctab.adb	s-exctab.ali
+W system.standard_library%s  s-stalib.adb	s-stalib.ali
+
+D ada.ads		20070406091342 9c7dd3ea
+D a-except.ads		20090409232307 b54b55de
+D a-finali.ads		20090409232307 9eaacebd
+D a-filico.ads		20090409232307 9299732a
+D a-ioexce.ads		20070406091342 be0900a0
+D a-stream.ads		20090409232307 34aca5be
+D a-tags.ads		20090409232307 bfa07446
+D a-textio.ads		20090409232307 fe8af46e
+D a-unccon.ads		20070406091342 51e09df2
+D ayacc_file_names.ads	20091116144814 12783ddc
+D interfac.ads		20090409232307 a69cad5c
+D i-cstrea.ads		20090409232307 e1e064a9
+D source_file.ads	20091116144814 6f1e4db3
+D source_file.adb	20091116144814 979397e9
+D system.ads		20100911234204 15e10948
+D s-crtl.ads		20090409232307 997234a1
+D s-exctab.ads		20090409232307 5c1c61ae
+D s-ficobl.ads		20090409232307 8bb681e5
+D s-finimp.ads		20090409232307 9449f4cb
+D s-finroo.ads		20090409232307 1408f9d1
+D s-imgint.ads		20090409232307 f77d133c
+D s-parame.ads		20090409232307 f32e56e9
+D s-secsta.ads		20090409232307 7bae3621
+D s-soflin.ads		20090409232307 0c6fd39d
+D s-stache.ads		20090409232307 257b3be8
+D s-stalib.ads		20090409232307 52b793d5
+D s-stoele.ads		20090409232307 ed966df3
+D s-stoele.adb		20090409232307 e9998c78
+D s-stratt.ads		20090409232307 fef7c1da
+D s-strops.ads		20090409232307 845f72d2
+D s-sopco3.ads		20090409232307 72ce1063
+D s-sopco4.ads		20090409232307 bc112723
+D s-sopco5.ads		20090409232307 191315e8
+D s-traent.ads		20090409232307 bd5f2753
+D s-unstyp.ads		20090409232307 c0f9fae5
+D s-wchcon.ads		20090409232307 ab028799
+D text_io.ads		20070406091342 7c37c8ff
+X 8 a-textio.ads
+51P9*File_Type(369R9) 14|59r18
+52n23*In_File{52E9} 14|83r26
+92U14*Open 14|83r9
+98U14*Close 14|97r9
+183V13*End_Of_File{boolean} 14|103r16 130r16 151r16
+208U14*Put 14|200r9 202r13 204r9
+242U14*Put 14|184r9 186r9
+244U14*Get_Line 14|123r13 211r9
+263U14*Put_Line 14|90r13 169r13 185r9 187r9
+294X4*Name_Error 14|89r14
+295X4*Use_Error 14|89r27
+X 10 ayacc_file_names.ads
+58K9*Ayacc_File_Names 95e21 14|49w15 81r13
+64V15*Get_Source_File_Name{string} 14|83r35 90r50
+X 13 source_file.ads
+45K9*Source_File 90l5 90e16 14|51b14 216l5 216t16
+57U16*Open 14|80b15 92l9 92t13
+58U16*Close 14|95b15 98l9 98t14
+60U16*Get_Char 60<28 14|118b15 142l9 142t17
+60e28 Ch{character} 14|118b24 131m17 135m13 138m13
+61U16*Unget_Char 61>28 14|162b15 174l9 174t19
+61e28 Ch{character} 14|162b26
+63V16*Peek_Next_Char{character} 14|148b14 158l9 158t23
+64V16*Is_End_of_File{boolean} 14|101b14 104l9 104t23
+65V16*Source_Line_Number{natural} 14|106b14 109l9 109t27
+69V14*Maximum_Line_Length{natural} 14|112b14 115l9 115t28
+71e5*Eof{character} 14|131r23 152r24
+72e5*Eoln{character} 14|135r19 154r24
+75U15*Print_Context_Lines 14|178b15 206l9 206t28
+80U15*Read_Line 80<25 80<50 14|209b15 213l9 213t18
+80s25 Source_Line{string} 14|209b25 211m30
+80i50 Last{natural} 14|209b50 211m43
+88X5*Pushback_Error 14|170r19
+X 14 source_file.adb
+53a3 SCCS_ID{string}
+57a3 Rcs_ID{string}
+59p5 Input_File{8|51P9} 83m14 97m15 103r28 123r22 130r28 151r28 211r18
+61N5 Max_Line_Length 65r32 114r14
+63R10 Long_STR 67e19 69r21 70r21
+65a13*Name{string} 123m47 138m32 157m29 185m32 187m31 193m29
+66i13*Length{natural} 123m66 129r41 150r41 185r54 187r52
+69r5 Current_Line{63R10} 84m9 122r30 123m34 123m53 129r28 138r19 150r28 157r16
+. 187r18 187r39 193r16
+70r5 Previous_Line{63R10} 85m9 122m13 185r18 185r40
+71i5 Column_Number{natural} 86m9 125m13 129r12 138r37 139m13 139r30 150r12
+. 157r34 168r15 172m13 172r30 192r21
+72i5 Line_Number{natural} 87m9 108r16 126m13 126r28 184r27 186r27 212m9 212r24
+75b5 Get_New_Line{boolean} 121r12 124m13 136m13 164r12 165m13
+76b5 End_of_Source_File{boolean} 132m17 166r15 167m13
+179i9 Ptr_Location{integer} 194m17 194r36 196m17 196r33 201r21
+192i13 I{integer} 193r34
+201i13 I{integer}
+X 37 text_io.ads
+24K9*Text_IO=24:29 14|49w6 50r6
+

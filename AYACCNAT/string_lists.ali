@@ -1,0 +1,43 @@
+V "GNAT Lib v4.4"
+P ZX
+R nnnvnnnnnnnnnnnnnnvnnnnvnnnnvnnnnnnnnnnnnvnnnnnnnnnnnnnvnnnnvnnnnnnnnnnnnnnnn
+
+U string_lists%b	string_lists.ads	adbc4fdb NE OO PK
+W ada.exceptions%s	a-except.adb		a-except.ali
+W lists%s		lists.adb		lists.ali  AD
+W string_pkg%s		string_pkg.adb		string_pkg.ali
+W system%s		system.ads		system.ali
+W system.exception_table%s  s-exctab.adb	s-exctab.ali
+W system.standard_library%s  s-stalib.adb	s-stalib.ali
+W unchecked_deallocation%s
+
+U string_lists%s	string_lists.ads	fb2cc7cf EB EE OO PK
+W lists%s		lists.adb		lists.ali  AD
+W string_pkg%s		string_pkg.adb		string_pkg.ali
+W system%s		system.ads		system.ali
+W system.exception_table%s  s-exctab.adb	s-exctab.ali
+W system.standard_library%s  s-stalib.adb	s-stalib.ali
+
+D ada.ads		20070406091342 9c7dd3ea
+D a-except.ads		20090409232307 b54b55de
+D a-unccon.ads		20070406091342 51e09df2
+D lists.ads		20091116144814 a58755e7
+D lists.adb		20091116144814 d8f89d3e
+D string_lists.ads	20091116144814 adbc4fdb
+D string_lists.ads	20091116144814 adbc4fdb
+D string_pkg.ads	20091116144814 f317ddf3
+D system.ads		20100911234204 15e10948
+D s-exctab.ads		20090409232307 5c1c61ae
+D s-parame.ads		20090409232307 f32e56e9
+D s-stalib.ads		20090409232307 52b793d5
+D s-traent.ads		20090409232307 bd5f2753
+D unchdeal.ads		20070406091342 66b7fd29
+X 4 lists.ads
+13k9*Lists 500e10 7|9w6 11r29
+X 7 string_lists.ads
+11K9*String_Lists[4|13]
+X 8 string_pkg.ads
+14K9*string_pkg 7|8w6 11r35 11r59 8|597e15
+95P10*string_type(string) 7|11r46
+410V14*equal{boolean} 7|11r70
+

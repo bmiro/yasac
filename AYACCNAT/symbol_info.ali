@@ -1,0 +1,132 @@
+V "GNAT Lib v4.4"
+P SS ZX
+R nnnvnnnnnnnnnnnnnnvnnnvvnnnnvnnnnnnnnnvnnvnnnnnnnnnnnnnvnnnnvnnnnnnnnnnnnnnnn
+
+U symbol_info%b		symbol_info.adb		4d08289b NE OO PK
+W ada.exceptions%s	a-except.adb		a-except.ali
+W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+W system.string_ops_concat_3%s  s-sopco3.adb	s-sopco3.ali
+W system.string_ops_concat_4%s  s-sopco4.adb	s-sopco4.ali
+W text_io%s		text_io.ads		text_io.ali
+
+U symbol_info%s		symbol_info.ads		512b6130 EE OO PK
+W ada.tags%s		a-tags.adb		a-tags.ali
+W rule_table%s		rule_table.adb		rule_table.ali
+W symbol_table%s	symbol_table.adb	symbol_table.ali
+W system%s		system.ads		system.ali
+W system.exception_table%s  s-exctab.adb	s-exctab.ali
+W system.standard_library%s  s-stalib.adb	s-stalib.ali
+
+D ada.ads		20070406091342 9c7dd3ea
+D a-except.ads		20090409232307 b54b55de
+D a-finali.ads		20090409232307 9eaacebd
+D a-filico.ads		20090409232307 9299732a
+D a-ioexce.ads		20070406091342 be0900a0
+D a-stream.ads		20090409232307 34aca5be
+D a-tags.ads		20090409232307 bfa07446
+D a-textio.ads		20090409232307 fe8af46e
+D a-unccon.ads		20070406091342 51e09df2
+D interfac.ads		20090409232307 a69cad5c
+D i-cstrea.ads		20090409232307 e1e064a9
+D rule_table.ads	20091116144814 00039317
+D symbol_info.ads	20091116144814 d6bac929
+D symbol_info.adb	20091116144814 e785294d
+D symbol_table.ads	20091116144814 87923b0e
+D system.ads		20100911234204 15e10948
+D s-crtl.ads		20090409232307 997234a1
+D s-exctab.ads		20090409232307 5c1c61ae
+D s-ficobl.ads		20090409232307 8bb681e5
+D s-finimp.ads		20090409232307 9449f4cb
+D s-finroo.ads		20090409232307 1408f9d1
+D s-parame.ads		20090409232307 f32e56e9
+D s-secsta.ads		20090409232307 7bae3621
+D s-soflin.ads		20090409232307 0c6fd39d
+D s-stache.ads		20090409232307 257b3be8
+D s-stalib.ads		20090409232307 52b793d5
+D s-stoele.ads		20090409232307 ed966df3
+D s-stoele.adb		20090409232307 e9998c78
+D s-stratt.ads		20090409232307 fef7c1da
+D s-strops.ads		20090409232307 845f72d2
+D s-sopco3.ads		20090409232307 72ce1063
+D s-sopco4.ads		20090409232307 bc112723
+D s-sopco5.ads		20090409232307 191315e8
+D s-traent.ads		20090409232307 bd5f2753
+D s-unstyp.ads		20090409232307 c0f9fae5
+D s-wchcon.ads		20090409232307 ab028799
+D text_io.ads		20070406091342 7c37c8ff
+X 8 a-textio.ads
+263U14*Put_Line 14|166r17 249r17
+X 12 rule_table.ads
+46K9*Rule_Table 84e15 13|45w20 46r20
+55I10*Rule<short_integer> 13|59r66
+62V15*Get_LHS{15|49I11} 14|83r27 90r36 159r20 226r28
+63V15*Get_RHS{15|49I11} 14|95r36 127r28 231r36
+68V15*Length_of{natural} 14|82r16 93r36 124r30 229r36
+70V15*First_Rule{55I10} 14|81r18 89r22 122r18 150r26 155r38 158r22 225r22
+71V15*Last_Rule{55I10} 14|81r30 89r34 122r30 150r51 158r34 225r34
+76U15*Set_Null_Pos 14|134r13
+X 13 symbol_info.ads
+47K9*Symbol_Info 80l5 80e16 14|46b14 277l5 277t16
+58I10*Yield_Index<integer> 59r38 60r66 14|145r25 150r14 150r39 155r26
+59A10*Rule_Array(12|55I10)<58I10> 62r41 14|149r34
+60A10*Offset_Array(58I10)<15|49I11> 63r41 14|152r40
+62P10*Rule_Array_Pointer(59A10) 65r35
+63P10*Offset_Array_Pointer(60A10) 66r35
+65p5*Nonterminal_Yield{62P10} 14|149m9 160r21
+66p5*Nonterminal_Yield_Index{63P10} 14|152m9 157r13 164r16 172r9
+70U15*Initialize 14|263b15 274l9 274t19
+72V14*Is_Nullable{boolean} 72>26 14|112b14 115l9 115t20
+72i26 Sym{15|49I11} 14|112b26 114r26
+74X5*Undefined_Nonterminal 14|177r19
+X 14 symbol_info.adb
+48a3 SCCS_ID{string}
+52a3 Rcs_ID{string}
+54A10 Nullables_Array(boolean)<15|49I11> 55r44 266r26
+55P10 Nullables_Array_Pointer(54A10) 57r17
+57p5 Nullables{55P10} 75r18 76r13 83r17 91r24 97r39 101r25 114r16 128r53
+. 266m9
+64U15 Find_Nullables 64b15 109l9 109t23 271r9
+65i9 Sym_Position{natural} 92m21 94r27 95r47 98m25 98r41 100r24
+66i9 Nonterminal_Sym{15|49I11} 90m17 91r34 101r35
+67i9 RHS_Sym{15|49I11} 95m25 96r47 97r49
+68b9 No_More_Added{boolean} 88m13 102m25 106r23
+69i9 Rule_Length{natural} 93m21 94r43 100r39
+75i13 S<short_integer> 76r23
+81i13 R<short_integer> 82r26 83r35
+89i17 R<short_integer> 90r44 93r46 95r44
+117U15 Make_Rules_Null_Position 117b15 138l9 138t33 272r9
+118i9 Null_Position{integer} 124m13 126r19 127r39 131m17 131r34 134r29
+119i9 RHS_Sym{15|49I11} 127m17 128r32 128r63
+122i13 R<short_integer> 124r40 127r36 134r26
+141U15 Find_Rule_Yields 141b15 180l9 180t25 269r9
+144b9 Found_Undefined_Nonterminal{boolean} 165m17 176r12
+145i9 Current_Index{13|58I10} 155m9 157r45 160r39 161m21 161r38 164r47 172r66
+156i13 Sym<short_integer> 157r37 159r33 164r40 166r67
+158i17 R<short_integer> 159r28 160r57
+188U15 Check_Grammar 188b15 259l9 259t22 270r9
+191A14 Nonterminal_Array(boolean)<15|49I11> 193r14
+193a9 Ok{191A14} 217r18 218m13 227r24 233r33 240m25 247r18 248r20
+196b9 More{boolean} 222m9 223r15 224m13 241m25
+197i9 I{natural} 228m21 230r27 231r47 237m25 237r30 239r24
+198i9 Rule_Length{natural} 229m21 230r32 239r28
+199b9 Found_Error{boolean} 251m17 255r12
+201i9 RHS_Sym{15|49I11} 231m25 232r43 233r36
+201i18 LHS_Sym{15|49I11} 226m17 227r27 240r28
+203X9 Bad_Grammar 256r19
+217i13 S<short_integer> 218r16
+225i17 R<short_integer> 226r36 229r46 231r44
+247i13 J<short_integer> 248r23 249r67
+X 15 symbol_table.ads
+45K9*Symbol_Table 13|45w6 46r6 15|79e17
+47n38*Nonterminal{47E11} 14|153r27 153r53 156r33 156r59 172r45 194r27 194r53
+. 267r27 267r55
+49I11*Grammar_Symbol<short_integer> 13|60r38 72r31 14|54r36 66r29 67r29 112r31
+. 119r25 191r42 201r27
+64V14*Get_Symbol_Name{string} 14|166r51 249r51
+66V14*First_Symbol{49I11} 14|153r14 156r20 194r14 267r14
+67V14*Last_Symbol{49I11} 14|153r41 156r47 172r33 194r41 267r43
+72V14*Is_Terminal{boolean} 14|96r35 128r20
+73V14*Is_Nonterminal{boolean} 14|232r28
+X 37 text_io.ads
+24K9*Text_IO=24:29 14|45w6 142r13 189r13
+

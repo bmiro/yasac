@@ -1,0 +1,105 @@
+V "GNAT Lib v4.4"
+P SS ZX
+R nnnnnnnnnnnnnnnvvnvnnnvnnnnnnnnnnnnnnnvnnnnnnnnnnnnnnnnvnnnnnnnnnnnnnnnnnnnnn
+
+U goto_file%b		goto_file.adb		2f2b8f7d NE OO PK
+W ada.exceptions%s	a-except.adb		a-except.ali
+W ada.tags%s		a-tags.adb		a-tags.ali
+W ayacc_file_names%s	ayacc_file_names.adb	ayacc_file_names.ali
+W rule_table%s		rule_table.adb		rule_table.ali
+W symbol_table%s	symbol_table.adb	symbol_table.ali
+W system.img_int%s	s-imgint.adb		s-imgint.ali
+W system.secondary_stack%s  s-secsta.adb	s-secsta.ali
+W system.soft_links%s	s-soflin.adb		s-soflin.ali
+W system.string_ops%s	s-strops.adb		s-strops.ali
+W system.string_ops_concat_3%s  s-sopco3.adb	s-sopco3.ali
+W system.string_ops_concat_5%s  s-sopco5.adb	s-sopco5.ali
+W text_io%s		text_io.ads		text_io.ali
+
+U goto_file%s		goto_file.ads		32156d55 EE NE OO PK
+
+D ada.ads		20070406091342 9c7dd3ea
+D a-except.ads		20090409232307 b54b55de
+D a-finali.ads		20090409232307 9eaacebd
+D a-filico.ads		20090409232307 9299732a
+D a-ioexce.ads		20070406091342 be0900a0
+D a-stream.ads		20090409232307 34aca5be
+D a-tags.ads		20090409232307 bfa07446
+D a-textio.ads		20090409232307 fe8af46e
+D a-unccon.ads		20070406091342 51e09df2
+D ayacc_file_names.ads	20091116144814 12783ddc
+D goto_file.ads		20091116144814 32156d55
+D goto_file.adb		20091116144814 f4e0bf12
+D interfac.ads		20090409232307 a69cad5c
+D i-cstrea.ads		20090409232307 e1e064a9
+D rule_table.ads	20091116144814 00039317
+D symbol_table.ads	20091116144814 87923b0e
+D system.ads		20100911234204 15e10948
+D s-crtl.ads		20090409232307 997234a1
+D s-exctab.ads		20090409232307 5c1c61ae
+D s-ficobl.ads		20090409232307 8bb681e5
+D s-finimp.ads		20090409232307 9449f4cb
+D s-finroo.ads		20090409232307 1408f9d1
+D s-imgint.ads		20090409232307 f77d133c
+D s-parame.ads		20090409232307 f32e56e9
+D s-secsta.ads		20090409232307 7bae3621
+D s-soflin.ads		20090409232307 0c6fd39d
+D s-stache.ads		20090409232307 257b3be8
+D s-stalib.ads		20090409232307 52b793d5
+D s-stoele.ads		20090409232307 ed966df3
+D s-stoele.adb		20090409232307 e9998c78
+D s-stratt.ads		20090409232307 fef7c1da
+D s-strops.ads		20090409232307 845f72d2
+D s-sopco3.ads		20090409232307 72ce1063
+D s-sopco4.ads		20090409232307 bc112723
+D s-sopco5.ads		20090409232307 191315e8
+D s-traent.ads		20090409232307 bd5f2753
+D s-unstyp.ads		20090409232307 c0f9fae5
+D s-wchcon.ads		20090409232307 ab028799
+D text_io.ads		20070406091342 7c37c8ff
+X 8 a-textio.ads
+51P9*File_Type(369R9) 12|12r16
+52n32*Out_File{52E9} 12|16r25
+86U14*Create 12|16r8
+98U14*Close 12|82r9
+207U14*Put 12|100r9
+241U14*Put 12|88r9
+259U14*Put_Line 12|94r9
+263U14*Put_Line 12|38r17
+294X4*Name_Error 12|37r18
+295X4*Use_Error 12|37r31
+X 10 ayacc_file_names.ads
+58K9*Ayacc_File_Names 95e21 12|2w41 3r41
+70V15*Get_Goto_File_Name{string} 12|16r35 38r54
+83V12*Goto_Tables_Unit_Name{string} 12|18r32 81r29
+X 11 goto_file.ads
+55K9*Goto_File 63l5 63e14 12|4b14 104l5 104t14
+57U15*Open_Write 12|14b15 40l9 40t19
+58U15*Close_Write 12|43b15 83l9 83t20
+59U15*Write 59>21 12|51r9 55r13 66r9 76r17 86b15 89l9 89t14
+59s21 S{string} 12|86b21 88r23
+60U15*Write_Line 60>26 12|18r8 19r8 20r8 21r8 22r8 23r8 24r8 25r8 26r8 27r8
+. 28r8 29r8 30r8 31r8 33r8 34r8 35r8 45r9 46r9 47r9 48r9 57r17 59r17 72r17
+. 74r17 81r9 92b15 95l9 95t19
+60s26 S{string} 12|92b26 94r28
+61U15*Write 61>21 12|61r17 98b15 101l9 101t14
+61e21 C{character} 12|98b21 100r23
+X 12 goto_file.adb
+6a3 SCCS_ID{string}
+10a3 Rcs_ID{string}
+12p5 The_File{8|51P9} 16m15 82m15 88r13 94r18 100r13
+54i13 R<short_integer> 55r44 56r16 58r19
+70i13 R<short_integer> 71r16 72r58 73r19 74r58 76r52
+X 15 rule_table.ads
+46K9*Rule_Table 12|2w15 3r15 15|84e15
+55I10*Rule<short_integer> 12|51r56 52r24 67r15 68r13
+62V15*Get_LHS{16|49I11} 12|72r50 74r50 76r44
+68V15*Length_of{natural} 12|55r34
+70V15*First_Rule{55I10} 12|51r67 54r18 67r26 70r18
+71V15*Last_Rule{55I10} 12|52r35 54r30 56r20 68r24 70r30 71r20
+X 16 symbol_table.ads
+45K9*Symbol_Table 12|2w27 3r27 16|79e17
+49I11*Grammar_Symbol<short_integer> 12|72r29 74r29 76r23
+X 39 text_io.ads
+24K9*Text_IO=24:29 12|2w6 3r6
+
