@@ -29,7 +29,8 @@ FACT:
 	| literal
 
 EXP_BOOL:
-	EXP_MAT or TERMB
+	EXP_BOOL or TERMB
+        ! EXP_BOOL
 	| TERMB
 
 TERMB:
@@ -37,7 +38,6 @@ TERMB:
 	| FACTB
 
 FACTB:
-	! FACTB
 	| (EXP_BOOL)
 	| literal
 

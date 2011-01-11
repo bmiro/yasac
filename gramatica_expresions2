@@ -1,19 +1,19 @@
 E:
-	! E
-	| E & E
-	| E | E
-	| E > E
-	| E < E
-	| E >= E
-	| E <= E
-	| E = E
-	| E != E
-	| E * E
-	| E / E
-	| E % E
-	| - E
-	| E + E
-	| E - E
+	pc_not E
+	| E pc_and E
+	| E pc_or E
+	| E s_major E
+	| E s_menor E
+	| E s_major_igual E
+	| E s_menor_igual E
+	| E s_igual E
+	| E s_diferent E
+	| E s_prod E
+	| E s_div E
+	| E s_mod E
+	| s_menys E
+	| E s_mes E
+	| E s_menys E
 	| (E)
 	| REF
 	| literal

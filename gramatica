@@ -96,63 +96,28 @@ SENT_FLUXE:
 	| pc_if EXPRESIO pc_then SENTENCIES pc_else SENTENCIES pc_end pc_if s_punt_i_coma
 
 	
-EXPRESIO:
-        EXP_BOOL
-        | EXP_COMP
-        | EXP_ARIT
-        | (EXPRESIO)
-        | REFERENCIA
+
+
+EXPRESSIO:
+        pc_not EXPRESSIO
+        | EXPRESSIO pc_and EXPRESSIO
+        | EXPRESSIO pc_or EXPRESSIO
+        | EXPRESSIO s_major EXPRESSIO
+        | EXPRESSIO s_menor EXPRESSIO
+        | EXPRESSIO s_major_igual EXPRESSIO
+        | EXPRESSIO s_menor_igual EXPRESSIO
+        | EXPRESSIO s_igual EXPRESSIO
+        | EXPRESSIO s_diferent EXPRESSIO
+        | EXPRESSIO s_prod EXPRESSIO
+        | EXPRESSIO s_div EXPRESSIO
+        | EXPRESSIO s_mod EXPRESSIO
+        | s_menys EXPRESSIO
+        | EXPRESSIO s_mes EXPRESSIO
+        | EXPRESSIO s_menys EXPRESSIO
+        | (EXPRESSIO)
+        | REF
         | literal
 
-EXP_ARIT:
-        s_menys EXP_ARIT
-        | EXP_MAT OPAD TERM
-        | TERM
-
-OPAD:
-        s_mes
-        | s_menys
-
-TERM:
-        TERM OPPR FACT
-        | FACT
-
-OPPR:
-        s_producte
-        | s_divisio
-        | s_modul
-
-FACT:
-        (EXPR_MAT)
-        | literal
-
-EXP_BOOL:
-        EXP_BOOL pc_or TERMB
-        | TERMB
-
-TERMB:
-        TERMB pc_and FACTB
-        | FACTB
-
-FACTB:
-        ! FACTB
-        | (EXP_BOOL)
-        | literal
-
-EXP_COMP:
-        EXP_MAT OPCM EXP_MAT
-        | EXP_BOOL OPC EXP_BOOL
-
-OPCM:
-        OPC
-        | s_major
-        | s_menor
-        | s_major_igual
-        | s_menor_igual
-        
-OPC:
-        s_igual
-        | s_distint
 
 REF:		
 	  REF s_punt REF

@@ -43,7 +43,7 @@ mod 	  { rl_atom(yylval, yytext, tok_begin_line, tok_begin_col); return pc_mod;}
 "<"  { rl_atom(yylval, yytext, tok_begin_line, tok_begin_col); return s_menor;}
 ">=" { rl_atom(yylval, yytext, tok_begin_line, tok_begin_col); return s_major_igual;}
 "<=" { rl_atom(yylval, yytext, tok_begin_line, tok_begin_col); return s_menor_igual;}
-"/=" { rl_atom(yylval, yytext, tok_begin_line, tok_begin_col); return s_distint;}
+"/=" { rl_atom(yylval, yytext, tok_begin_line, tok_begin_col); return s_diferent;}
 ":=" { rl_atom(yylval, yytext, tok_begin_line, tok_begin_col); return s_assignacio;}
 "("  { rl_atom(yylval, yytext, tok_begin_line, tok_begin_col); return s_parentesi_obert;}
 ")"  { rl_atom(yylval, yytext, tok_begin_line, tok_begin_col); return s_parentesi_tancat;}
