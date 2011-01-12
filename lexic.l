@@ -66,17 +66,10 @@ mod 	  { rl_atom(yylval, yytext, tok_begin_line, tok_begin_col); return pc_mod;}
 %%
 
 with decls.datribut; use decls.datribut; 
+with sintactic_tokens; use  sintactic_tokens;
 package a_lexic is
-	yylval : atribut;
-	type token is(Error, End_Of_Input, pc_and, pc_array, pc_begin, pc_constant, pc_else,
-		      pc_end, pc_for, pc_if, pc_in, pc_is, pc_loop, pc_mod, pc_new, pc_not, pc_of,
-		      pc_or, pc_out, pc_procedure, pc_range, pc_record, pc_then, pc_type,
-		      pc_while, s_mes, s_menys, s_producte, s_divisio, s_igual, s_dos_punts,
-		      s_punt, s_puntpunt, s_coma, s_punt_i_coma, s_major, s_menor, s_major_igual,
-		      s_menor_igual, s_distint, s_assignacio, s_parentesi_obert,
-		      s_parentesi_tancat, literal, identificador);
-
-	function yylex return token;
+	
+   function yylex return token;
 
 end a_lexic;
 
