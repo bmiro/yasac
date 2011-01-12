@@ -4,7 +4,7 @@ with analitzador_sintactic; use analitzador_sintactic;
 procedure principal is	
 begin
 
-    Open_Input("codi.ysa");
+    Open_Input("codi2.ysa");
     inicialitzacio;
     yyparse;
     Close_Input;

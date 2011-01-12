@@ -1,6 +1,5 @@
 %token Error
 %token End_Of_Input
-%token lambda
 %token pc_and
 %token pc_array
 %token pc_begin
@@ -101,7 +100,7 @@ MODE:
 
 DECLARACIONS: 
                DECLARACIONS DECLARACIO
-            | lambda
+            | 
             ;
 
 DECLARACIO:
@@ -215,38 +214,43 @@ EXPRESSIO:
 
 ---REF:
 ---          REF s_punt REF
----        | identificador REF_ARRAY
----        ;
+---       | identificador REF_ARRAY
+---       ;
 
-REF:
-      identificador s_punt REF
-      | identificador REF_ARRAY s_punt REF
-      | identificador REF_ARRAY
-      ;
+---REF:
+---      identificador s_punt REF
+---      | identificador REF_ARRAY s_punt REF
+---      | identificador REF_ARRAY
+---      ;
+
+---REF_ARRAY:
+---          REF_ARRAY s_parentesi_obert REF s_parentesi_tancat
+---          | literal
+---          ;    
+
+REF: 
+	identificador	
+	| REF s_punt identificador
+    | REF_ARRAY s_parentesi_tancat    
+	;
 
 REF_ARRAY:
-            REF_ARRAY s_parentesi_obert REF s_parentesi_tancat
-          | literal
-          | lambda
-          ;
-       
+    REF_ARRAY s_coma EXPRESSIO
+    | REF s_parentesi_obert EXPRESSIO
+	;    
 
 SENT_ASSIGNACIO: 
-                  REF s_assignacio EXPRESSIO s_punt_i_coma
-                  ;
+	REF s_assignacio EXPRESSIO s_punt_i_coma
+    ;
 
 SENT_PROCEDURE: 
-                  identificador s_parentesi_obert PARAMS s_parentesi_tancat s_punt_i_coma
-                  ;
-                  
-REF_PROC:
-         identificador
-         ;
-         
-PARAMS:
-          PARAMS s_coma REF
-        | REF
-        ;
+	REF s_punt_i_coma
+;
+                           
+---PARAMS:
+---          PARAMS s_coma REF
+---        | REF
+---        ;
 
 %%
 

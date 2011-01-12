@@ -1,5 +1,5 @@
 procedure prova(a:in integer) is
-	type x is array(1..max) of character;
+--	type x is array(1..max) of character;
 	y : integer;
 	type s is 
 		record
