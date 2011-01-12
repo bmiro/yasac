@@ -3,31 +3,31 @@ with ada.integer_text_io; use ada.integer_text_io;
 with decls.dtnoms; use decls.dtnoms;
 with decls.generals; use decls.generals;
 procedure proves_tnoms is
-   tn : Tnoms;
-   id_n : id_nom;
-   id_s : id_string;
+	tn : Tnoms;
+	id_n : id_nom;
+	id_s : id_string;
 begin
-   tbuida(tn);
+	tbuida(tn);
 
-   posa_id(tn, "hola", id_n);
-   put(con_id(tn, id_n)); new_line;
+	posa_id(tn, "hola", id_n);
+	put(con_id(tn, id_n)); new_line;
 
-   posa_id(tn, "compiladors", id_n);
-   put(con_id(tn, id_n)); new_line;
+	posa_id(tn, "compiladors", id_n);
+    put(con_id(tn, id_n)); new_line;
 
-   posa_id(tn, "hola", id_n);
-   put(con_id(tn, id_n)); new_line;
+	posa_id(tn, "hola", id_n);
+	put(con_id(tn, id_n)); new_line;
 
-   posa_cad(tn, "Aixo es una cadena", id_s);
-   put(con_cad(tn, id_s)); new_line;
+	posa_cad(tn, "Aixo es una cadena", id_s);
+	put(con_cad(tn, id_s)); new_line;
    
-   posa_id(tn, "ahol", id_n);
-   put(con_id(tn, id_n)); new_line;
+	posa_id(tn, "ahol", id_n);
+	put(con_id(tn, id_n)); new_line;
    
-   posa_id(tn, "oalh", id_n);
-   put(con_id(tn, id_n)); new_line;
+	posa_id(tn, "oalh", id_n);
+	put(con_id(tn, id_n)); new_line;
    
-   posa_cad(tn, "prova", id_s);
-   put(con_cad(tn, id_s)); new_line;
+	posa_cad(tn, "prova", id_s);
+	put(con_cad(tn, id_s)); new_line;
 	
 end proves_tnoms;

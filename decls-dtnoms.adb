@@ -15,10 +15,20 @@ package body decls.dtnoms is
 
    end tbuida;
 
-   function hash(k: in string) return natural is
-   begin
-      return natural(Ada.Strings.Hash(k));
-   end hash;
+   --TODO Amb aquesta funcio de hash no funciona
+   --function hash(k: in string) return natural is
+   --begin
+   --   return natural(Ada.Strings.Hash(k));
+   --end hash;
+	
+    function hash(k: in string) return natural is
+        comptador : natural := 0;
+    begin
+        for i in k'first..k'last loop
+	    comptador := comptador + character'POS(k(i));
+	end loop;
+	    return comptador mod tam_tdispersio;
+    end hash;
 
    --Insereix un string dins la taula de caracters
    procedure posa(tc: in out taula_caracters; idx_tc: in out index_tcaracters;

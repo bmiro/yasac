@@ -22,7 +22,7 @@ package body decls.datribut is
    procedure rl_lit_enter(yylval : out atribut; yytext : in string;
 			  lin, col : in natural) is
    begin
-      yylval := (at_lit_enter, lin, col,
+      yylval := (at_lit_enter, lin, col, 
 		 integer(character'pos(yytext(yytext'first))) - 48, enter);
    end rl_lit_enter;
 
