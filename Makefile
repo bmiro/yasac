@@ -25,6 +25,11 @@ tnoms:
 	gnatmake proves_tnoms.adb
 	./proves_tnoms
 
+tsimbols:
+	gnatmake decls-dtsimbols.adb
+	gnatmake prova_tsimbols.adb
+	./prova_tsimbols
+
 edit:
 	kate decls.ads decls-datribut.adb decls-datribut.ads decls-dtnoms.adb decls-dtnoms.ads decls-generals.ads gramatica lexic.l Makefile
 
