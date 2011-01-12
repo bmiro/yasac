@@ -15,9 +15,6 @@ begin
 		while 1 = 1 loop
 			s := s + s(x);
 		end loop;
-		for i in 1..x loop
-			a(i);		
-		end loop;
 	else 
 		p := 3;
 		if a = 2 then
