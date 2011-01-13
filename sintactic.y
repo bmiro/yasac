@@ -117,7 +117,7 @@ DEC_TIPUS:
         ;
 
 DEC_CONST: 
-          identificador s_dos_punts pc_constant identificador s_assignacio V_CONST s_punt_i_coma
+          LLISTA_ID s_dos_punts pc_constant identificador s_assignacio V_CONST s_punt_i_coma
           ;
 
 V_CONST:
@@ -126,7 +126,7 @@ V_CONST:
         ;
 
 DEC_VAR: 
-        identificador s_dos_punts identificador s_punt_i_coma
+        LLISTA_ID s_dos_punts identificador s_punt_i_coma
         ;
 
 DEC_ARRAY: 
