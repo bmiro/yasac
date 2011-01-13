@@ -34,6 +34,7 @@ package decls.arbre is
 	 when n_dec_param =>
 	    dpa_identif: id_nom;
 	    dpa_mode: pnode;
+	    dpa_tipus: id_nom;
 	 when n_mode =>
 	    mode: t_mode; --TODO revisar, existeix?
 	 when n_dec_const =>
@@ -60,6 +61,9 @@ package decls.arbre is
 	 when n_val_const =>
 	    vc_signe: t_signe;
 	    vc_literal: pnode;
+	 when n_vconst =>
+	    v_signe: operador; --sols sera menys unitari o nul
+	    v_literal: pnode;
 	 when n_lit =>
 	    l_val: integer; --TODO Revisar i aclarir
 	    l_ts: tipus_subjacent;
@@ -102,16 +106,21 @@ package decls.arbre is
    procedure crea_n_dec_proc(a: out ast;
 			     encap, decls, sents, identif: in ast);
    procedure crea_n_encap(a: out ast; identif: in ast; params: in ast);
-   procedure crea_n_decs();
+   procedure crea_n_decs(a: out ast; dec, decs: in ast);
+   procedure remunta_decs(a: out ast);
+   procedure remunta_dec(a: out ast; dec_especifica: in ast);
    procedure crea_n_sents();
    procedure crea_n_ident();
-   procedure crea_n_dec_params(a:out ast; params, param: in ast);
-   procedure crea_n_dec_param();
-   procedure crea_n_mode();
-   procedure crea_n_dec_const();
+   procedure crea_n_dec_params(a: out ast; params, param: in ast);
+   procedure crea_n_dec_param(a: out ast;
+			      identif, tipus: in id_nom;
+			      mode: in pnode);
+   procedure crea_n_mode(a: out ast; mode: in t_mode);
+   procedure crea_n_dec_const(a: out ast; llista_id, tipus, valor: in ast);
    procedure crea_n_dec_var();
    procedure crea_n_dec_array();
    procedure crea_n_dec_rec();
+   procedure remunta_vconst(a:out ast; lit: in ast; signe:in t_operacio);
    procedure crea_dec_subrang();
    procedure crea_n_llista_id();
    procedure crea_n_val_const();
