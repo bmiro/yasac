@@ -65,7 +65,7 @@
 %with decls.datribut;
 %use decls.datribut;
 {
-subtype YYSType is atribut; 
+subtype YYSType is pnode; 
 }
 
 %%
