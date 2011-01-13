@@ -70,7 +70,7 @@ subtype YYSType is atribut;
 
 %%
 
-PROGRAMA:
+DEC_PROC:
         pc_procedure ENCAP pc_is
                 DECLARACIONS
         pc_begin
@@ -106,7 +106,7 @@ DECLARACIONS:
 DECLARACIO:
           DEC_CONST
         | DEC_VAR
-        | DEC_PROCEDURE
+        | DEC_PROC
         | DEC_TIPUS
         ;
 
@@ -137,10 +137,6 @@ LLISTA_ID:
             LLISTA_ID s_coma identificador
             | identificador
             ;
-
-DEC_PROCEDURE: 
-               PROGRAMA
-               ;
 
 DEC_RECORD: 
         pc_type identificador pc_is pc_record CAMPS pc_end pc_record s_punt_i_coma
@@ -231,11 +227,11 @@ EXPRESSIO:
 REF: 
 	identificador	
 	| REF s_punt identificador
-    | REF_ARRAY s_parentesi_tancat    
+    | REF_COMP s_parentesi_tancat    
 	;
 
-REF_ARRAY:
-    REF_ARRAY s_coma EXPRESSIO
+REF_COMP:
+    REF_COMP s_coma EXPRESSIO
     | REF s_parentesi_obert EXPRESSIO
 	;    
 
