@@ -89,7 +89,7 @@ PARAMETRES:
         ;
         
 PARAMETRE:
-        identificador s_dos_punts MODE identificador
+          identificador s_dos_punts MODE identificador
         ;
 
 MODE:
@@ -99,9 +99,9 @@ MODE:
         ;
 
 DECLARACIONS: 
-               DECLARACIONS DECLARACIO
-            | 
-            ;
+	  DECLARACIONS DECLARACIO
+        | 
+        ;
 
 DECLARACIO:
           DEC_CONST
@@ -117,8 +117,8 @@ DEC_TIPUS:
         ;
 
 DEC_CONST: 
-          LLISTA_ID s_dos_punts pc_constant identificador s_assignacio V_CONST s_punt_i_coma
-          ;
+	LLISTA_ID s_dos_punts pc_constant identificador s_assignacio V_CONST s_punt_i_coma
+	;
 
 V_CONST:
           s_menys literal
@@ -130,30 +130,30 @@ DEC_VAR:
         ;
 
 DEC_ARRAY: 
-            pc_type identificador pc_is pc_array s_parentesi_obert LLISTA_ID s_parentesi_tancat pc_of identificador s_punt_i_coma
-            ;
+	pc_type identificador pc_is pc_array s_parentesi_obert LLISTA_ID s_parentesi_tancat pc_of identificador s_punt_i_coma
+	;
 
 LLISTA_ID:
-            LLISTA_ID s_coma identificador
-            | identificador
-            ;
+	  LLISTA_ID s_coma identificador
+	| identificador
+	;
 
 DEC_RECORD: 
         pc_type identificador pc_is pc_record CAMPS pc_end pc_record s_punt_i_coma
-        ;
+	;
         
 CAMPS:
-      CAMPS CAMP
-      | CAMP
-      ;
+	  CAMPS CAMP
+	| CAMP
+	;
       
 CAMP:
-     identificador s_dos_punts identificador s_punt_i_coma
-     ;
+	identificador s_dos_punts identificador s_punt_i_coma
+	;
 
 DEC_SUBRANG:
-         pc_type identificador pc_is pc_new identificador pc_range RANG s_punt_i_coma
-         ;
+        pc_type identificador pc_is pc_new identificador pc_range RANG s_punt_i_coma
+        ;
 
 RANG: 
         LIM s_puntpunt LIM 
@@ -179,8 +179,8 @@ SENTENCIA:
         ;
 
 SENT_BUCLES: 
-          pc_while EXPRESSIO pc_loop SENTENCIES pc_end pc_loop s_punt_i_coma
-          ;
+	pc_while EXPRESSIO pc_loop SENTENCIES pc_end pc_loop s_punt_i_coma
+	;
         
 SENT_FLUXE:
           pc_if EXPRESSIO pc_then SENTENCIES pc_end pc_if s_punt_i_coma
@@ -208,46 +208,25 @@ EXPRESSIO:
         | literal
         ;
 
----REF:
----          REF s_punt REF
----       | identificador REF_ARRAY
----       ;
-
----REF:
----      identificador s_punt REF
----      | identificador REF_ARRAY s_punt REF
----      | identificador REF_ARRAY
----      ;
-
----REF_ARRAY:
----          REF_ARRAY s_parentesi_obert REF s_parentesi_tancat
----          | literal
----          ;    
-
 REF: 
-	identificador	
+	  identificador	
 	| REF s_punt identificador
-    | REF_COMP s_parentesi_tancat    
+	| REF_COMP s_parentesi_tancat    
 	;
 
 REF_COMP:
-    REF_COMP s_coma EXPRESSIO
-    | REF s_parentesi_obert EXPRESSIO
+	  REF_COMP s_coma EXPRESSIO
+	| REF s_parentesi_obert EXPRESSIO
 	;    
 
 SENT_ASSIGNACIO: 
 	REF s_assignacio EXPRESSIO s_punt_i_coma
-    ;
+	;
 
 SENT_PROCEDURE: 
 	REF s_punt_i_coma
-;
+	;
                            
----PARAMS:
----          PARAMS s_coma REF
----        | REF
----        ;
-
 %%
 
 package analitzador_sintactic is
