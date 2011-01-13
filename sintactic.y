@@ -100,50 +100,50 @@ PARAMETRE:
 
 MODE:
           pc_in
-      {crea_n_dec_mode($$,m_in);}
+	  {crea_n_dec_mode($$,m_in);}
         | pc_out
-      {crea_n_dec_mode($$,m_out);}
+	  {crea_n_dec_mode($$,m_out);}
         | pc_in pc_out
-      {crea_n_dec_mode($$,m_in_out);}
+	  {crea_n_dec_mode($$,m_in_out);}
         ;
 
 DECLARACIONS: 
 	  DECLARACIONS DECLARACIO
-	{crea_n_decs($$,$1,$2);}
+	  {crea_n_decs($$,$1,$2);}
         | 
-	{remunta_decs($$);}
+	  {remunta_decs($$);}
         ;
 
 DECLARACIO:
           DEC_CONST
-	{remunta_dec($$,$1);}
+	  {remunta_dec($$,$1);}
         | DEC_VAR
-	{remunta_dec($$,$1);}
+	  {remunta_dec($$,$1);}
         | DEC_PROC
-	{remunta_dec($$,$1);}
+	  {remunta_dec($$,$1);}
         | DEC_TIPUS
-	{remunta_dec($$,$1);}
+	  {remunta_dec($$,$1);}
         ;
 
 DEC_TIPUS:
           DEC_ARRAY
-	{remunta_dec($$,$1);}
+	  {remunta_dec($$,$1);}
         | DEC_RECORD
-	{remunta_dec($$,$1);}
+	  {remunta_dec($$,$1);}
         | DEC_SUBRANG
-	{remunta_dec($$,$1);}
+	  {remunta_dec($$,$1);}
         ;
 
 DEC_CONST: 
-	LLISTA_ID s_dos_punts pc_constant identificador s_assignacio V_CONST s_punt_i_coma
-	{remunta_dec($$,$1,$4,$6);}
+	  LLISTA_ID s_dos_punts pc_constant identificador s_assignacio V_CONST s_punt_i_coma
+	  {remunta_dec($$,$1,$4,$6);}
 	;
 
 V_CONST:
           s_menys literal
-	{remunta_vconst($$,$2,s_menys);}
+	  {remunta_vconst($$,$2,s_menys);}
         | literal
-	{remunta_vconst($$,$1,null);}
+	  {remunta_vconst($$,$1,null);}
         ;
 
 DEC_VAR: 
