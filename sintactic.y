@@ -76,53 +76,74 @@ DEC_PROC:
         pc_begin
                 SENTENCIES
         pc_end identificador s_punt_i_coma
+        {crea_n_dec_proc($$,$2,$4,$6,$8);}
         ;
 
 ENCAP:
           identificador
+	{crea_n_encap($$,$1,null);}
         | identificador s_parentesi_obert PARAMETRES s_parentesi_tancat
+	{crea_n_encap($$,$1,$3);}
         ;
 
 PARAMETRES:
           PARAMETRES s_punt_i_coma PARAMETRE
+	{crea_n_dec_params($$,$1,$3);}
         | PARAMETRE
+	{crea_n_dec_params($$,null,$1);}
         ;
         
 PARAMETRE:
           identificador s_dos_punts MODE identificador
+	{crea_n_dec_param($$,$1,$4,$3);}
         ;
 
 MODE:
           pc_in
+      {crea_n_dec_mode($$,m_in);}
         | pc_out
+      {crea_n_dec_mode($$,m_out);}
         | pc_in pc_out
+      {crea_n_dec_mode($$,m_in_out);}
         ;
 
 DECLARACIONS: 
 	  DECLARACIONS DECLARACIO
+	{crea_n_decs($$,$1,$2);}
         | 
+	{remunta_decs($$);}
         ;
 
 DECLARACIO:
           DEC_CONST
+	{remunta_dec($$,$1);}
         | DEC_VAR
+	{remunta_dec($$,$1);}
         | DEC_PROC
+	{remunta_dec($$,$1);}
         | DEC_TIPUS
+	{remunta_dec($$,$1);}
         ;
 
 DEC_TIPUS:
           DEC_ARRAY
+	{remunta_dec($$,$1);}
         | DEC_RECORD
+	{remunta_dec($$,$1);}
         | DEC_SUBRANG
+	{remunta_dec($$,$1);}
         ;
 
 DEC_CONST: 
 	LLISTA_ID s_dos_punts pc_constant identificador s_assignacio V_CONST s_punt_i_coma
+	{remunta_dec($$,$1,$4,$6);}
 	;
 
 V_CONST:
           s_menys literal
+	{remunta_vconst($$,$2,s_menys);}
         | literal
+	{remunta_vconst($$,$1,null);}
         ;
 
 DEC_VAR: 
