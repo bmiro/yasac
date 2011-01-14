@@ -71,8 +71,8 @@ subtype YYSType is ast;
 %%
 
 PROGRAMA: 
-	  DEC_PROC
-	  {rs_programa($1);}
+          DEC_PROC
+          {rs_programa($1);}
         ;
 
 DEC_PROC:
@@ -86,69 +86,69 @@ DEC_PROC:
 
 ENCAP:
           identificador
-	{rs_encap($$, $1);}
+          {rs_encap($$, $1);}
         | identificador s_parentesi_obert PARAMETRES s_parentesi_tancat
-	{rs_encap($$, $1, $3);}
+          {rs_encap($$, $1, $3);}
         ;
 
 PARAMETRES:
           PARAMETRES s_punt_i_coma PARAMETRE
-	{rs_parametres($$, $1, $3);}
+          {rs_parametres($$, $1, $3);}
         | PARAMETRE
-	{rs_parametres($$, $1);}
+          {rs_parametres($$, $1);}
         ;
         
 PARAMETRE:
           identificador s_dos_punts MODE identificador
-	{rs_parametre($$, $1, $4, $3);}
+          {rs_parametre($$, $1, $4, $3);}
         ;
 
 MODE:
           pc_in
-	  {rs_mode($$, m_in);}
+          {rs_mode($$, m_in);}
         | pc_out
-	  {rs_mode($$, m_out);}
+          {rs_mode($$, m_out);}
         | pc_in pc_out
-	  {rs_mode($$, m_in_out);}
+          {rs_mode($$, m_in_out);}
         ;
 
 DECLARACIONS: 
-	  DECLARACIONS DECLARACIO
-	  {rs_declaracions($$, $1, $2);}
+          DECLARACIONS DECLARACIO
+          {rs_declaracions($$, $1, $2);}
         | 
-	  {rs_declaracions($$);}
+          {rs_declaracions($$);}
         ;
 
 DECLARACIO:
           DEC_CONST
-	  {rs_declaracio($$, $1);}
+          {rs_declaracio($$, $1);}
         | DEC_VAR
-	  {rs_declaracio($$, $1);}
+          {rs_declaracio($$, $1);}
         | DEC_PROC
-	  {rs_declaracio($$, $1);}
+          {rs_declaracio($$, $1);}
         | DEC_TIPUS
-	  {rs_declaracio($$, $1);}
+          {rs_declaracio($$, $1);}
         ;
 
 DEC_TIPUS:
           DEC_ARRAY
-	  {rs_dec_tipus($$, $1);}
+          {rs_dec_tipus($$, $1);}
         | DEC_RECORD
-	  {rs_dec_tipus($$, $1);}
+          {rs_dec_tipus($$, $1);}
         | DEC_SUBRANG
-	  {rs_dec_tipus($$, $1);}
+          {rs_dec_tipus($$, $1);}
         ;
 
 DEC_CONST: 
-	  LLISTA_ID s_dos_punts pc_constant identificador s_assignacio V_CONST s_punt_i_coma
-	  {rs_dec_const($$, $1, $6, $4);}
-	;
+          LLISTA_ID s_dos_punts pc_constant identificador s_assignacio V_CONST s_punt_i_coma
+          {rs_dec_const($$, $1, $6, $4);}
+        ;
 
 V_CONST:
           s_menys literal
-	  {rs_vconst($$, $2, o_menys_unitari);}
+          {rs_vconst($$, $2, o_menys_unitari);}
         | literal
-	  {rs_vconst($$, $1);}
+          {rs_vconst($$, $1);}
         ;
 
 DEC_VAR: 
@@ -157,33 +157,33 @@ DEC_VAR:
         ;
 
 DEC_ARRAY: 
-	  pc_type identificador pc_is pc_array s_parentesi_obert LLISTA_ID s_parentesi_tancat pc_of identificador s_punt_i_coma
-	  {rs_dec_array($$, $2, $6, $9);}
-	;
+          pc_type identificador pc_is pc_array s_parentesi_obert LLISTA_ID s_parentesi_tancat pc_of identificador s_punt_i_coma
+          {rs_dec_array($$, $2, $6, $9);}
+        ;
 
 LLISTA_ID:
-	  LLISTA_ID s_coma identificador
-	  {rs_llista_id($$, $3, $1);}
-	| identificador
-	  {rs_llista_id($$, $1);}
-	;
+          LLISTA_ID s_coma identificador
+          {rs_llista_id($$, $3, $1);}
+        | identificador
+          {rs_llista_id($$, $1);}
+        ;
 
 DEC_RECORD: 
           pc_type identificador pc_is pc_record CAMPS pc_end pc_record s_punt_i_coma
           {rs_dec_record($$, $2, $5);}
-	;
+        ;
         
 CAMPS:
-	  CAMPS CAMP
-	  {rs_camps($$, $2, $1);}
-	| CAMP
-	  {rs_camps($$, $1);}
-	;
+          CAMPS CAMP
+          {rs_camps($$, $2, $1);}
+        | CAMP
+          {rs_camps($$, $1);}
+        ;
       
 CAMP:
-	  identificador s_dos_punts identificador s_punt_i_coma
-	  {rs_camp($$, $1, $2);}
-	;
+          identificador s_dos_punts identificador s_punt_i_coma
+          {rs_camp($$, $1, $2);}
+        ;
 
 DEC_SUBRANG:
           pc_type identificador pc_is pc_new identificador pc_range RANG s_punt_i_coma
@@ -225,9 +225,9 @@ SENTENCIA:
         ;
 
 SENT_BUCLES: 
-	  pc_while EXPRESSIO pc_loop SENTENCIES pc_end pc_loop s_punt_i_coma
-	  {rs_sent_bucles($$, $2, $4);}
-	;
+          pc_while EXPRESSIO pc_loop SENTENCIES pc_end pc_loop s_punt_i_coma
+          {rs_sent_bucles($$, $2, $4);}
+        ;
         
 SENT_FLUXE:
           pc_if EXPRESSIO pc_then SENTENCIES pc_end pc_if s_punt_i_coma
@@ -276,30 +276,30 @@ EXPRESSIO:
         ;
 
 REF: 
-	  identificador
-	  {rs_ref($$, $1);}
-	| REF s_punt identificador
-	  {rs_ref($$, $3, $1);}
-	| REF_COMP s_parentesi_tancat
-	  {rs_ref($$, $1);}
-	;
+          identificador
+          {rs_ref($$, $1);}
+        | REF s_punt identificador
+          {rs_ref($$, $3, $1);}
+        | REF_COMP s_parentesi_tancat
+          {rs_ref($$, $1);}
+        ;
 
 REF_COMP:
-	  REF_COMP s_coma EXPRESSIO
-	  {rs_ref_comp($$, $3, $1);}
-	| REF s_parentesi_obert EXPRESSIO
-	  {rs_ref_comp($$, $3, $1);} --TODO revisar si es la mateixa funcio
-	;    
+          REF_COMP s_coma EXPRESSIO
+          {rs_ref_comp($$, $3, $1);}
+        | REF s_parentesi_obert EXPRESSIO
+          {rs_ref_comp($$, $3, $1);} --TODO revisar si es la mateixa funcio
+        ;    
 
 SENT_ASSIGNACIO: 
-	  REF s_assignacio EXPRESSIO s_punt_i_coma
-	  {rs_sent_assignacio($$, $1, $3);}
-	;
+          REF s_assignacio EXPRESSIO s_punt_i_coma
+          {rs_sent_assignacio($$, $1, $3);}
+        ;
 
 SENT_PROCEDURE: 
-	  REF s_punt_i_coma
-	  {rs_sent_procedure($$, $1);}
-	;
+          REF s_punt_i_coma
+          {rs_sent_procedure($$, $1);}
+        ;
                            
 %%
 
