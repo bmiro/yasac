@@ -13,9 +13,9 @@ package decls.generals is
    subtype id_string is natural range 1..tam_tcaracters;
    type valor is new integer;
 
-   type t_operacio is (o_suma, o_resta, o_mult, o_div, o_modul, o_menys_unitari,
+   type t_operacio is (o_mes, o_menys, o_producte, o_divisio, o_modul, o_menys_unitari,
 		    o_and, o_or, o_not,
-		    o_igual, o_diferent, o_menor, o_major, o_men_ig, o_maj_ig,
+		    o_igual, o_diferent, o_menor, o_major, o_menor_igual, o_major_igual,
 		    o_nul);
    type t_mode is (m_in, m_out, m_in_out);
 
