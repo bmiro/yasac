@@ -220,6 +220,16 @@ package body decls.crea_arbre is
    begin
       a:= fill;
    end remunta_fill;
+   
+   procedure crea_arbre(a: in ast) is
+   begin
+      arrel:= a;
+   end crea_arbre;
+   
+   function tst_arrel return ast is
+   begin
+      return arrel;
+   end tst_arrel;
 
 end decls.crea_arbre;
 

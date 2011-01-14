@@ -42,9 +42,12 @@ package decls.crea_arbre is
    procedure remunta_fill(a: out ast; fill: in ast);
    
    procedure inicia_tn;
+   
+   procedure crea_arbre(a: in ast);
     
 private
 
+   arrel: ast;
    tn: tnoms;
 
 end decls.crea_arbre;

@@ -71,7 +71,8 @@ subtype YYSType is ast;
 %%
 
 PROGRAMA: 
-		  DEC_PROC
+          DEC_PROC
+          {crea_arbre($1);}
         ;
 
 DEC_PROC:

@@ -1,11 +1,12 @@
-with decls.datribut; use decls.datribut;
 with lexic_io; use lexic_io;
 with analitzador_sintactic; use analitzador_sintactic;
-procedure principal is	
+with decls.crea_arbre; use decls.crea_arbre;
+
+procedure principal is
 begin
 
     Open_Input("codi.ysa");
-    inicialitzacio;
+    inicia_tn;
     yyparse;
     Close_Input;
 
