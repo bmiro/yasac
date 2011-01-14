@@ -76,120 +76,136 @@ DEC_PROC:
         pc_begin
                 SENTENCIES
         pc_end identificador s_punt_i_coma
-        {crea_n_dec_proc($$,$2,$4,$6,$8);}
+        {crea_n_dec_proc($$, $2, $4, $6, $8);}
         ;
 
 ENCAP:
           identificador
-	{crea_n_encap($$,$1,null);}
+	{crea_n_encap($$, $1, null);}
         | identificador s_parentesi_obert PARAMETRES s_parentesi_tancat
-	{crea_n_encap($$,$1,$3);}
+	{crea_n_encap($$, $1, $3);}
         ;
 
 PARAMETRES:
           PARAMETRES s_punt_i_coma PARAMETRE
-	{crea_n_dec_params($$,$1,$3);}
+	{crea_n_dec_params($$, $1, $3);}
         | PARAMETRE
-	{crea_n_dec_params($$,null,$1);}
+	{crea_n_dec_params($$, null, $1);}
         ;
         
 PARAMETRE:
           identificador s_dos_punts MODE identificador
-	{crea_n_dec_param($$,$1,$4,$3);}
+	{crea_n_dec_param($$, $1, $4, $3);}
         ;
 
 MODE:
           pc_in
-	  {crea_n_dec_mode($$,m_in);}
+	  {crea_n_dec_mode($$, m_in);}
         | pc_out
-	  {crea_n_dec_mode($$,m_out);}
+	  {crea_n_dec_mode($$, m_out);}
         | pc_in pc_out
-	  {crea_n_dec_mode($$,m_in_out);}
+	  {crea_n_dec_mode($$, m_in_out);}
         ;
 
 DECLARACIONS: 
 	  DECLARACIONS DECLARACIO
-	  {crea_n_decs($$,$1,$2);}
+	  {crea_n_decs($$, $1, $2);}
         | 
-	  {remunta_decs($$);}
+	  {remunta_fill($$, null);}
         ;
 
 DECLARACIO:
           DEC_CONST
-	  {remunta_dec($$,$1);}
+	  {remunta_fill($$, $1);}
         | DEC_VAR
-	  {remunta_dec($$,$1);}
+	  {remunta_fill($$, $1);}
         | DEC_PROC
-	  {remunta_dec($$,$1);}
+	  {remunta_fill($$, $1);}
         | DEC_TIPUS
-	  {remunta_dec($$,$1);}
+	  {remunta_fill($$, $1);}
         ;
 
 DEC_TIPUS:
           DEC_ARRAY
-	  {remunta_dec($$,$1);}
+	  {remunta_fill($$, $1);}
         | DEC_RECORD
-	  {remunta_dec($$,$1);}
+	  {remunta_fill($$, $1);}
         | DEC_SUBRANG
-	  {remunta_dec($$,$1);}
+	  {remunta_fill($$, $1);}
         ;
 
 DEC_CONST: 
 	  LLISTA_ID s_dos_punts pc_constant identificador s_assignacio V_CONST s_punt_i_coma
-	  {remunta_dec($$,$1,$4,$6);}
+	  {crea_n_dec_const($$, $1, $6, $4);}
 	;
 
 V_CONST:
           s_menys literal
-	  {remunta_vconst($$,$2,s_menys);}
+	  {crea_n_vconst($$, $2, o_menys_unitari);}
         | literal
-	  {remunta_vconst($$,$1,null);}
+	  {remunta_fill($$, $1);}
         ;
 
 DEC_VAR: 
-        LLISTA_ID s_dos_punts identificador s_punt_i_coma
+          LLISTA_ID s_dos_punts identificador s_punt_i_coma
+          {crea_n_dec_var($$, $3, $1);}
         ;
 
 DEC_ARRAY: 
-	pc_type identificador pc_is pc_array s_parentesi_obert LLISTA_ID s_parentesi_tancat pc_of identificador s_punt_i_coma
+	  pc_type identificador pc_is pc_array s_parentesi_obert LLISTA_ID s_parentesi_tancat pc_of identificador s_punt_i_coma
+	  {crea_dec_array($$, $2, $6, $9);}
 	;
 
 LLISTA_ID:
 	  LLISTA_ID s_coma identificador
+	  {crea_n_llista_id($$, $3, $1);}
 	| identificador
+	  {remunta_fill($$, $1);}
 	;
 
 DEC_RECORD: 
-        pc_type identificador pc_is pc_record CAMPS pc_end pc_record s_punt_i_coma
+          pc_type identificador pc_is pc_record CAMPS pc_end pc_record s_punt_i_coma
+          {crea_n_dec_rec($$, $2, $5);}
 	;
         
 CAMPS:
 	  CAMPS CAMP
+	  {crea_n_camps_rec($$, $2, $1);}
 	| CAMP
+	  {remunta_fill($$, $1);}
 	;
       
 CAMP:
-	identificador s_dos_punts identificador s_punt_i_coma
+	  identificador s_dos_punts identificador s_punt_i_coma
+	  {crea_n_camp_rec($$, $1, $2);}
 	;
 
 DEC_SUBRANG:
-        pc_type identificador pc_is pc_new identificador pc_range RANG s_punt_i_coma
+          pc_type identificador pc_is pc_new identificador pc_range RANG s_punt_i_coma
+          {crea_n_dec_subrang($$, $2, $5, $7);}
         ;
 
 RANG: 
-        LIM s_puntpunt LIM 
+          LIM s_puntpunt LIM
+          {crea_n_rang($$, $1, $3);}
         ;
 
 LIM:    
           identificador
+          {remunta_fill($$, $1);}
         | s_menys identificador
+          {crea_n_lim($$, $2, o_menys_unitari);}
         | s_menys literal
+          {crea_n_lim($$, $2, o_menys_unitari);}
         | literal
+          {remunta_fill($$, $1);}
         ;
 
 SENTENCIES:
           SENTENCIES SENTENCIA
+          {crea_n_sents($$, $2, $1);}
         | SENTENCIA
+          {remunta_fill($$, $1);}
         ;
 
 SENTENCIA: 

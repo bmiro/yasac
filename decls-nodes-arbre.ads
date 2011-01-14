@@ -7,7 +7,7 @@ package decls.arbre is
 		  n_dec_array, n_dec_rec, dec_subrang, n_llista_id,
 		  n_val_const, n_lit, n_camps_rec, n_camp_rec, n_rang, n_lim,
 		  n_sent, n_sent_buc, n_sent_flux, n_sent_proc, n_sent_assig,
-		  n_expr, n_ref, n_ref_comp
+		  n_expr, n_ref, n_ref_comp, n_id, n_lit
 		  ); --TODO quadrar linies
    type node (tnd: tnode) is
       record
@@ -16,7 +16,7 @@ package decls.arbre is
 	    dp_encap: pnode;
 	    dp_decls: pnode;
 	    dp_sents: pnode;
-	    dp_identif: id_nom;
+	    dp_identif: pnode;
 	 when n_encap =>
 	    e_identif: id_nom;
 	    e_params: pnode;
@@ -27,36 +27,36 @@ package decls.arbre is
 	    s_sent: pnode;
 	    s_sents: pnode;
 	 when n_ident =>
-	    identif: id_nom;
+	    identif: pnode;
 	 when n_dec_params =>
 	    dpa_param: pnode;
 	    dpa_params: pnode;
 	 when n_dec_param =>
-	    dpa_identif: id_nom;
+	    dpa_identif: pnode;
 	    dpa_mode: pnode;
-	    dpa_tipus: id_nom;
+	    dpa_tipus: pnode;
 	 when n_mode =>
 	    mode: t_mode; --TODO revisar, existeix?
 	 when n_dec_const =>
 	    dc_llista_id: pnode;
-	    dc_id_tipus: id_nom;
+	    dc_id_tipus: pnode;
 	    dc_vconst: pnode;
 	 when n_dec_var =>
 	    dv_llista_id: pnode;
-	    dv_id_tipus: id_nom;
+	    dv_id_tipus: pnode;
 	 when n_dec_array =>
 	    da_identif: pnode;
 	    da_llista_idx: pnode;
-	    da_id_tipus: id_nom;
+	    da_id_tipus: pnode;
 	 when n_dec_rec =>
-	    dr_idenfif: id_nom;
+	    dr_idenfif: pnode;
 	    dr_camps: pnode;
 	 when dec_subrang =>
-	    ds_identif: id_nom;
-	    ds_id_tipus: id_nom;
+	    ds_identif: pnode;
+	    ds_id_tipus: pnode;
 	    ds_rang: pnode;
 	 when n_llista_id =>
-	    li_identif: id_nom;
+	    li_identif: pnode;
 	    li_llista_id: pnode;
 	 when n_val_const =>
 	    vc_signe: t_signe;
@@ -71,8 +71,8 @@ package decls.arbre is
 	    csr_camp: pnode;
 	    csr_llista_camps: pnode;
 	 when n_camp_rec =>
-	    cr_identif: id_nom;
-	    cr_id_tipus: id_nom;
+	    cr_identif: pnode;
+	    cr_id_tipus: pnode;
 	 when n_rang =>
 	    r_lim_inf: pnode;
 	    r_lim_sup: pnode;
@@ -95,39 +95,47 @@ package decls.arbre is
 	    e_operacio: t_operacio;
 	    e_camp2: pnode;
 	 when n_ref =>
-	    r_identif: id_nom;
+	    r_identif: pnode;
 	    r_llista_ref: pnode;
 	 when n_ref_comp =>
 	    rc_expr: pnode;
 	    rc_llista_ref: pnode;
+	 when n_identif =>
+	    identif: id_nom;
+	 when n_lit_enter =>
+	    vl: valor;
+	 when n_lit_caracter =>
+	    caracter: valor;
+	 when n_lit_string =>
+	    cadena: id_string;
 	 end case;
       end record;
 
+   procedure remunta_fill(a: out ast; fill: in ast);
+
    procedure crea_n_dec_proc(a: out ast;
 			     encap, decls, sents, identif: in ast);
-   procedure crea_n_encap(a: out ast; identif: in ast; params: in ast);
+   procedure crea_n_encap(a: out ast; identif, params: in ast);
    procedure crea_n_decs(a: out ast; dec, decs: in ast);
-   procedure remunta_decs(a: out ast);
-   procedure remunta_dec(a: out ast; dec_especifica: in ast);
-   procedure crea_n_sents();
+
+   procedure crea_n_sents(a: out ast; sent, sents: in ast);
    procedure crea_n_ident();
    procedure crea_n_dec_params(a: out ast; params, param: in ast);
    procedure crea_n_dec_param(a: out ast;
-			      identif, tipus: in id_nom;
-			      mode: in pnode);
+			      identif, tipus: in ast;
+			      mode: in t_mode);
    procedure crea_n_mode(a: out ast; mode: in t_mode);
-   procedure crea_n_dec_const(a: out ast; llista_id, tipus, valor: in ast);
-   procedure crea_n_dec_var();
-   procedure crea_n_dec_array();
-   procedure crea_n_dec_rec();
-   procedure remunta_vconst(a:out ast; lit: in ast; signe:in t_operacio);
-   procedure crea_dec_subrang();
-   procedure crea_n_llista_id();
-   procedure crea_n_val_const();
+   procedure crea_n_dec_const(a: out ast; llista_id, valor, tipus: in ast);
+   procedure crea_n_dec_var(a: out ast; identif: in id_nom; llista_id: in ast);
+   procedure crea_n_dec_array(a: out ast; identif, llista_idx, tipus: in ast);
+   procedure crea_n_dec_rec(a: out ast; identif, camps: in ast);
+   procedure crea_n_vconst(a: out ast; lit: in ast; signe: in t_operacio);
+   procedure crea_n_dec_subrang(a: out ast; identif, tipus, rang: in ast);
+   procedure crea_n_llista_id(a:out ast; identif, llista_id: in ast);
    procedure crea_n_lit();
-   procedure crea_n_camps_rec();
-   procedure crea_n_camp_rec();
-   procedure crea_n_rang();
+   procedure crea_n_camps_rec(a: out ast; camp, camps: in ast);
+   procedure crea_n_camp_rec(a: out ast: identif, tipus: in ast);
+   procedure crea_n_rang(a: out ast; lim_inf, lim_sup: in ast);
    procedure crea_n_lim();
    procedure crea_n_sent_buc();
    procedure crea_n_sent_flux();

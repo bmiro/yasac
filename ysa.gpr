@@ -1,4 +1,4 @@
-project Ysa is
+ate project Ysa is
 
    package Make is
       for Makefile use "Makefile";
