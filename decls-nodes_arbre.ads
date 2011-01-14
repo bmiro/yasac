@@ -3,18 +3,18 @@ package decls.nodes_arbre is
    type node;
    type pnode is access node;
 	subtype ast is pnode;
-   type tnode is (n_dec_proc, n_encap, n_decs, n_sents, n_ident, n_dec_params,
-		  n_dec_param, n_mode, n_dec_const, n_dec_var,
-		  n_dec_array, n_dec_rec, dec_subrang, n_llista_id,
-		  n_vconst, n_camps_rec, n_camp_rec, n_rang, n_lim,
-		  n_sent_buc, n_sent_flux, n_sent_assig, n_expr, n_ref, 
-		  n_ref_comp, n_id, n_lit_enter, n_lit_caracter, n_lit_string
-		  ); 
+   type tnode is (n_dec_proc, n_encap, n_decs, n_sents, n_dec_params,
+		  n_dec_param, n_mode, n_dec_const, n_dec_var, n_dec_array,
+		  n_dec_rec, dec_subrang, n_llista_id, n_vconst, n_camps_rec,
+		  n_camp_rec, n_rang, n_lim,n_sent_buc, n_sent_flux,
+		  n_sent_assig, n_expr, n_ref, n_ref_comp, n_identif,
+		  n_lit_enter, n_lit_caracter, n_lit_string, n_atom
+		  );
    type node (tnd: tnode) is
       record
+         lin: natural;
+         col: natural;
 	 case tnd is
-	 lin: natural; 
-	 col: natural;
 	 when n_dec_proc =>
 	    dp_encap: pnode;
 	    dp_decls: pnode;
@@ -29,8 +29,6 @@ package decls.nodes_arbre is
 	 when n_sents =>
 	    s_sent: pnode;
 	    s_sents: pnode;
-	 when n_ident =>
-	    identif: pnode;
 	 when n_dec_params =>
 	    dpa_param: pnode;
 	    dpa_params: pnode;
@@ -39,7 +37,7 @@ package decls.nodes_arbre is
 	    dpa_mode: pnode;
 	    dpa_tipus: pnode;
 	 when n_mode =>
-	    mode: t_mode; 
+	    mode: t_mode;
 	 when n_dec_const =>
 	    dc_llista_id: pnode;
 	    dc_id_tipus: pnode;
@@ -96,7 +94,7 @@ package decls.nodes_arbre is
 	 when n_ref_comp =>
 	    rc_expr: pnode;
 	    rc_llista_ref: pnode;
-	 when n_id =>
+	 when n_identif =>
 	    id: id_nom;
 	 when n_lit_enter =>
 	    vl: valor;
@@ -104,6 +102,8 @@ package decls.nodes_arbre is
 	    caracter: valor;
 	 when n_lit_string =>
 	    cadena: id_string;
+	 when n_atom =>
+            null;
 	 end case;
       end record;
 

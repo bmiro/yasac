@@ -1,4 +1,5 @@
 with decls.generals, decls.nodes_arbre; use decls.generals, decls.nodes_arbre;
+with decls.dtnoms; use decls.dtnoms;
 package decls.crea_arbre is
 
    procedure crea_n_dec_proc(a: out ast;
@@ -28,14 +29,22 @@ package decls.crea_arbre is
                          operacio: t_operacio);
    procedure crea_n_ref(a:out ast; identif, llista_ref: in ast);
    procedure crea_n_ref_comp(a: out ast; expr, ref_comp: in ast);
-   
-   procedure rl_atom(yylval: out ast; lin, col: in natural);
-   procedure rl_id(yylval: out ast; yytext: in string; lin, col: in natural);
-   procedure rl_operacio(yylval: out ast; operacio: t_operacio ; lin, col: in natural);
-   procedure rl_lit_enter(yylval: out ast; yytext: in string; lin, col: in natural);
-   procedure rl_lit_string(yylval: out ast; yytext: in string; lin, col: in natural);
-   procedure rl_lit_caracter(yylval: out ast; yytext: in string; lin, col: in natural);
-   
+
+   procedure rl_atom(a: out ast; lin, col: in natural);
+   procedure rl_id(a: out ast; yytext: in string; lin, col: in natural);
+   procedure rl_lit_enter(a: out ast; yytext: in string;
+			  lin, col: in natural);
+   procedure rl_lit_string(a: out ast; yytext: in string;
+			   lin, col: in natural);
+   procedure rl_lit_caracter(a: out ast; yytext: in string;
+			     lin, col: in natural);
+
    procedure remunta_fill(a: out ast; fill: in ast);
    
+   procedure inicia_tn;
+    
+private
+
+   tn: tnoms;
+
 end decls.crea_arbre;

@@ -176,42 +176,46 @@ package body decls.crea_arbre is
    end crea_n_ref_comp;
 
 
-   procedure rl_atom(yylval : out ast; lin, col : in natural) is
+   procedure rl_atom(a : out ast; lin, col : in natural) is
    begin
-      yylval := (at_atom, lin, col);
+      a := new node'(n_atom, lin, col);
    end rl_atom;
 
-   procedure rl_id(yylval : out ast; yytext : in string;
+   procedure rl_id(a : out ast; yytext : in string;
 		   lin, col : in natural) is
       id : id_nom;
    begin
       posa_id(tn, yytext, id);
-      yylval := (at_identificador, lin, col, id);
+      a := new node'(n_identif, lin, col, id);
    end rl_id;
 
-   procedure rl_lit_enter(yylval : out ast;
+   procedure rl_lit_enter(a : out ast; yytext : in string;
 			  lin, col : in natural) is
    begin
-      yylval := (at_lit_enter, lin, col,
-		 integer(character'pos(yytext(yytext'first))) - 48, enter);
+      a := new node'(n_lit_enter, lin, col,
+		 valor(character'pos(yytext(yytext'first))) - 48);
    end rl_lit_enter;
 
-   procedure rl_lit_string(yylval : out ast;
+   procedure rl_lit_string(a : out ast; yytext : in string;
 			   lin, col : in natural) is
       id : id_string;
    begin
       posa_cad(tn, yytext(yytext'first+1..yytext'last-1), id);
-      yylval := (at_lit_string, lin, col, id, cadena);
+      a := new node'(n_lit_string, lin, col, id);
    end rl_lit_string;
 
-   procedure rl_lit_caracter(yylval : out ast;
+   procedure rl_lit_caracter(a : out ast; yytext : in string;
 			     lin, col : in natural) is
    begin
-      yylval := (at_lit_caracter, lin, col,
-		 integer(character'pos(yytext(yytext'first+1))), caracter);
+      a := new node'(n_lit_caracter, lin, col,
+		 valor(character'pos(yytext(yytext'first+1))));
    end rl_lit_caracter;
 
-
+   procedure inicia_tn is
+   begin
+      tbuida(tn);
+   end inicia_tn;
+   
    procedure remunta_fill(a: out ast; fill: in ast) is
    begin
       a:= fill;
