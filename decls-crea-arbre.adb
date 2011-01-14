@@ -179,11 +179,5 @@ package body decls.crea-arbre is
       a.rc_llista_ref:= ref_comp;
    end crea_n_ref_comp;
 
-end decls.nodes-arbre;
-
-
-
-
-
-
+end decls.crea-arbre;
 
