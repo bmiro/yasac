@@ -1,5 +1,5 @@
 with delcs.
-package decls.arbre is
+package decls.nodes-arbre is
    type node;
    type node is access node;
    type tnode is (n_dec_proc, n_encap, n_decs, n_sents, n_ident, n_dec_params,
@@ -78,6 +78,7 @@ package decls.arbre is
 	    r_lim_sup: pnode;
 	 when n_lim =>
 	    lim: pnode;
+		 signe: t_operacio;
 	 --when n_sent =>
 	 when n_sent_buc =>
 	    sb_condicio: pnode;
@@ -143,4 +144,4 @@ package decls.arbre is
    procedure crea_n_ref(a:out ast; identif, llista_ref: in ast);
    procedure crea_n_ref_comp(a: out ast; expr, ref_comp: in ast);
 
-end decls.arbre
+end decls.nodes-arbre;
