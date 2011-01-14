@@ -6,42 +6,42 @@ carrepnodoc [ -!#a-~]
 
 %%
 
-procedure { rl_atom(yylval, tok_begin_line, tok_begin_col); 
-            return pc_procedure;}
-is 	  { rl_atom(yylval, tok_begin_line, tok_begin_col);
-            return pc_is;}
-begin 	  { rl_atom(yylval, tok_begin_line, tok_begin_col);
-            return pc_begin;}
-end 	  { rl_atom(yylval, tok_begin_line, tok_begin_col);
-            return pc_end;}
-in 	  { rl_atom(yylval, tok_begin_line, tok_begin_col);
-            return pc_in;}
-out 	  { rl_atom(yylval, tok_begin_line, tok_begin_col);
-            return pc_out;}
-type 	  { rl_atom(yylval, tok_begin_line, tok_begin_col);
-            return pc_type;}
-array 	  { rl_atom(yylval, tok_begin_line, tok_begin_col);
-            return pc_array;}
-constant  { rl_atom(yylval, tok_begin_line, tok_begin_col);
-            return pc_constant;}
-record 	  { rl_atom(yylval, tok_begin_line, tok_begin_col); 
-            return pc_record;}
-range 	  { rl_atom(yylval, tok_begin_line, tok_begin_col);
-            return pc_range;}
-of 	  { rl_atom(yylval, tok_begin_line, tok_begin_col);
-            return pc_of;}
-if 	  { rl_atom(yylval, tok_begin_line, tok_begin_col);
-            return pc_if;}
-then 	  { rl_atom(yylval, tok_begin_line, tok_begin_col);
-            return pc_then;}
-else 	  { rl_atom(yylval, tok_begin_line, tok_begin_col);
-            return pc_else;}
-for 	  { rl_atom(yylval, tok_begin_line, tok_begin_col);
-            return pc_for;}
-while 	  { rl_atom(yylval, tok_begin_line, tok_begin_col);
-            return pc_while;}
-loop 	  { rl_atom(yylval, tok_begin_line, tok_begin_col);
-            return pc_loop;}
+procedure   { rl_atom(yylval, tok_begin_line, tok_begin_col); 
+              return pc_procedure;}
+is          { rl_atom(yylval, tok_begin_line, tok_begin_col);
+              return pc_is;}
+begin       { rl_atom(yylval, tok_begin_line, tok_begin_col);
+              return pc_begin;}
+end         { rl_atom(yylval, tok_begin_line, tok_begin_col);
+              return pc_end;}
+in          { rl_atom(yylval, tok_begin_line, tok_begin_col);
+              return pc_in;}
+out         { rl_atom(yylval, tok_begin_line, tok_begin_col);
+              return pc_out;}
+type        { rl_atom(yylval, tok_begin_line, tok_begin_col);
+              return pc_type;}
+array       { rl_atom(yylval, tok_begin_line, tok_begin_col);
+              return pc_array;}
+constant    { rl_atom(yylval, tok_begin_line, tok_begin_col);
+              return pc_constant;}
+record      { rl_atom(yylval, tok_begin_line, tok_begin_col); 
+              return pc_record;}
+range       { rl_atom(yylval, tok_begin_line, tok_begin_col);
+              return pc_range;}
+of          { rl_atom(yylval, tok_begin_line, tok_begin_col);
+              return pc_of;}
+if          { rl_atom(yylval, tok_begin_line, tok_begin_col);
+              return pc_if;}
+then        { rl_atom(yylval, tok_begin_line, tok_begin_col);
+              return pc_then;}
+else        { rl_atom(yylval, tok_begin_line, tok_begin_col);
+              return pc_else;}
+for         { rl_atom(yylval, tok_begin_line, tok_begin_col);
+              return pc_for;}
+while       { rl_atom(yylval, tok_begin_line, tok_begin_col);
+              return pc_while;}
+loop        { rl_atom(yylval, tok_begin_line, tok_begin_col);
+              return pc_loop;}
 
 
 and  { rl_atom(yylval, tok_begin_line, tok_begin_col);
@@ -91,23 +91,26 @@ mod  { rl_atom(yylval, tok_begin_line, tok_begin_col);
 ")"  { rl_atom(yylval, tok_begin_line, tok_begin_col);
        return s_parentesi_tancat;}
 
-{lletra}(_?{lletdig})*            { rl_id(yylval, yytext, tok_begin_line, tok_begin_col);
-                                    return identificador;}
+{lletra}(_?{lletdig})* { rl_id(yylval, yytext, tok_begin_line, tok_begin_col);
+                         return identificador;}
 
-{digit}+                          { rl_lit_enter(yylval, yytext, tok_begin_line, tok_begin_col);
-                                    return literal;}
+{digit}+               { rl_lit_enter(yylval, yytext, tok_begin_line, 
+                                      tok_begin_col);
+                         return literal;}
 
-\"{carrepnodoc}*\"                { rl_lit_string(yylval, yytext, tok_begin_line, tok_begin_col);
-                                    return literal;}
+\"{carrepnodoc}*\"     { rl_lit_string(yylval, yytext, tok_begin_line,
+                                       tok_begin_col);
+                         return literal;}
 
-\'{carrep}\'                      { rl_lit_caracter(yylval, yytext, tok_begin_line, tok_begin_col);
-                                    return literal;}
+\'{carrep}\'           { rl_lit_caracter(yylval, yytext, tok_begin_line,
+                                        tok_begin_col);
+                         return literal;}
 
-"--"[^\n]*                        {null;}	--comentaris
+"--"[^\n]*             {null;}	--comentaris
 
-[\t|\r|\ ]+                       {null;}  	--separadors
+[\t|\r|\ ]+            {null;}  	--separadors
 
-. 	                          {return Error;}
+. 	                    {return Error;}
 
 
 %%
