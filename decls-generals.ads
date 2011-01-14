@@ -10,7 +10,7 @@ package decls.generals is
    num_caracters: constant natural := maxid *(long_mitja_id + 1) +
                                        maxstr*(long_mitja_str + 1);
 
-   type id_nom is new natural range 1..maxid;
+   type id_nom is new natural range 0..maxid; --TODO binet he passat de 1 a 0, esper que no tengui mes consequencies
    idn_nul: constant id_nom := 0;
 
    subtype id_string is natural range 1..num_caracters;
