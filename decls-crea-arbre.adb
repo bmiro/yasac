@@ -145,9 +145,9 @@ package body decls.crea-arbre is
    procedure crea_n_sent_flux(a: out ast; expr, sents, sents_else: in ast) is
    begin
       a:= new node(n_sent_flux);
-      a.sb_condicio:= expr;
-      a.sb_sents:= sents;
-      a.sb_sents_else:= sents_else;
+      a.sf_condicio:= expr;
+      a.sf_sents:= sents;
+      a.sf_sents_else:= sents_else;
    end crea_n_sent_flux;
 
    procedure crea_n_sent_assig(a: out ast; ref, expr: in ast) is
