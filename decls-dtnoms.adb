@@ -5,30 +5,21 @@ package body decls.dtnoms is
       idx_tblocs : id_nom renames tn.idx_tblocs;
       idx_tcaracters : index_tcaracters renames tn.idx_tcaracters;
    begin
-
       for i in 0..tam_tdispersio loop
          tdispersio(i) := id_nom'first;   --id_nom'first indica que no apunta enlloc
       end loop;
-
       idx_tblocs := id_nom'first+1;
       idx_tcaracters := index_tcaracters'first;
-
    end tbuida;
 
-   --TODO Amb aquesta funcio de hash no funciona
-   --function hash(k: in string) return natural is
-   --begin
-   --   return natural(Ada.Strings.Hash(k));
-   --end hash;
-	
-    function hash(k: in string) return natural is
-        comptador : natural := 0;
-    begin
-        for i in k'first..k'last loop
-	    comptador := comptador + character'POS(k(i));
-	end loop;
-	    return comptador mod tam_tdispersio;
-    end hash;
+	function hash(k: in string) return natural is
+		comptador : natural := 0;
+	begin
+		for i in k'first..k'last loop
+			comptador := comptador + character'POS(k(i));
+		end loop;
+		return comptador mod tam_tdispersio;
+	end hash;
 
    --Insereix un string dins la taula de caracters
    procedure posa(tc: in out taula_caracters; idx_tc: in out index_tcaracters;
@@ -44,11 +35,11 @@ package body decls.dtnoms is
 
    --Compara un string amb un altre ja introduit dins la taula de caracters
    --si son iguals retorna true, sino false
-   function compara(tc: in taula_caracters; s: in string;
+	function compara(tc: in taula_caracters; s: in string;
                     id: in index_tcaracters) return boolean is
-      idx_tcaracters : index_tcaracters := id;
-      idx_s : natural := s'first;
-   begin
+		idx_tcaracters : index_tcaracters := id;
+		idx_s : natural := s'first;
+	begin
       while tc(idx_tcaracters) = s(idx_s) and idx_s < s'last loop
          idx_tcaracters := index_tcaracters'succ(idx_tcaracters);
          idx_s := natural'succ(idx_s);

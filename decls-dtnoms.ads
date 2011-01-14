@@ -1,4 +1,3 @@
-with Ada.Strings.Hash;
 with decls.generals; use decls.generals;
 package decls.dtnoms is
 
