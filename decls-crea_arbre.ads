@@ -11,7 +11,7 @@ package decls.crea_arbre is
                               identif, tipus, mode: in ast);
    procedure crea_n_mode(a: out ast; mode: in t_mode);
    procedure crea_n_dec_const(a: out ast; llista_id, valor, tipus: in ast);
-   procedure crea_n_dec_var(a: out ast; identif: in id_nom; llista_id: in ast);
+   procedure crea_n_dec_var(a: out ast; identif, llista_id: in ast);
    procedure crea_n_dec_array(a: out ast; identif, llista_idx, tipus: in ast);
    procedure crea_n_dec_rec(a: out ast; identif, camps: in ast);
    procedure crea_n_vconst(a: out ast; lit: in ast; signe: in t_operacio);

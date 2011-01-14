@@ -62,13 +62,17 @@
       s_divisio
       s_modul
       
-%with decls.node.arbre;
-%use decls.node.arbre;
+%with decls.crea_arbre;
+%use decls.crea_arbre;
 {
 subtype YYSType is ast; 
 }
 
 %%
+
+PROGRAMA: 
+		  DEC_PROC
+        ;
 
 DEC_PROC:
         pc_procedure ENCAP pc_is
@@ -100,11 +104,11 @@ PARAMETRE:
 
 MODE:
           pc_in
-	  {crea_n_dec_mode($$, m_in);}
+	  {crea_n_mode($$, m_in);}
         | pc_out
-	  {crea_n_dec_mode($$, m_out);}
+	  {crea_n_mode($$, m_out);}
         | pc_in pc_out
-	  {crea_n_dec_mode($$, m_in_out);}
+	  {crea_n_mode($$, m_in_out);}
         ;
 
 DECLARACIONS: 
@@ -153,7 +157,7 @@ DEC_VAR:
 
 DEC_ARRAY: 
 	  pc_type identificador pc_is pc_array s_parentesi_obert LLISTA_ID s_parentesi_tancat pc_of identificador s_punt_i_coma
-	  {crea_dec_array($$, $2, $6, $9);}
+	  {crea_n_dec_array($$, $2, $6, $9);}
 	;
 
 LLISTA_ID:
@@ -263,7 +267,7 @@ EXPRESSIO:
         | s_menys EXPRESSIO 
           {crea_n_expr($$, $1, null, o_menys_unitari);}
         | s_parentesi_obert EXPRESSIO s_parentesi_tancat
-          {crea_n_expr($$, $1, $2, o_parentesi);}
+          {remunta_fill($$, $2);}
         | REF
           {remunta_fill($$, $1);}
         | literal
@@ -304,8 +308,8 @@ package analitzador_sintactic is
 end analitzador_sintactic;
 
 with ada.text_io; use ada;
-with decls.generals, decls.nodes.arbre, decls.crea.arbre;
-use decls.generals, decls.nodes.arbre, decls.crea.arbre; 
+with decls.generals, decls.nodes_arbre, decls.crea_arbre;
+use decls.generals, decls.nodes_arbre, decls.crea_arbre; 
 with a_lexic, lexic_dfa, lexic_io; use a_lexic, lexic_dfa, lexic_io;
 with sintactic_tokens, sintactic_goto, sintactic_shift_reduce;
 use sintactic_tokens, sintactic_goto, sintactic_shift_reduce;
@@ -313,7 +317,7 @@ package body analitzador_sintactic is
 
     procedure yyerror(s: in string) is
     begin
-        text_io.put_line("Error de sintaxi. Lin: " & natural'image(yylval.lin) & " Col: " & natural'image(yylval.col));
+        --text_io.put_line("Error de sintaxi. Lin: " & natural'image(yylval.lin) & " Col: " & natural'image(yylval.col));
 		raise Error_sintactic;
     end yyerror;
 ##

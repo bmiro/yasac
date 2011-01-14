@@ -68,6 +68,7 @@ package body decls.crea_arbre is
 
    procedure crea_n_dec_array(a: out ast; identif, llista_idx, tipus: in ast) is
    begin
+		a:= new node(n_dec_array);
       a.da_identif:= identif;
       a.da_llista_idx:= llista_idx;
       a.da_id_tipus:= tipus;
@@ -76,8 +77,8 @@ package body decls.crea_arbre is
    procedure crea_n_dec_rec(a: out ast; identif, camps: in ast) is
    begin
       a:= new node(n_dec_rec);
-      dr_idenfif:= identif;
-      dr_camps:= camps;
+      a.dr_identif:= identif;
+      a.dr_camps:= camps;
    end crea_n_dec_rec;
 
    procedure crea_n_vconst(a: out ast; lit: in ast; signe: in t_operacio) is
@@ -116,9 +117,9 @@ package body decls.crea_arbre is
       a.cr_id_tipus:= tipus;
    end crea_n_camp_rec;
 
-   procedure crea_n_rang(a        : out ast; lim_inf, lim_sup: in ast) is
+   procedure crea_n_rang(a: out ast; lim_inf, lim_sup: in ast) is
    begin
-      a:= new node(r_rang);
+      a:= new node(n_rang);
       a.r_lim_inf:= lim_inf;
       a.r_lim_sup:= lim_sup;
    end crea_n_rang;

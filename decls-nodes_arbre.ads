@@ -50,7 +50,7 @@ package decls.nodes_arbre is
 	    da_llista_idx: pnode;
 	    da_id_tipus: pnode;
 	 when n_dec_rec =>
-	    dr_idenfif: pnode;
+	    dr_identif: pnode;
 	    dr_camps: pnode;
 	 when dec_subrang =>
 	    ds_identif: pnode;
