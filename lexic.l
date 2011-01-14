@@ -44,35 +44,35 @@ loop 	  { rl_atom(yylval, tok_begin_line, tok_begin_col);
             return pc_loop;}
 
 
-and  { rl_operacio(yylval, yytext, tok_begin_line, tok_begin_col);
+and  { rl_atom(yylval, tok_begin_line, tok_begin_col);
        return pc_and;}
-not  { rl_operacio(yylval, yytext, tok_begin_line, tok_begin_col);
+not  { rl_atom(yylval, tok_begin_line, tok_begin_col);
        return pc_not;}
-or   { rl_operacio(yylval, yytext, tok_begin_line, tok_begin_col);
+or   { rl_atom(yylval, tok_begin_line, tok_begin_col);
        return pc_or;}
-mod  { rl_operacio(yylval, o_modul, tok_begin_line, tok_begin_col); 
+mod  { rl_atom(yylval, tok_begin_line, tok_begin_col); 
        return pc_mod;}
-"+"  { rl_operacio(yylval, o_suma, tok_begin_line, tok_begin_col);
+"+"  { rl_atom(yylval, tok_begin_line, tok_begin_col);
        return s_mes;}
-"-"  { rl_operacio(yylval, o_resta, tok_begin_line, tok_begin_col);
+"-"  { rl_atom(yylval, tok_begin_line, tok_begin_col);
        return s_menys;}
-"*"  { rl_operacio(yylval, o_mult, tok_begin_line, tok_begin_col);
+"*"  { rl_atom(yylval, tok_begin_line, tok_begin_col);
        return s_producte;}
-"/"  { rl_operacio(yylval, o_div, tok_begin_line, tok_begin_col);
+"/"  { rl_atom(yylval, tok_begin_line, tok_begin_col);
        return s_divisio;}
-"="  { rl_operacio(yylval, o_igual, tok_begin_line, tok_begin_col);
+"="  { rl_atom(yylval, tok_begin_line, tok_begin_col);
        return s_igual;}
-">"  { rl_operacio(yylval, o_major, tok_begin_line, tok_begin_col);
+">"  { rl_atom(yylval, tok_begin_line, tok_begin_col);
        return s_major;}
-"<"  { rl_operacio(yylval, o_menor, tok_begin_line, tok_begin_col);
+"<"  { rl_atom(yylval, tok_begin_line, tok_begin_col);
        return s_menor;}
-">=" { rl_operacio(yylval, o_maj_ig, tok_begin_line, tok_begin_col);
+">=" { rl_atom(yylval, tok_begin_line, tok_begin_col);
        return s_major_igual;}
-"<=" { rl_operacio(yylval, o_men_ig, tok_begin_line, tok_begin_col);
+"<=" { rl_atom(yylval, tok_begin_line, tok_begin_col);
        return s_menor_igual;}
-"/=" { rl_operacio(yylval, o_diferent, tok_begin_line, tok_begin_col);
+"/=" { rl_atom(yylval, tok_begin_line, tok_begin_col);
        return s_diferent;}
-":=" { rl_operacio(yylval, yytext, tok_begin_line, tok_begin_col);
+":=" { rl_atom(yylval, tok_begin_line, tok_begin_col);
        return s_assignacio;}
 
 ":"  { rl_atom(yylval, tok_begin_line, tok_begin_col);
@@ -91,16 +91,16 @@ mod  { rl_operacio(yylval, o_modul, tok_begin_line, tok_begin_col);
 ")"  { rl_atom(yylval, tok_begin_line, tok_begin_col);
        return s_parentesi_tancat;}
 
-{lletra}(_?{lletdig})*            { rl_id(yylval, tok_begin_line, tok_begin_col);
+{lletra}(_?{lletdig})*            { rl_id(yylval, yytext, tok_begin_line, tok_begin_col);
                                     return identificador;}
 
-{digit}+                          { rl_lit_enter(yylval, tok_begin_line, tok_begin_col);
+{digit}+                          { rl_lit_enter(yylval, yytext, tok_begin_line, tok_begin_col);
                                     return literal;}
 
-\"{carrepnodoc}*\"                { rl_lit_string(yylval, tok_begin_line, tok_begin_col);
+\"{carrepnodoc}*\"                { rl_lit_string(yylval, yytext, tok_begin_line, tok_begin_col);
                                     return literal;}
 
-\'{carrep}\'                      { rl_lit_caracter(yylval, tok_begin_line, tok_begin_col);
+\'{carrep}\'                      { rl_lit_caracter(yylval, yytext, tok_begin_line, tok_begin_col);
                                     return literal;}
 
 "--"[^\n]*                        {null;}	--comentaris
