@@ -62,8 +62,8 @@
       s_divisio
       s_modul
       
-%with decls.datribut;
-%use decls.datribut;
+%with decls.node.arbre;
+%use decls.node.arbre;
 {
 subtype YYSType is pnode; 
 }
@@ -304,9 +304,11 @@ package analitzador_sintactic is
 end analitzador_sintactic;
 
 with ada.text_io; use ada;
-with decls.generals, decls.datribut; use decls.generals, decls.datribut; 
+with decls.generals, decls.nodes.arbre, decls.crea.arbre;
+use decls.generals, decls.nodes.arbre, decls.crea.arbre; 
 with a_lexic, lexic_dfa, lexic_io; use a_lexic, lexic_dfa, lexic_io;
-with sintactic_tokens, sintactic_goto, sintactic_shift_reduce; use sintactic_tokens, sintactic_goto, sintactic_shift_reduce;
+with sintactic_tokens, sintactic_goto, sintactic_shift_reduce;
+use sintactic_tokens, sintactic_goto, sintactic_shift_reduce;
 package body analitzador_sintactic is
 
     procedure yyerror(s: in string) is

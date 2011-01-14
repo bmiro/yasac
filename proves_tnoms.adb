@@ -12,7 +12,7 @@ begin
 	posa_id(tn, "hola", id_n);
 	put(con_id(tn, id_n)); new_line;
 
-	posa_id(tn, "compilado", id_n);
+	posa_id(tn, "compiladoasdadadadasdasdasd", id_n);
    put(con_id(tn, id_n)); new_line;
 
 	posa_id(tn, "hola", id_n);

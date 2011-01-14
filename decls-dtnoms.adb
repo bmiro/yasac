@@ -11,15 +11,34 @@ package body decls.dtnoms is
       idx_tblocs := id_nom'first+1;
       idx_tcaracters := index_tcaracters'first;
    end tbuida;
-
-	function hash(k: in string) return natural is
-		comptador : natural := 0;
-	begin
-		for i in k'first..k'last loop
-			comptador := comptador + character'POS(k(i));
-		end loop;
-		return comptador mod tam_tdispersio;
-	end hash;
+   
+  -- Esmicolament Quadratic basat en: 
+  -- A Premier on program Constuction: IV. Data Structrures, Draft 1.1
+  -- Març 2010, Albert Llemosí.
+  -- Chapter 4, Section 10, subsection 6, paragraph Quadratic hashing.
+   function hash (s: in String) return natural is
+      n: constant natural := s'last;
+      m: constant natural := character'pos(character'last)+1;
+      c: natural;
+      k, l: integer;
+      a: array (1..n) of natural;
+      r: array(1..2*n) of natural;
+   begin
+      for i in s'range loop a(i) := character'pos(s(i)); end loop;
+      for i in 1..2*n loop r(i) := 0; end loop;
+      k := 2*n+1;
+      for i in reverse 1..n loop
+         k := k-1; l := k; c := 0;
+         for j in reverse 1..n loop
+            c := c + r(l) + a(i)*a(j);
+            r(l) := c mod m; c := c/m;
+            l := l-1;
+         end loop;
+         r(l) := c;
+      end loop;
+      c := (r(n)*m + r(n+1)) mod tam_tdispersio;
+      return c;
+   end hash;
 
    --Insereix un string dins la taula de caracters
    procedure posa(tc: in out taula_caracters; idx_tc: in out index_tcaracters;
