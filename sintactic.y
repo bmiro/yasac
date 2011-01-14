@@ -65,7 +65,7 @@
 %with decls.node.arbre;
 %use decls.node.arbre;
 {
-subtype YYSType is pnode; 
+subtype YYSType is ast; 
 }
 
 %%
