@@ -13,6 +13,8 @@ package decls.nodes_arbre is
    type node (tnd: tnode) is
       record
 	 case tnd is
+	 lin: natural; 
+	 col: natural;
 	 when n_dec_proc =>
 	    dp_encap: pnode;
 	    dp_decls: pnode;
