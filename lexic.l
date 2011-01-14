@@ -112,7 +112,7 @@ mod  { rl_operacio(yylval, o_modul, tok_begin_line, tok_begin_col);
 
 %%
 
-with decls.datribut; use decls.datribut; 
+with decls.crea_arbre; use decls.crea_arbre; 
 with sintactic_tokens; use  sintactic_tokens;
 package a_lexic is
 	

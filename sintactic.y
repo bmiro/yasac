@@ -62,8 +62,8 @@
       s_divisio
       s_modul
       
-%with decls.crea_arbre;
-%use decls.crea_arbre;
+%with decls.crea_arbre, decls.nodes_arbre;
+%use decls.crea_arbre, decls.nodes_arbre;
 {
 subtype YYSType is ast; 
 }
