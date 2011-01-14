@@ -104,7 +104,7 @@ package body decls.dtnoms is
       tblocs : taula_blocs renames tn.tblocs;
       tc : taula_caracters renames tn.tcaracters;
    begin
-      i := idx;
+      i := tblocs(id).ptcaracters;
       while tc(i) /= Ascii.NUL loop
          i := index_tcaracters'succ(i);
       end loop;
@@ -115,7 +115,7 @@ package body decls.dtnoms is
       i : index_tcaracters;
       tc: taula_caracters renames tn.tcaracters;
    begin
-      i := idx;
+      i := id;
       while tc(i) /= Ascii.NUL loop
          i := index_tcaracters'succ(i);
       end loop;

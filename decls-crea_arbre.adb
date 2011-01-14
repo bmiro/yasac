@@ -22,18 +22,18 @@ package body decls.crea_arbre is
       a.dp_decls:= decls;
       a.dp_sents:= sents;
       a.dp_identif:= identif;
-   end crea_n_dec_proc;
+   end rs_dec_proc;
 
    procedure rs_encap(a: out ast; identif, params: in ast) is
    begin
       a:= new node(n_encap);
       a.e_identif:= identif;
       a.e_params:= params;
-   end crea_n_encap;
+   end rs_encap;
 
    procedure rs_encap(a: out ast; identif: in ast) is
    begin
-      ast := identif;
+      a := identif;
    end rs_encap;
 
    procedure rs_declaracions(a: out ast; dec, decs: in ast) is
@@ -41,19 +41,19 @@ package body decls.crea_arbre is
       a:= new node(n_decs);
       a.d_decl:= dec;
       a.d_decls:= decs;
-   end crea_n_decs;
+   end rs_declaracions;
 
    procedure rs_declaracions(a: out ast) is
    begin
       a:= null;
-   end crea_n_decs;
+   end rs_declaracions;
 
-   procedure rs_sents(a: out ast; sent, sents: in ast) is
+   procedure rs_sentencies(a: out ast; sent, sents: in ast) is
    begin
       a:= new node(n_sents);
       a.s_sent:= sent;
       a.s_sents:= sents;
-   end rs_sents;
+   end rs_sentencies;
 
    procedure rs_parametres(a: out ast; params, param: in ast) is
    begin
@@ -131,6 +131,11 @@ package body decls.crea_arbre is
       a:= new node(n_llista_id);
       a.li_identif:= identif;
       a.li_llista_id:= llista_id;
+   end rs_llista_id;
+
+   procedure rs_llista_id(a: out ast; identif: in ast) is
+   begin
+      a:= identif;
    end rs_llista_id;
 
    procedure rs_dec_record(a: out ast; identif, camps: in ast) is

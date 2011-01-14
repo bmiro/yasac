@@ -28,6 +28,7 @@ package decls.crea_arbre is
    procedure rs_dec_var(a: out ast; identif, llista_id: in ast);
    procedure rs_dec_array(a: out ast; identif, llista_idx, tipus: in ast);
    procedure rs_llista_id(a:out ast; identif, llista_id: in ast);
+   procedure rs_llista_id(a:out ast; identif: in ast);
    procedure rs_dec_record(a: out ast; identif, camps: in ast);
    procedure rs_camps(a: out ast; camp, camps: in ast);
    procedure rs_camps(a: out ast; camp: in ast);
