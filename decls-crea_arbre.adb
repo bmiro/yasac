@@ -1,6 +1,15 @@
 package body decls.crea_arbre is
 
-   procedure crea_n_dec_proc(a: out ast; encap, decls, sents, identif: in ast) is
+   procedure inicia_tn is
+   begin
+      tbuida(tn);
+   end inicia_tn;
+
+-------------------------------------------------------------------------------
+------------------------------Rutines Semàntiques------------------------------
+-------------------------------------------------------------------------------
+
+   procedure rs_dec_proc(a: out ast; encap, decls, sents, identif: in ast) is
    begin
       a:= new node(n_dec_proc);
       a.dp_encap:= encap;
@@ -9,18 +18,28 @@ package body decls.crea_arbre is
       a.dp_identif:= identif;
    end crea_n_dec_proc;
 
-   procedure crea_n_encap(a: out ast; identif, params: in ast) is
+   procedure rs_encap(a: out ast; identif, params: in ast) is
    begin
       a:= new node(n_encap);
       a.e_identif:= identif;
       a.e_params:= params;
    end crea_n_encap;
 
-   procedure crea_n_decs(a: out ast; dec, decs: in ast) is
+   procedure rs_encap(a: out ast; identif: in ast) is
+   begin
+      ast := identif;
+   end rs_encap;
+
+   procedure rs_declaracions(a: out ast; dec, decs: in ast) is
    begin
       a:= new node(n_decs);
       a.d_decl:= dec;
       a.d_decls:= decs;
+   end crea_n_decs;
+
+   procedure rs_declaracions(a: out ast) is
+   begin
+      a:= null;
    end crea_n_decs;
 
    procedure crea_n_sents(a: out ast; sent, sents: in ast) is
@@ -30,14 +49,19 @@ package body decls.crea_arbre is
       a.s_sents:= sents;
    end crea_n_sents;
 
-   procedure crea_n_dec_params(a: out ast; params, param: in ast) is
+   procedure rs_parametres(a: out ast; params, param: in ast) is
    begin
       a:= new node(n_dec_params);
       a.dpa_params:= params;
       a.dpa_param:= param;
    end crea_n_dec_params;
 
-   procedure crea_n_dec_param(a: out ast; identif, tipus, mode: in ast) is
+   procedure rs_parametres(a: out ast; param: in ast) is
+   begin
+      a:= param;
+   end rs_parametres;
+
+   procedure rs_parametre(a: out ast; identif, tipus, mode: in ast) is
    begin
       a:= new node(n_dec_param);
       a.dpa_identif:= identif;
@@ -45,13 +69,23 @@ package body decls.crea_arbre is
       a.dpa_mode:= mode;
    end crea_n_dec_param;
 
-   procedure crea_n_mode(a: out ast; mode: in t_mode) is
+   procedure rs_mode(a: out ast; mode: in t_mode) is
    begin
       a:= new node(n_mode);
       a.mode:= mode;
    end crea_n_mode;
 
-   procedure crea_n_dec_const(a: out ast; llista_id, valor, tipus: in ast) is
+   procedure rs_declaracio(a: out ast; declaracio: in ast) is
+   begin
+      a:= declaracio;
+   end rs_declaracio;
+
+   procedure rs_dec_tipus(a: out ast; declaracio: in ast) is
+   begin
+      a:= declaracio;
+   end rs_dec_tipus;
+
+   procedure rs_dec_const(a: out ast; llista_id, valor, tipus: in ast) is
    begin
       a:= new node(n_dec_const);
       a.dc_llista_id:= llista_id;
@@ -59,122 +93,166 @@ package body decls.crea_arbre is
       a.dc_vconst:= valor;
    end crea_n_dec_const;
 
-   procedure crea_n_dec_var(a: out ast; identif, llista_id: in ast) is
+   procedure rs_vconst(a: out ast; lit: in ast; signe: in t_operacio) is
+   begin
+      a:= new node(n_vconst);
+      a.v_signe:= signe;
+      a.v_literal:= lit;
+   end rs_vconst;
+
+   procedure rs_vconst(a: out ast; lit: in ast) is
+   begin
+      a:= lit;
+   end rs_vconst;
+
+   procedure rs_dec_var(a: out ast; identif, llista_id: in ast) is
    begin
       a:= new node(n_dec_var);
       a.dv_id_tipus:= identif;
       a.dv_llista_id:= llista_id;
-   end crea_n_dec_var;
+   end rs_dec_var;
 
-   procedure crea_n_dec_array(a: out ast; identif, llista_idx, tipus: in ast) is
+   procedure rs_dec_array(a: out ast; identif, llista_idx, tipus: in ast) is
    begin
 		a:= new node(n_dec_array);
       a.da_identif:= identif;
       a.da_llista_idx:= llista_idx;
       a.da_id_tipus:= tipus;
-   end crea_n_dec_array;
+   end rs_dec_array;
 
-   procedure crea_n_dec_rec(a: out ast; identif, camps: in ast) is
+   procedure rs_llista_id(a: out ast; identif, llista_id: in ast) is
+   begin
+      a:= new node(n_llista_id);
+      a.li_identif:= identif;
+      a.li_llista_id:= llista_id;
+   end rs_llista_id;
+
+   procedure rs_dec_record(a: out ast; identif, camps: in ast) is
    begin
       a:= new node(n_dec_rec);
       a.dr_identif:= identif;
       a.dr_camps:= camps;
-   end crea_n_dec_rec;
+   end rs_dec_record;
 
-   procedure crea_n_vconst(a: out ast; lit: in ast; signe: in t_operacio) is
+   procedure rs_camps(a: out ast; camp, camps: in ast) is
    begin
-      a:= new node(n_vconst);
-      a.v_signe:= signe;
-      a.v_literal:= lit;
-   end crea_n_vconst;
+      a:= new node(n_camps_rec);
+      a.csr_camp:= camp;
+      a.csr_llista_camps:= camps;
+   end rs_camps_rec;
 
-   procedure crea_n_dec_subrang(a: out ast; identif, tipus, rang: in ast) is
+   procedure rs_camps(a: out ast; camp: in ast) is
+   begin
+      a:= camp;
+   end rs_camps_rec;
+
+   procedure rs_camp(a: out ast; identif, tipus: in ast) is
+   begin
+      a:= new node(n_camp_rec);
+      a.cr_identif:= identif;
+      a.cr_id_tipus:= tipus;
+   end rs_camp_rec;
+
+   procedure rs_dec_subrang(a: out ast; identif, tipus, rang: in ast) is
    begin
       a:= new node(dec_subrang);
       a.ds_identif:= identif;
       a.ds_id_tipus:= tipus;
       a.ds_rang:= rang;
-   end crea_n_dec_subrang;
+   end rs_dec_subrang;
 
-   procedure crea_n_llista_id(a: out ast; identif, llista_id: in ast) is
-   begin
-      a:= new node(n_llista_id);
-      a.li_identif:= identif;
-      a.li_llista_id:= llista_id;
-   end crea_n_llista_id;
-
-   procedure crea_n_camps_rec(a: out ast; camp, camps: in ast) is
-   begin
-      a:= new node(n_camps_rec);
-      a.csr_camp:= camp;
-      a.csr_llista_camps:= camps;
-   end crea_n_camps_rec;
-
-   procedure crea_n_camp_rec(a: out ast; identif, tipus: in ast) is
-   begin
-      a:= new node(n_camp_rec);
-      a.cr_identif:= identif;
-      a.cr_id_tipus:= tipus;
-   end crea_n_camp_rec;
-
-   procedure crea_n_rang(a: out ast; lim_inf, lim_sup: in ast) is
+   procedure rs_rang(a: out ast; lim_inf, lim_sup: in ast) is
    begin
       a:= new node(n_rang);
       a.r_lim_inf:= lim_inf;
       a.r_lim_sup:= lim_sup;
-   end crea_n_rang;
+   end rs_rang;
 
-   procedure crea_n_lim(a: out ast; base: in ast; signe: in t_operacio) is
+   procedure rs_lim(a: out ast; base: in ast; signe: in t_operacio) is
    begin
       a:= new node(n_lim);
       a.lim:= base;
       a.signe:= signe;
-   end crea_n_lim;
+   end rs_lim;
 
-   procedure crea_n_sent_buc(a: out ast; expr, sents: in ast) is
+   procedure rs_lim(a: out ast; base: in ast) is
+   begin
+      a:= base;
+   end rs_lim;
+
+   procedure rs_sentencies(a: out ast; sentencia: in ast) is
+   begin
+      a:= sentencia;
+   end rs_sentencies;
+
+   procedure rs_sentencia(a: out ast; sentencia: in ast) is
+   begin
+      a:= sentencia;
+   end rs_sentencia;
+
+   procedure rs_sent_bucles(a: out ast; expr, sents: in ast) is
    begin
       a:= new node(n_sent_buc);
       a.sb_condicio:= expr;
       a.sb_sents:= sents;
-   end crea_n_sent_buc;
+   end rs_sent_bucles;
 
-   procedure crea_n_sent_flux(a: out ast; expr, sents, sents_else: in ast) is
+   procedure rs_sent_fluxe(a: out ast; expr, sents, sents_else: in ast) is
    begin
       a:= new node(n_sent_flux);
       a.sf_condicio:= expr;
       a.sf_sents:= sents;
       a.sf_sents_else:= sents_else;
-   end crea_n_sent_flux;
+   end rs_sent_fluxe;
 
-   procedure crea_n_sent_assig(a: out ast; ref, expr: in ast) is
-   begin
-      a:= new node(n_sent_assig);
-      a.sa_ref:= ref;
-      a.sa_expr:= expr;
-   end crea_n_sent_assig;
-
-   procedure crea_n_expr(a: out ast; expr1, expr2: in ast; operacio: t_operacio) is
+   procedure rs_expressio(a: out ast; expr1, expr2: in ast;
+                          operacio: t_operacio) is
    begin
       a:= new node(n_expr);
       a.e_camp1:= expr1;
       a.e_operacio:= operacio;
       a.e_camp2:= expr2;
-   end crea_n_expr;
+   end rs_expressio;
 
-   procedure crea_n_ref(a: out ast; identif, llista_ref: in ast) is
+   procedure rs_expressio(a: out ast; expr: in ast) is
+   begin
+      a:= expr;
+   end rs_expressio;
+
+   procedure rs_ref(a: out ast; identif, llista_ref: in ast) is
    begin
       a:= new node(n_ref);
       a.r_identif:= identif;
       a.r_llista_ref:= llista_ref;
-   end crea_n_ref;
+   end rs_ref;
 
-   procedure crea_n_ref_comp(a: out ast; expr, ref_comp: in ast) is
+   procedure rs_ref(a: out ast; identif: in ast) is
+   begin
+      a:= identif;
+   end rs_ref;
+
+   procedure rs_ref_comp(a: out ast; expr, ref_comp: in ast) is
    begin
       a:= new node(n_ref_comp);
       a.rc_expr:= expr;
       a.rc_llista_ref:= ref_comp;
-   end crea_n_ref_comp;
+   end rs_ref_comp;
 
+   procedure rs_sent_assignacio(a: out ast; ref, expr: in ast) is
+   begin
+      a:= new node(n_sent_assig);
+      a.sa_ref:= ref;
+      a.sa_expr:= expr;
+   end rs_sent_assignacio;
+
+   procedure rs_sent_procedure(a: out ast; identif: in ast) is
+   begin
+      a:= identif;
+   end rs_sent_procedure;
+
+------------------------------------------------------------------------------
+-------------------------------Rutines Lèxiques-------------------------------
+------------------------------------------------------------------------------
 
    procedure rl_atom(a : out ast; lin, col : in natural) is
    begin
@@ -210,16 +288,6 @@ package body decls.crea_arbre is
       a := new node'(n_lit_caracter, lin, col,
 		 valor(character'pos(yytext(yytext'first+1))));
    end rl_lit_caracter;
-
-   procedure inicia_tn is
-   begin
-      tbuida(tn);
-   end inicia_tn;
-   
-   procedure remunta_fill(a: out ast; fill: in ast) is
-   begin
-      a:= fill;
-   end remunta_fill;
 
 end decls.crea_arbre;
 

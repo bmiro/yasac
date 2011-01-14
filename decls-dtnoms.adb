@@ -11,8 +11,8 @@ package body decls.dtnoms is
       idx_tblocs := id_nom'first+1;
       idx_tcaracters := index_tcaracters'first;
    end tbuida;
-   
-  -- Esmicolament Quadratic basat en: 
+
+  -- Esmicolament Quadratic basat en:
   -- A Premier on program Constuction: IV. Data Structrures, Draft 1.1
   -- Març 2010, Albert Llemosí.
   -- Chapter 4, Section 10, subsection 6, paragraph Quadratic hashing.
@@ -99,24 +99,15 @@ package body decls.dtnoms is
       posa(tcaracters, idx_tcaracters, s);
    end posa_cad;
 
-   --retorna la posicio on acaba l'string a llegir
-   function con(tc: in taula_caracters; idx: in index_tcaracters)
-		return index_tcaracters is
-      i : index_tcaracters;
-   begin
-      i := idx;
-      while tc(i) /= Ascii.NUL loop
-         i := index_tcaracters'succ(i);
-      end loop;
-      return i;
-   end con;
-
    function con_id(tn: in Tnoms; id: in id_nom) return string is
       i : index_tcaracters;
       tblocs : taula_blocs renames tn.tblocs;
       tc : taula_caracters renames tn.tcaracters;
    begin
-      i := con(tc, tblocs(id).ptcaracters);
+      i := idx;
+      while tc(i) /= Ascii.NUL loop
+         i := index_tcaracters'succ(i);
+      end loop;
       return string(tc(tblocs(id).ptcaracters..i));
    end con_id;
 
@@ -124,7 +115,10 @@ package body decls.dtnoms is
       i : index_tcaracters;
       tc: taula_caracters renames tn.tcaracters;
    begin
-      i := con(tc, id);
+      i := idx;
+      while tc(i) /= Ascii.NUL loop
+         i := index_tcaracters'succ(i);
+      end loop;
       return string(tc(id..i));
    end con_cad;
 

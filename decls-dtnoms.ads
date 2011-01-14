@@ -11,6 +11,8 @@ package decls.dtnoms is
 
 private
 
+   tam_tdispersio: constant natural := maxid;
+
    subtype index_tcaracters is id_string;
 
    type taula_dispersio is array(0..tam_tdispersio) of id_nom;

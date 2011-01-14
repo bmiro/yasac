@@ -1,8 +1,7 @@
 with decls.generals; use decls.generals;
 package decls.descripcions is
 
-   type it_index is new natural range 0..maxid;
-   type it_param is new natural range 0..maxid;
+   pragma pure;
 
    type tipus_descripcio is (d_nul, d_const, d_var, d_tipus, d_proc);
    type tipus_sub is (tsnul, tsbool, tscar, tsenter, tsrec, tsarray);
