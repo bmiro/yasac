@@ -22,7 +22,7 @@ package decls.crea_arbre is
    procedure rs_declaracions(a: out ast);
    procedure rs_declaracio(a: out ast; declaracio: in ast);
    procedure rs_dec_tipus(a: out ast; declaracio: in ast);
-   procedure rs_dec_const(a: out ast; llista_id, valor, tipus: in ast);
+   procedure rs_dec_const(a: out ast; identif, valor, tipus: in ast);
    procedure rs_vconst(a: out ast; lit: in ast; signe: in t_operacio);
    procedure rs_vconst(a: out ast; lit: in ast);
    procedure rs_dec_var(a: out ast; identif, llista_id: in ast);

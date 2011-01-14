@@ -41,7 +41,7 @@ package decls.nodes_arbre is
 	 when n_mode =>
 	    mode: t_mode;
 	 when n_dec_const =>
-	    dc_llista_id: pnode;
+	    dc_identif: pnode;
 	    dc_id_tipus: pnode;
 	    dc_vconst: pnode;
 	 when n_dec_var =>

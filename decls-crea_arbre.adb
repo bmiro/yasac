@@ -91,10 +91,10 @@ package body decls.crea_arbre is
       a:= declaracio;
    end rs_dec_tipus;
 
-   procedure rs_dec_const(a: out ast; llista_id, valor, tipus: in ast) is
+   procedure rs_dec_const(a: out ast; identif, valor, tipus: in ast) is
    begin
       a:= new node(n_dec_const);
-      a.dc_llista_id:= llista_id;
+      a.dc_identif:= identif;
       a.dc_id_tipus:= tipus;
       a.dc_vconst:= valor;
    end rs_dec_const;

@@ -140,7 +140,7 @@ DEC_TIPUS:
         ;
 
 DEC_CONST: 
-          LLISTA_ID s_dos_punts pc_constant identificador s_assignacio V_CONST s_punt_i_coma
+          identificador s_dos_punts pc_constant identificador s_assignacio V_CONST s_punt_i_coma
           {rs_dec_const($$, $1, $6, $4);}
         ;
 
