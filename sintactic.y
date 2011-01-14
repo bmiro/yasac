@@ -210,58 +210,90 @@ SENTENCIES:
 
 SENTENCIA: 
           SENT_BUCLES
+          {remunta_fill($$, $1);}
         | SENT_FLUXE
+          {remunta_fill($$, $1);}
         | SENT_PROCEDURE
+          {remunta_fill($$, $1);}
         | SENT_ASSIGNACIO
+          {remunta_fill($$, $1);}
         ;
 
 SENT_BUCLES: 
-	pc_while EXPRESSIO pc_loop SENTENCIES pc_end pc_loop s_punt_i_coma
+	  pc_while EXPRESSIO pc_loop SENTENCIES pc_end pc_loop s_punt_i_coma
+	  {crea_n_sent_buc($$, $2, $4);}
 	;
         
 SENT_FLUXE:
           pc_if EXPRESSIO pc_then SENTENCIES pc_end pc_if s_punt_i_coma
+          {crea_n_sent_flux($$, $2, $4, null);}
         | pc_if EXPRESSIO pc_then SENTENCIES pc_else SENTENCIES pc_end pc_if s_punt_i_coma
+          {crea_n_sent_flux($$, $2, $4, $6);}
         ;
 
 EXPRESSIO:
           EXPRESSIO pc_and EXPRESSIO
+          {crea_n_expr($$, $1, $2, o_and);}
         | EXPRESSIO pc_or EXPRESSIO
+          {crea_n_expr($$, $1, $2, o_or);}
         | EXPRESSIO s_major EXPRESSIO
+          {crea_n_expr($$, $1, $2, o_major);}
         | EXPRESSIO s_menor EXPRESSIO
+          {crea_n_expr($$, $1, $2, o_menor);}
         | EXPRESSIO s_major_igual EXPRESSIO
+          {crea_n_expr($$, $1, $2, o_major_igual);}
         | EXPRESSIO s_menor_igual EXPRESSIO
+          {crea_n_expr($$, $1, $2, o_menor_igual);}
         | EXPRESSIO s_igual EXPRESSIO
+          {crea_n_expr($$, $1, $2, o_igual);}
         | EXPRESSIO s_diferent EXPRESSIO
+          {crea_n_expr($$, $1, $2, o_diferent);}
         | EXPRESSIO s_mes EXPRESSIO
+          {crea_n_expr($$, $1, $2, o_mes);}
         | EXPRESSIO s_menys EXPRESSIO
+          {crea_n_expr($$, $1, $2, o_menys);}
         | EXPRESSIO s_producte EXPRESSIO
+          {crea_n_expr($$, $1, $2, o_producte);}
         | EXPRESSIO s_divisio EXPRESSIO
+          {crea_n_expr($$, $1, $2, o_divisio);}
         | EXPRESSIO s_modul EXPRESSIO
+          {crea_n_expr($$, $1, $2, o_modul);}
         | pc_not EXPRESSIO %prec s_menys
+          {crea_n_expr($$, $1, $2, o_not);}
         | s_menys EXPRESSIO 
+          {crea_n_expr($$, $1, null, o_menys_unitari);}
         | s_parentesi_obert EXPRESSIO s_parentesi_tancat
+          {crea_n_expr($$, $1, $2, o_parentesi);}
         | REF
+          {remunta_fill($$, $1);}
         | literal
+          {remunta_fill($$, $1);}
         ;
 
 REF: 
-	  identificador	
+	  identificador
+	  {remunta_fill($$, $1);}
 	| REF s_punt identificador
-	| REF_COMP s_parentesi_tancat    
+	  {crea_n_ref($$, $3, $1);}
+	| REF_COMP s_parentesi_tancat
+	  {remunta_fill($$, $1);}
 	;
 
 REF_COMP:
 	  REF_COMP s_coma EXPRESSIO
+	  {crea_n_ref_comp($$, $3, $1);}
 	| REF s_parentesi_obert EXPRESSIO
+	  {crea_n_ref_comp($$, $3, $1);}
 	;    
 
 SENT_ASSIGNACIO: 
-	REF s_assignacio EXPRESSIO s_punt_i_coma
+	  REF s_assignacio EXPRESSIO s_punt_i_coma
+	  {crea_n_sent_assig($$, $1, $3);}
 	;
 
 SENT_PROCEDURE: 
-	REF s_punt_i_coma
+	  REF s_punt_i_coma
+	  {remunta_fill($$, $1);}
 	;
                            
 %%
