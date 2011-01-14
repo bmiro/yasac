@@ -12,7 +12,7 @@ package decls.datribut is
          lin: natural;
          col: natural;
 	 case tipus is
-            when at_atom => null;
+       when at_atom => null;
 	    when at_lit_enter =>
 	       vale: integer; -- sera el valor enter
 	       tle: tipus_subjacent := enter;

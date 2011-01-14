@@ -12,12 +12,6 @@ package body decls.dtnoms is
       idx_tcaracters := index_tcaracters'first;
    end tbuida;
 
-   --TODO Amb aquesta funcio de hash no funciona
-   --function hash(k: in string) return natural is
-   --begin
-   --   return natural(Ada.Strings.Hash(k));
-   --end hash;
-	
 	function hash(k: in string) return natural is
 		comptador : natural := 0;
 	begin
