@@ -62,8 +62,8 @@
       s_divisio
       s_modul
       
-%with decls.crea_arbre, decls.nodes_arbre;
-%use decls.crea_arbre, decls.nodes_arbre;
+%with semantica, decls.nodes_arbre;
+%use semantica, decls.nodes_arbre;
 {
 subtype YYSType is ast; 
 }
@@ -152,7 +152,7 @@ V_CONST:
         ;
 
 DEC_VAR: 
-          LLISTA_ID s_dos_punts identificador s_punt_i_coma
+         LLISTA_ID s_dos_punts identificador s_punt_i_coma
           {rs_dec_var($$, $3, $1);}
         ;
 
@@ -309,8 +309,8 @@ package analitzador_sintactic is
 end analitzador_sintactic;
 
 with ada.text_io; use ada;
-with decls.generals, decls.nodes_arbre, decls.crea_arbre;
-use decls.generals, decls.nodes_arbre, decls.crea_arbre; 
+with decls.generals, decls.nodes_arbre, semantica;
+use decls.generals, decls.nodes_arbre, semantica; 
 with a_lexic, lexic_dfa, lexic_io; use a_lexic, lexic_dfa, lexic_io;
 with sintactic_tokens, sintactic_goto, sintactic_shift_reduce;
 use sintactic_tokens, sintactic_goto, sintactic_shift_reduce;

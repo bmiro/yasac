@@ -115,7 +115,7 @@ mod  { rl_atom(yylval, tok_begin_line, tok_begin_col);
 
 %%
 
-with decls.crea_arbre; use decls.crea_arbre; 
+with semantica; use semantica; 
 with sintactic_tokens; use  sintactic_tokens;
 package a_lexic is
 	
