@@ -1,5 +1,5 @@
 procedure prova is
- a: constant integer;
+ a: constant integer:=2;
 begin
 
 	a := 0;

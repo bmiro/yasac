@@ -49,4 +49,3 @@ clean:
 	rm AYACCNAT/ayacc &
 	rm AYACCNAT/*.ali &
 	rm AYACCNAT/*.o &
-	rm *.tar.bz2
