@@ -13,14 +13,23 @@ begin
 	put(con_id(tn, id_n)); new_line;
 	put(id_n'img); new_line;
 
-	posa_id(tn, "hola", id_n);
-	put(id_n'img); new_line;
-
-	posa_id(tn, "compiladoasdadadadasdasdasd", id_n);
-   put(con_id(tn, id_n)); new_line;
+	posa_cad(tn, " hola ", id_s);
+	put(con_cad(tn, id_s)); new_line;
 
 	posa_id(tn, "hola", id_n);
 	put(con_id(tn, id_n)); new_line;
+	put(id_n'img); new_line;
+
+	posa_id(tn, "compiladoasdadadadasdasdasd", id_n);
+	put(con_id(tn, id_n)); new_line;
+    
+	posa_id(tn, "hola", id_n);
+	put(con_id(tn, id_n)); new_line;
+	put(id_n'img); new_line;
+
+	posa_id(tn, "hola", id_n);
+	put(con_id(tn, id_n)); new_line;
+	put(id_n'img); new_line;
 
 	posa_cad(tn, "Aixo es una cadena", id_s);
 	put(con_cad(tn, id_s)); new_line;
@@ -33,5 +42,8 @@ begin
    
 	posa_cad(tn, "prova", id_s);
 	put(con_cad(tn, id_s)); new_line;
-	
+
+	posa_id(tn, "hola", id_n);
+	put(con_id(tn, id_n)); new_line;
+	put(id_n'img); new_line;
 end proves_tnoms;
