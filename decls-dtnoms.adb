@@ -1,3 +1,5 @@
+with ada.text_io; use ada.text_io;
+with ada.integer_text_io; use ada.integer_text_io;
 package body decls.dtnoms is
 
    procedure tbuida(tn: out Tnoms) is
@@ -17,29 +19,29 @@ package body decls.dtnoms is
   -- Març 2010, Albert Llemosí.
   -- Chapter 4, Section 10, subsection 6, paragraph Quadratic hashing.
    function hash (s: in String) return natural is
-      n: constant natural := s'last;
-      m: constant natural := character'pos(character'last)+1;
-      c: natural;
+  	   n: constant natural := s'last;
+     	m: constant natural := character'pos(character'last)+1;
+     	c: natural;
       k, l: integer;
       a: array (1..n) of natural;
       r: array(1..2*n) of natural;
-   begin
-      for i in s'range loop a(i) := character'pos(s(i)); end loop;
-      for i in 1..2*n loop r(i) := 0; end loop;
-      k := 2*n+1;
-      for i in reverse 1..n loop
-         k := k-1; l := k; c := 0;
-         for j in reverse 1..n loop
-            c := c + r(l) + a(i)*a(j);
+	begin
+		for i in s'range loop a(i) := character'pos(s(i)); end loop;
+	   for i in 1..2*n loop r(i) := 0; end loop;
+    	k := 2*n+1;
+    	for i in reverse 1..n loop
+  		   k := k-1; l := k; c := 0;
+			for j in reverse 1..n loop
+      	   c := c + r(l) + a(i)*a(j);
             r(l) := c mod m; c := c/m;
-            l := l-1;
-         end loop;
+      	   l := l-1;
+      	end loop;
          r(l) := c;
       end loop;
       c := (r(n)*m + r(n+1)) mod tam_tdispersio;
-      return c;
+   	return c;
    end hash;
-
+		
    --Insereix un string dins la taula de caracters
    procedure posa(tc: in out taula_caracters; idx_tc: in out index_tcaracters;
 		  s: in string) is
@@ -76,18 +78,35 @@ package body decls.dtnoms is
       tcaracters : taula_caracters renames tn.tcaracters;
       idx_tblocs : id_nom renames tn.idx_tblocs;
       idx_tcaracters : index_tcaracters renames tn.idx_tcaracters;
+		tb: boolean;
    begin
-      p := hash(s);
-      idx := tdispersio(p);
-      while idx /= id_nom'first and then
-        not compara(tcaracters, s, tblocs(idx).ptcaracters) loop
-         idx := tblocs(idx).ptblocs;
-      end loop;
-      if idx = id_nom'first then
+   	p:= hash(s);
+      if tdispersio(p) = id_nom'first then
+         -- Si la posició del hash és buida.
+         tdispersio(p) := idx_tblocs;
          id := idx_tblocs;
-         tblocs(idx_tblocs).ptcaracters := idx_tcaracters;
+			tblocs(id).ptblocs := id_nom'first;
+			tblocs(id).ptcaracters := idx_tcaracters;
          posa(tcaracters, idx_tcaracters, s);
-         idx_tblocs := idx_tblocs + 1;
+      else
+         idx := tdispersio(p);
+         loop
+            -- Cercam si hi ha el nom a la taula d'dentificadors.
+            -- Anam botant a les distintes posicions indicades per el
+            -- punter pr, les quals són les que ha hagut colisions del
+            -- hash si procedeix.
+            tb := not compara(tcaracters, s, tblocs(idx).ptcaracters);
+            exit when tb or tblocs(idx).ptblocs = id_nom'first;
+            idx := tblocs(idx).ptblocs;
+         end loop;
+         if tb then
+            id := idx;
+         else
+            tblocs(idx).ptblocs := idx_tblocs;
+				tblocs(idx).ptcaracters := idx_tcaracters;
+            id := idx_tblocs;
+            posa(tcaracters, idx_tcaracters, s);
+         end if;
       end if;
    end posa_id;
 

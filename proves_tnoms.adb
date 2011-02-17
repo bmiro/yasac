@@ -11,6 +11,10 @@ begin
 
 	posa_id(tn, "hola", id_n);
 	put(con_id(tn, id_n)); new_line;
+	put(id_n'img); new_line;
+
+	posa_id(tn, "hola", id_n);
+	put(id_n'img); new_line;
 
 	posa_id(tn, "compiladoasdadadadasdasdasd", id_n);
    put(con_id(tn, id_n)); new_line;

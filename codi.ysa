@@ -1,7 +1,6 @@
 procedure prova is
- a: constant integer:=2;
+	a: constant integer:=2;
 begin
-
 	a := 0;
 	if a < b then
 		a := a + 1;

@@ -76,19 +76,18 @@ PROGRAMA:
         ;
 
 DEC_PROC:
-        pc_procedure ENCAP pc_is
+        pc_procedure identificador ENCAP pc_is
                 DECLARACIONS
         pc_begin
                 SENTENCIES
         pc_end identificador s_punt_i_coma
-        {rs_dec_proc($$, $2, $4, $6, $8);}
+        {rs_dec_proc($$, $3, $5, $7, $2, $9);}
         ;
 
 ENCAP:
-          identificador
-          {rs_encap($$, $1);}
-        | identificador s_parentesi_obert PARAMETRES s_parentesi_tancat
-          {rs_encap($$, $1, $3);}
+         s_parentesi_obert PARAMETRES s_parentesi_tancat
+          {rs_encap($$, $2);}
+		  | {rs_encap($$);}
         ;
 
 PARAMETRES:
@@ -318,7 +317,7 @@ package body analitzador_sintactic is
 
     procedure yyerror(s: in string) is
     begin
-      text_io.put_line("Error de sintaxi. Lin: " & natural'image(yylval.lin) & " Col: " & natural'image(yylval.col));
+        text_io.put_line("Error de sintaxi. Lin: " & natural'image(yylval.lin) & " Col: " & natural'image(yylval.col));
 		raise Error_sintactic;
     end yyerror;
 ##

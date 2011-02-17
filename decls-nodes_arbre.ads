@@ -21,9 +21,9 @@ package decls.nodes_arbre is
 	    dp_encap: pnode;
 	    dp_decls: pnode;
 	    dp_sents: pnode;
-	    dp_identif: pnode;
+	    dp_identif_inici: pnode;
+		 dp_identif_fi: pnode;
 	 when n_encap =>
-	    e_identif: pnode;
 	    e_params: pnode;
 	 when n_decs =>
 	    d_decl: pnode;
