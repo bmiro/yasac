@@ -3,7 +3,7 @@ package body semantica is
    procedure inicia_analitzador is
    begin
       tbuida(tn);
-		tbuida(ts);
+      tbuida(ts);
    end inicia_analitzador;
 
 -------------------------------------------------------------------------------
@@ -32,10 +32,10 @@ package body semantica is
       a.e_params:= params;
    end rs_encap;
 
-	procedure rs_encap(a: out ast) is
-	begin
-		a:= null;
-	end rs_encap;
+   procedure rs_encap(a: out ast) is
+   begin
+    a:= null;
+   end rs_encap;
 
    procedure rs_declaracions(a: out ast; dec, decs: in ast) is
    begin

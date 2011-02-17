@@ -1,4 +1,4 @@
-procedure prova is
+procedure prova(a: in integer; b: out integer) is
 	a: constant integer:=2;
 begin
 	a := 0;

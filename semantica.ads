@@ -13,7 +13,7 @@ package semantica is
    procedure rs_dec_proc(a: out ast;
                              encap, decls, sents, identif_inici, identif_fi: in ast);
    procedure rs_encap(a: out ast; params: in ast);
-	procedure rs_encap(a: out ast);
+   procedure rs_encap(a: out ast);
    procedure rs_parametres(a: out ast; params, param: in ast);
    procedure rs_parametres(a: out ast; param: in ast);
    procedure rs_parametre(a: out ast;

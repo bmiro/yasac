@@ -87,7 +87,7 @@ DEC_PROC:
 ENCAP:
          s_parentesi_obert PARAMETRES s_parentesi_tancat
           {rs_encap($$, $2);}
-		  | {rs_encap($$);}
+	| {rs_encap($$);}
         ;
 
 PARAMETRES:
