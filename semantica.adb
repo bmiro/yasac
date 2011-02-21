@@ -167,7 +167,7 @@ package body semantica is
 
    procedure rs_dec_subrang(a: out ast; identif, tipus, rang: in ast) is
    begin
-      a:= new node(dec_subrang);
+      a:= new node(n_dec_subrang);
       a.ds_identif:= identif;
       a.ds_id_tipus:= tipus;
       a.ds_rang:= rang;
@@ -257,6 +257,7 @@ package body semantica is
       a.sa_expr:= expr;
    end rs_sent_assignacio;
 
+	--TODO Revisar
    procedure rs_sent_procedure(a: out ast; identif: in ast) is
    begin
       a:= identif;
