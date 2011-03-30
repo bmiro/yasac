@@ -43,6 +43,7 @@ package body semantica.comprovacio_tipus is
 		end if;
 		np:= np + 1;		
 		posa(ts, id_inici, (d_proc, np), e);
+		--TODO Revisar taula de simbols. Si hi ha dos procediments amb el mateix nom, posa(ts) no dona error
       if e then
       	put("Ja existeix un procediment amb aquest nom"); new_line;
       	error:= true;
