@@ -11,12 +11,12 @@ package body decls.dtsimbols is
       prof := 1;
       ta(prof) := 0;
       for id in id_nom loop
-	 td(id) := (0, d, id_nom'first);
+	 		td(id) := (0, d, id_nom'first);
       end loop;
    end tbuida;
 
    procedure posa(ts: in out tsimbols; id: in id_nom; d: in descripcio;
-		  error: out boolean) is
+		error: out boolean) is
       ne : id_nom;
       td: tdescripcions renames ts.td;
       ta: tambits renames ts.ta;
@@ -25,10 +25,10 @@ package body decls.dtsimbols is
    begin
       error := td(id).profd = prof;
       if not error then
-	 ta(prof) := ta(prof) + 1;
-	 ne := ta(prof);
-	 te(ne) := (td(id).profd, td(id).d, id, td(id).s);
-	 td(id) := (prof, d, id_nom'first);
+			ta(prof) := ta(prof) + 1;
+	 		ne := ta(prof);
+	 		te(ne) := (td(id).profd, td(id).d, id, td(id).s);
+	 		td(id) := (prof, d, id_nom'first);
       end if;
    end posa;
 
@@ -241,10 +241,10 @@ package body decls.dtsimbols is
 
    procedure cons_param(ts: in tsimbols; it: in it_param;
 			idparf: out id_nom; dparf: out descripcio) is
-	 te: texpansio renames ts.te;
-      begin
-	 idparf := te(id_nom(it)).ptd;
-	 dparf := te(id_nom(it)).d;
-      end cons_param;
+	 		te: texpansio renames ts.te;
+    begin
+		idparf := te(id_nom(it)).ptd;
+		dparf := te(id_nom(it)).d;
+    end cons_param;
 
 end decls.dtsimbols;
