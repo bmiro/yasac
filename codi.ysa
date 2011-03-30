@@ -1,16 +1,13 @@
-procedure prova(a: in integer; b: out integer) is
-	a: constant integer:=2;
+procedure prova is
+	a:integer;
+	b:constant integer:=3;
+	type c is array(a,b) of integer;
+	procedure prova is
+	begin
+		a:=2;
+	end prova;
 begin
 	a:=0;
-	b:=1;
-	if a < b then
-		a := a + 1;
-	end if;
-	c:=2;
-	while x < 2 loop	
-		b:=3;
-	end loop;
-	d:=a+b;
 end prova;
 
 		

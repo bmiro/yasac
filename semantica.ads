@@ -26,7 +26,7 @@ package semantica is
    procedure rs_dec_const(a: out ast; identif, valor, tipus: in ast);
    procedure rs_vconst(a: out ast; lit: in ast; signe: in t_operacio);
    procedure rs_vconst(a: out ast; lit: in ast);
-   procedure rs_dec_var(a: out ast; identif, llista_id: in ast);
+   procedure rs_dec_var(a: out ast; identif_var, identif_tipus: in ast);
    procedure rs_dec_array(a: out ast; identif, llista_idx, tipus: in ast);
    procedure rs_llista_id(a:out ast; identif, llista_id: in ast);
    procedure rs_llista_id(a:out ast; identif: in ast);
@@ -69,5 +69,7 @@ private
    arrel: ast;
    tn: tnoms; 
 	ts: tsimbols;
+	np: num_proc := 0;
+	nv: num_var := 0;
 
 end semantica;

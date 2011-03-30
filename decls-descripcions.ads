@@ -34,11 +34,11 @@ package decls.descripcions is
 	    vc: valor;
 	 when d_var =>
 	    tyv: id_nom;
-	    nv: natural;
+	    nv: num_var;
 	 when d_tipus =>
 	    dt: descr_tipus;
 	 when d_proc =>
-	    np: natural;
+	    np: num_proc;
 	 end case;
       end record;
 

@@ -82,19 +82,15 @@ package body decls.dtnoms is
    begin
    	p:= hash(s);
       if tdispersio(p) = id_nom'first then
-         -- Si la posició del hash és buida.
          tdispersio(p) := idx_tblocs;
          id := idx_tblocs;
-	tblocs(id).ptblocs := id_nom'first;
-	tblocs(id).ptcaracters := idx_tcaracters;
+			idx_tblocs := idx_tblocs + 1;
+			tblocs(id).ptblocs := id_nom'first;
+			tblocs(id).ptcaracters := idx_tcaracters;
          posa(tcaracters, idx_tcaracters, s);
       else
          idx := tdispersio(p);
          loop
-            -- Cercam si hi ha el nom a la taula d'dentificadors.
-            -- Anam botant a les distintes posicions indicades per el
-            -- punter pr, les quals són les que ha hagut colisions del
-            -- hash si procedeix.
             tb := compara(tcaracters, s, tblocs(idx).ptcaracters);
             exit when tb or tblocs(idx).ptblocs = id_nom'first;
             idx := tblocs(idx).ptblocs;
@@ -103,8 +99,8 @@ package body decls.dtnoms is
             id := idx;
          else
             tblocs(idx).ptblocs := idx_tblocs;
-	    tblocs(idx_tblocs).ptblocs := id_nom'first;
-	    tblocs(idx_tblocs).ptcaracters := idx_tcaracters;
+	    		tblocs(idx_tblocs).ptblocs := id_nom'first;
+	   		tblocs(idx_tblocs).ptcaracters := idx_tcaracters;
             id := idx_tblocs;
             posa(tcaracters, idx_tcaracters, s);
          end if;

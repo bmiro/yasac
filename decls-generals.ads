@@ -23,5 +23,8 @@ package decls.generals is
 		    o_nul); -- TODO revisar si aixo va aqui (obersvacio Entrega2)
    type t_mode is (m_in, m_out, m_in_out);
 
+	type num_var is new natural range 0..maxid;
+	type num_proc is new natural range 0..maxid;
+
 end decls.generals;
 

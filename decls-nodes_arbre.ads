@@ -10,7 +10,7 @@ package decls.nodes_arbre is
 		  n_camp_rec, n_rang, n_lim,n_sent_buc, n_sent_flux,
 		  n_sent_assig, n_expr, n_ref, n_ref_comp, n_identif,
 		  n_lit_enter, n_lit_caracter, n_lit_string, n_atom
-                 );
+    );
 
    type node (tnd: tnode) is
       record
@@ -45,7 +45,7 @@ package decls.nodes_arbre is
 	    dc_id_tipus: pnode;
 	    dc_vconst: pnode;
 	 when n_dec_var =>
-	    dv_llista_id: pnode;
+	    dv_id_var: pnode;
 	    dv_id_tipus: pnode;
 	 when n_dec_array =>
 	    da_identif: pnode;

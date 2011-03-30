@@ -144,15 +144,15 @@ DEC_CONST:
         ;
 
 V_CONST:
-          s_menys literal
+			 s_menys literal
           {rs_vconst($$, $2, o_menys_unitari);}
         | literal
           {rs_vconst($$, $1);}
         ;
 
 DEC_VAR: 
-         LLISTA_ID s_dos_punts identificador s_punt_i_coma
-          {rs_dec_var($$, $3, $1);}
+         identificador s_dos_punts identificador s_punt_i_coma
+          {rs_dec_var($$, $1, $3);}
         ;
 
 DEC_ARRAY: 
@@ -161,10 +161,10 @@ DEC_ARRAY:
         ;
 
 LLISTA_ID:
-          LLISTA_ID s_coma identificador
-          {rs_llista_id($$, $3, $1);}
-        | identificador
+			 identificador
           {rs_llista_id($$, $1);}
+        | LLISTA_ID s_coma identificador
+          {rs_llista_id($$, $3, $1);}
         ;
 
 DEC_RECORD: 

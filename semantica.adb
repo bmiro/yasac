@@ -1,3 +1,5 @@
+with ada.text_io; use ada.text_io;
+with ada.integer_text_io; use ada.integer_text_io;
 package body semantica is
 
    procedure inicia_analitzador is
@@ -112,11 +114,11 @@ package body semantica is
       a:= lit;
    end rs_vconst;
 
-   procedure rs_dec_var(a: out ast; identif, llista_id: in ast) is
+   procedure rs_dec_var(a: out ast; identif_var, identif_tipus: in ast) is
    begin
       a:= new node(n_dec_var);
-      a.dv_id_tipus:= identif;
-      a.dv_llista_id:= llista_id;
+		a.dv_id_var:= identif_var;
+      a.dv_id_tipus:= identif_tipus;
    end rs_dec_var;
 
    procedure rs_dec_array(a: out ast; identif, llista_idx, tipus: in ast) is
@@ -277,7 +279,7 @@ package body semantica is
       id : id_nom;
    begin
       posa_id(tn, yytext, id);
-      a := new node'(n_identif, lin, col, id);
+		a := new node'(n_identif, lin, col, id);
    end rl_id;
 
    procedure rl_lit_enter(a : out ast; yytext : in string;
