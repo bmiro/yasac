@@ -11,8 +11,8 @@ package body decls.dtsimbols is
       prof := 1;
       ta(prof) := 0;
       for id in id_nom loop
-	 		td(id) := (0, d, id_nom'first);
-      end loop;
+			td(id) := (0, d, id_nom'first);
+		end loop;
    end tbuida;
 
    procedure posa(ts: in out tsimbols; id: in id_nom; d: in descripcio;
@@ -26,10 +26,10 @@ package body decls.dtsimbols is
       error := td(id).profd = prof;
       if not error then
 			ta(prof) := ta(prof) + 1;
-	 		ne := ta(prof);
-	 		te(ne) := (td(id).profd, td(id).d, id, td(id).s);
-	 		td(id) := (prof, d, id_nom'first);
-      end if;
+			ne := ta(prof);
+			te(ne) := (td(id).profd, td(id).d, id, td(id).s);
+			td(id) := (prof, d, id_nom'first);
+		end if;
    end posa;
 
    function cons(ts: in tsimbols; id: in id_nom) return descripcio is
@@ -58,11 +58,11 @@ package body decls.dtsimbols is
       ne := ta(prof);
       prof := prof - 1;
       while ne > ta(prof) loop
-	 if te(ne).profd >= 0 then
-	    id := te(ne).ptd;
-	    td(id) := (te(ne).profd, te(ne).d, te(id).s);
-	 end if;
-	 ne := ne - 1;
+         if te(ne).profd >= 0 then
+            id := te(ne).ptd;
+            td(id) := (te(ne).profd, te(ne).d, te(id).s);
+         end if;
+         ne := ne - 1;
       end loop;
    end surtbloc;
 
@@ -77,18 +77,18 @@ package body decls.dtsimbols is
    begin
       dr := td(idr).d;
       if not (dr.td = d_tipus and then dr.dt.tsub = tsrec) then
-	 raise mal_us;
+         raise mal_us;
       end if;
       ie := td(idr).s;
       while (ie /= 0 and then te(ie).ptd /= idc) loop
-	 ie := te(ie).s;
+         ie := te(ie).s;
       end loop;
       error := (ie /= 0);
       if not error then
-	 ta(prof) := ta(prof) + 1;
-	 ne := ta(prof);
-	 te(ne) := (-1, d, idc, td(idr).s);
-	 td(idr).s := ne;
+         ta(prof) := ta(prof) + 1;
+         ne := ta(prof);
+         te(ne) := (-1, d, idc, td(idr).s);
+         td(idr).s := ne;
       end if;
    end posa_camp;
 
@@ -102,14 +102,14 @@ package body decls.dtsimbols is
    begin
       dr := td(idr).d;
       if not (dr.td = d_tipus and then dr.dt.tsub = tsrec) then
-	 raise mal_us;
+         raise mal_us;
       end if;
       ie := td(idr).s;
       while (ie /= 0) loop
-	 ie := te(ie).s;
+         ie := te(ie).s;
       end loop;
       if ie /= 0 then
-	 dc := te(ie).d;
+         dc := te(ie).d;
       end if;
       return dc;
    end cons_camp;
@@ -131,12 +131,12 @@ package body decls.dtsimbols is
    begin
       da := td(ida).d;
       if not (da.td = d_tipus and then da.dt.tsub = tsarray) then
-	 raise mal_us;
+         raise mal_us;
       end if;
       ie := td(ida).s; pie := 0;
       while ie /= 0 loop
-	 pie := ie;
-	 ie := te(ie).s;
+         pie := ie;
+         ie := te(ie).s;
       end loop;
       ta(prof) := ta(prof) + 1;
       ne := ta(prof);
@@ -144,21 +144,21 @@ package body decls.dtsimbols is
       te(ne).profd := -1;
       te(ne).d := d;
       if pie = 0 then
-	 td(ida).s := ne;
-	 te(ne).s := 0;
+         td(ida).s := ne;
+         te(ne).s := 0;
       else
-	 te(pie).s := ne;
-	 te(ne).s := 0;
+         te(pie).s := ne;
+         te(ne).s := 0;
       end if;
    end posa_index;
 
    function primer_index(ts: in tsimbols; ida: in id_nom) return it_index is
-      da : descripcio;
+      da: descripcio;
       td: tdescripcions renames ts.td;
    begin
       da := td(ida).d;
       if not (da.td = d_tipus and then da.dt.tsub = tsarray) then
-	 raise mal_us;
+         raise mal_us;
       end if;
       return it_index(td(ida).s);
    end primer_index;
@@ -191,60 +191,58 @@ package body decls.dtsimbols is
    begin
       dproc := td(idproc).d;
       if (dproc.td /= d_proc) then
-	 raise mal_us;
+         raise mal_us;
       end if;
       ie := td(idproc).s; pie := 0;
       while ie /= 0 and then te(ie).ptd /= idparf loop
-	 pie := ie;
-	 ie := te(ie).s;
+         pie := ie;
+         ie := te(ie).s;
       end loop;
       dperf := (ie/=0);
       if not dperf then
-	 ta(prof) := ta(prof) + 1;
-	 ne := ta(prof);
-	 te(ne).ptd := idparf;
-	 te(ne).profd := -1;
-	 te(ne).d := dparf;
-	 if pie = 0 then
-	    td(idproc).s := ne;
-	    te(ne).s := 0;
-	 else
-	    te(pie).s := ne;
-	    te(ne).s := 0;
-	 end if;
+         ta(prof) := ta(prof) + 1;
+         ne := ta(prof);
+         te(ne).ptd := idparf;
+         te(ne).profd := -1;
+         te(ne).d := dparf;
+         if pie = 0 then
+            td(idproc).s := ne;
+            te(ne).s := 0;
+         else
+            te(pie).s := ne;
+            te(ne).s := 0;
+         end if;
 		end if;
-      end posa_param;
+   end posa_param;
 
    function primer_param(ts: in tsimbols; idproc: in id_nom)
-			    return it_param is
-	 d : descripcio;
-	 td: tdescripcions renames ts.td;
-	 begin
-	     d := td(idproc).d;
-	 if d.td /= d_proc then
-	    raise mal_us;
-	 end if;
+            return it_param is
+         d : descripcio;
+         td: tdescripcions renames ts.td;
+   begin
+      d := td(idproc).d;
+      if d.td /= d_proc then
+         raise mal_us;
+      end if;
+      return it_param(td(idproc).s);
+   end primer_param;
 
-	 return it_param(td(idproc).s);
-	end primer_param;
+   function seg_param(ts: in tsimbols; it: in it_param) return it_param is
+      te: texpansio renames ts.te;
+   begin
+      return it_param(te(id_nom(it)).s);
+   end seg_param;
 
-      function seg_param(ts: in tsimbols; it: in it_param) return it_param is
-	 te: texpansio renames ts.te;
+   function esvalid(it: in it_param) return boolean is
       begin
-	 return it_param(te(id_nom(it)).s);
-      end seg_param;
+         return it /= 0;
+   end esvalid;
 
-      function esvalid(it: in it_param) return boolean is
-      begin
-	 return it /= 0;
-      end esvalid;
-
-   procedure cons_param(ts: in tsimbols; it: in it_param;
-			idparf: out id_nom; dparf: out descripcio) is
-	 		te: texpansio renames ts.te;
-    begin
+	procedure cons_param(ts: in tsimbols; it: in it_param;
+		idparf: out id_nom; dparf: out descripcio) is
+		te: texpansio renames ts.te;
+	begin
 		idparf := te(id_nom(it)).ptd;
 		dparf := te(id_nom(it)).d;
-    end cons_param;
-
+	end cons_param;
 end decls.dtsimbols;
