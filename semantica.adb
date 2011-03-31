@@ -111,7 +111,7 @@ package body semantica is
 
    procedure rs_vconst(a: out ast; lit: in ast) is
    begin
-      a:= lit;
+		a:= lit;
    end rs_vconst;
 
    procedure rs_dec_var(a: out ast; identif_var, identif_tipus: in ast) is
@@ -283,10 +283,11 @@ package body semantica is
    end rl_id;
 
    procedure rl_lit_enter(a : out ast; yytext : in string;
-			  lin, col : in natural) is
-   begin
-      a := new node'(n_lit_enter, lin, col,
-		 valor(character'pos(yytext(yytext'first))) - 48);
+			  lin, col : in natural) is	
+		prova:valor;
+   begin      		
+		a := new node'(n_lit_enter, lin, col, valor'value(yytext
+			(yytext'first..yytext'last)));
    end rl_lit_enter;
 
    procedure rl_lit_string(a : out ast; yytext : in string;

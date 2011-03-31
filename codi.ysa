@@ -1,7 +1,9 @@
 procedure prova is
 	a:integer;
-	b:constant integer:=3;
+	b:constant integer:="aaaaabbbb";
+	c:constant integer:="cdidafi";
 	type c is array(a,b) of integer;
+	prova:integer;
 	procedure prova is
 	begin
 		a:=2;

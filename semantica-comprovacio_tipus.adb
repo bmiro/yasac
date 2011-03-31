@@ -1,4 +1,5 @@
 with ada.integer_text_io; use ada.integer_text_io;
+with ada.text_io; use ada.text_io;
 package body semantica.comprovacio_tipus is
 
    procedure ct_dec_proc(proc: in ast; error: in out boolean);
@@ -8,20 +9,38 @@ package body semantica.comprovacio_tipus is
        put("Comprovacio tipus - Encap."); new_line;
    end ct_encap;
 
+	procedure ct_const(const: in ast; error: in out boolean) is
+	begin
+		new_line;	
+		if const.dc_vconst.tnd = n_vconst then
+			put("Valor constant amb signe");
+		else
+			--constant sense signe
+			case const.dc_vconst.tnd is
+				when n_lit_enter => put(const.dc_vconst.vl'img); 
+				when n_lit_caracter => put(const.dc_vconst.caracter'img);
+				when n_lit_string => put(con_cad(tn, const.dc_vconst.cadena));
+				when others => null;
+			end case;
+		end if;
+		new_line;
+	end ct_const;
+
    procedure ct_decs(decs: in ast; error: in out boolean) is
    begin
       if decs.d_decl /= null then
          ct_decs(decs.d_decl, error);
       end if;
       case decs.d_decls.tnd is
-         when n_dec_const => put("Declaracio Constant"); new_line;
-         when n_dec_var => put("Declaracio Variable"); new_line;
-         when n_dec_array => put("Declaracio Array"); new_line;
-         when n_dec_rec => put("Declaracio Record"); new_line;
-         when n_dec_subrang => put("Declaracio Subrang"); new_line;
+         when n_dec_const => put("Declaracio Constant"); ct_const(decs.d_decls, error);
+         when n_dec_var => put("Declaracio Variable"); 
+         when n_dec_array => put("Declaracio Array"); 
+         when n_dec_rec => put("Declaracio Record"); 
+         when n_dec_subrang => put("Declaracio Subrang"); 
          when n_dec_proc => ct_dec_proc(decs.d_decls, error);
          when others => null;
       end case;
+		new_line;
    end ct_decs;
 
    procedure ct_sents(sents: in ast; error: in out boolean) is
@@ -43,9 +62,7 @@ package body semantica.comprovacio_tipus is
       end if;
       np:= np + 1;      
       posa(ts, id_inici, (d_proc, np), e);
-      --TODO Revisar taula de simbols. Si hi ha dos procediments amb el mateix nom, posa(ts) no dona error
-      if e then
-         put("Ja existeix un procediment amb aquest nom"); new_line;
+     	if e then
          error:= true;
       end if;
       if proc.dp_encap /= null then
