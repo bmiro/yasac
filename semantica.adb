@@ -1,9 +1,10 @@
 with ada.text_io; use ada.text_io;
 with ada.integer_text_io; use ada.integer_text_io;
+with decls.descripcions; use decls.descripcions;
 package body semantica is
 
-   procedure inicia_analitzador is
-   begin
+   procedure inicia_analitzador is	  
+	begin
       tbuida(tn);
       tbuida(ts);
    end inicia_analitzador;

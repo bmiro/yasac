@@ -11,20 +11,19 @@ package body semantica.comprovacio_tipus is
 
 	procedure ct_const(const: in ast; error: in out boolean) is
 	begin
+		put("Declaracio Constant");
 		new_line;	
-		if const.dc_vconst.tnd = n_vconst then
-			put("Valor constant amb signe");
-		else
-			--constant sense signe
-			case const.dc_vconst.tnd is
-				when n_lit_enter => put(const.dc_vconst.vl'img); 
-				when n_lit_caracter => put(const.dc_vconst.caracter'img);
-				when n_lit_string => put(con_cad(tn, const.dc_vconst.cadena));
-				when others => null;
-			end case;
-		end if;
-		new_line;
 	end ct_const;
+
+	procedure ct_variable(var: in ast; error: in out boolean) is
+		id_var, id_tipus: id_nom;
+		dt: descripcio;	
+	begin
+		put("Declaracio Variable"); new_line;
+		id_var := var.dv_id_var.id;
+		id_tipus := var.dv_id_tipus.id;
+		dt:= cons(ts, id_tipus);
+	end ct_variable;
 
    procedure ct_decs(decs: in ast; error: in out boolean) is
    begin
@@ -32,8 +31,8 @@ package body semantica.comprovacio_tipus is
          ct_decs(decs.d_decl, error);
       end if;
       case decs.d_decls.tnd is
-         when n_dec_const => put("Declaracio Constant"); ct_const(decs.d_decls, error);
-         when n_dec_var => put("Declaracio Variable"); 
+         when n_dec_const => ct_const(decs.d_decls, error);
+         when n_dec_var => ct_variable(decs.d_decls, error);
          when n_dec_array => put("Declaracio Array"); 
          when n_dec_rec => put("Declaracio Record"); 
          when n_dec_subrang => put("Declaracio Subrang"); 
