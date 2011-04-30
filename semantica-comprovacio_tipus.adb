@@ -107,6 +107,7 @@ package body semantica.comprovacio_tipus is
 
    procedure ct_dec_proc(proc: in ast; error: in out boolean) is
       id_inici, id_fi: id_nom;
+		it : it_param;
       e: boolean;
    begin
       put("Declaracio procediment."); new_line;   
@@ -124,8 +125,11 @@ package body semantica.comprovacio_tipus is
       if proc.dp_encap /= null then
          ct_encap(proc.dp_encap, error);
          entrabloc(ts);
-         --primer_index
-         --mentres sigui_valid fer
+    		it := primer_param(ts, id_inici);
+			while esvalid(it) loop 
+				put("Param");
+				it := seg_param(ts, it);
+			end loop;
       else
          entrabloc(ts);
       end if;
