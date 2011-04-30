@@ -4,9 +4,33 @@ with decls.descripcions; use decls.descripcions;
 package body semantica is
 
    procedure inicia_analitzador is	  
+      id, id_int, id_car, id_bool: id_nom;
+		d: descripcio;
+      e: boolean:= false;
 	begin
       tbuida(tn);
       tbuida(ts);
+	
+		posa_id(tn, "integer", id_int);
+      d := (d_tipus, (tsenter, ocup_int, valor'first, valor'last, id_int));
+		posa(ts, id_int, d, e);
+
+		posa_id(tn, "character", id_car);
+      d := (d_tipus, (tscar, ocup_int, valor(character'pos(character'first)), valor(character'pos(character'last)), id_car));
+      posa(ts, id_car, d, e);
+				
+		posa_id(tn, "boolean", id_bool);
+      d := (d_tipus, (tsbool, ocup_int, 0, 1, id_bool));
+      posa(ts, id_bool, d, e);
+
+		posa_id(tn,"true", id);
+      d := (d_const, id_bool, 1);
+      posa(ts, id, d, e);
+
+      posa_id(tn,"false", id);
+      d := (d_const, id_bool, 0);
+      posa(ts, id, d, e);
+
    end inicia_analitzador;
 
 -------------------------------------------------------------------------------
@@ -285,7 +309,6 @@ package body semantica is
 
    procedure rl_lit_enter(a : out ast; yytext : in string;
 			  lin, col : in natural) is	
-		prova:valor;
    begin      		
 		a := new node'(n_lit_enter, lin, col, valor'value(yytext
 			(yytext'first..yytext'last)));

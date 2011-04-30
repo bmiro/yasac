@@ -9,6 +9,7 @@ package decls.generals is
    long_mitja_str: constant natural := 20;
    num_caracters: constant natural := maxid *(long_mitja_id + 1) +
                                        maxstr*(long_mitja_str + 1);
+	ocup_int: constant integer:= integer'size/8;
 
    type id_nom is new natural range 0..maxid; --TODO binet he passat de 1 a 0, esper que no tengui mes consequencies
    idn_nul: constant id_nom := 0;
