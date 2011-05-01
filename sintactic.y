@@ -195,11 +195,7 @@ RANG:
         ;
 
 LIM:    
-          identificador
-          {rs_lim($$, $1);}
-        | s_menys identificador
-          {rs_lim($$, $2, o_menys_unitari);}
-        | s_menys literal
+          s_menys literal
           {rs_lim($$, $2, o_menys_unitari);}
         | literal
           {rs_lim($$, $1);}

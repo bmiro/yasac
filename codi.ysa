@@ -1,9 +1,10 @@
 procedure prova(a: in integer; b: in integer; c: in out integer; d: out character) is
+	type valor is new integer range 1..11;		
+   v: valor;
 	e: integer;
 	f: string;
 	g: constant integer := 2;
 	h: constant character := 'a';
-	i: boolean;
 begin
 	a:=0;
 end prova;

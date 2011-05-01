@@ -28,6 +28,8 @@ record      { rl_atom(yylval, tok_begin_line, tok_begin_col);
               return pc_record;}
 range       { rl_atom(yylval, tok_begin_line, tok_begin_col);
               return pc_range;}
+new			{ rl_atom(yylval, tok_begin_line, tok_begin_col);
+				  return pc_new;}
 of          { rl_atom(yylval, tok_begin_line, tok_begin_col);
               return pc_of;}
 if          { rl_atom(yylval, tok_begin_line, tok_begin_col);
