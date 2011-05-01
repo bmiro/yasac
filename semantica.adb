@@ -4,7 +4,7 @@ with decls.descripcions; use decls.descripcions;
 package body semantica is
 
    procedure inicia_analitzador is	  
-      id, id_int, id_car, id_bool: id_nom;
+      id, id_int, id_car, id_str, id_bool: id_nom;
 		d: descripcio;
       e: boolean:= false;
 	begin
@@ -18,6 +18,10 @@ package body semantica is
 		posa_id(tn, "character", id_car);
       d := (d_tipus, (tscar, ocup_int, valor(character'pos(character'first)), valor(character'pos(character'last)), id_car));
       posa(ts, id_car, d, e);
+
+		posa_id(tn, "string", id_str);
+      d := (d_tipus, (tsstr, ocup_int, id_str));
+      posa(ts, id_str, d, e);
 				
 		posa_id(tn, "boolean", id_bool);
       d := (d_tipus, (tsbool, ocup_int, 0, 1, id_bool));

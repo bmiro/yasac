@@ -4,17 +4,44 @@ package body semantica.comprovacio_tipus is
 
    procedure ct_dec_proc(proc: in ast; error: in out boolean);
 
-   procedure ct_encap(encap: in ast; error: in out boolean) is
-   begin
-       put("Comprovacio tipus - Encap."); new_line;
-   end ct_encap;
+	procedure ct_param(param: in ast; id_proc: in id_nom; error: in out boolean) is
+		id_param, id_tipus : id_nom;
+		mode : t_mode;
+		dt, dp : descripcio;
+		e : boolean;
+	begin
+		id_param := param.dpa_identif.id;
+		id_tipus := param.dpa_tipus.id;
+		mode := param.dpa_mode.mode;
+		dt := cons(ts, id_tipus);
+		if dt.td /= d_tipus then
+			error := true;
+			put("Error: El tipus del parametre "); put(con_id(tn, param.dpa_identif.id)); put(" es incorrecte"); new_line;
+		end if;
+		dp := (d_param, id_tipus, mode, 0); 
+		posa_param(ts, id_proc, id_param, dp, e);
+		if e then 
+			error := true;
+			put("Error: Ja existeix un parametre amb aquest nom"); new_line;
+		end if;
+	end ct_param;
+
+   procedure ct_params(params: in ast; id_proc: in id_nom; error: in out boolean) is
+   begin   
+		if params.tnd = n_dec_params then
+			ct_params(params.dpa_params, id_proc, error);
+			ct_param(params.dpa_param, id_proc, error);
+		else 
+			ct_param(params, id_proc, error);
+		end if;
+	end ct_params;
 
 	procedure ct_vconst(lit: in ast; tsub: out tipus_sub; v: out valor) is
 	begin
 		case lit.tnd is 	
 			when n_lit_enter => tsub := tsenter; v := lit.vl;
 			when n_lit_caracter => tsub := tscar; v := lit.caracter;
-			when n_lit_string => put("literal string"); --TODO literal string i booleans???
+			--TODO booleans?
 			when others => null;
 		end case;
 	end ct_vconst;
@@ -25,8 +52,7 @@ package body semantica.comprovacio_tipus is
 		tsub: tipus_sub;
 		v: valor;
 		e: boolean;
-	begin
-		put("Declaracio Constant"); new_line;	
+	begin	
 		id_const := const.dc_identif.id;
 		id_tipus := const.dc_id_tipus.id;
 		dt := cons(ts, id_tipus);
@@ -40,24 +66,30 @@ package body semantica.comprovacio_tipus is
 		end if; 
 		if const.dc_vconst.tnd = n_vconst then
 			--Constant amb signe
-			--TODO Que feim amb el signe?
-			ct_vconst(const.dc_vconst.v_literal, tsub, v); 
+			ct_vconst(const.dc_vconst.v_literal, tsub, v);
+			if tsub /= tsenter then
+				error := true; 
+				put("Error: Signe menys incompatible amb el tipus."); new_line;
+			end if; 
+			v := -v;
 		else
 			ct_vconst(const.dc_vconst, tsub, v);
 		end if;
 		if tsub /= dt.dt.tsub then
 			error := true;
-			put("El valor de la constant no es del tipus que toca."); new_line;
+			put("Error: El valor de la constant no es del tipus que toca."); new_line;
 		end if;
-		if v < dt.dt.linf or v > dt.dt.lsup then 
-			error := true;
-			put("El valor de la constant supera els limits"); new_line;
+		if tsub = tsenter or tsub = tscar then
+			if v < dt.dt.linf or v > dt.dt.lsup then 
+				error := true;
+				put("Error: El valor de la constant supera els limits"); new_line;
+			end if;
 		end if;
 		dc := (d_const, id_tipus, v); 
 		posa(ts, id_const, dc, e);
 		if e then
 			error := true;
-			put("Ja existeix una constant amb aquest nom"); new_line;
+			put("Error: Nom de la constant incorrecte"); new_line;
 		end if;
 	end ct_dec_const;
 
@@ -78,7 +110,7 @@ package body semantica.comprovacio_tipus is
 		posa(ts, id_var, dv, e);
 		if e then
 			error := true;
-			put("Error: Ja existeix una variable amb aquest nom"); new_line;
+			put("Error: Nom de la variable incorrecte"); new_line;
 		end if;
 	end ct_dec_variable;
 
@@ -106,7 +138,8 @@ package body semantica.comprovacio_tipus is
    end ct_sents;
 
    procedure ct_dec_proc(proc: in ast; error: in out boolean) is
-      id_inici, id_fi: id_nom;
+      id_inici, id_fi, id_param : id_nom;
+		d_param : descripcio;
 		it : it_param;
       e: boolean;
    begin
@@ -117,17 +150,20 @@ package body semantica.comprovacio_tipus is
           error := True;
           put("Nom del procediment diferent"); new_line;
       end if;
-      np:= np + 1;      
+      np := np + 1;      
       posa(ts, id_inici, (d_proc, np), e);
      	if e then
          error:= true;
       end if;
       if proc.dp_encap /= null then
-         ct_encap(proc.dp_encap, error);
+         ct_params(proc.dp_encap.e_params, id_inici, error);
          entrabloc(ts);
     		it := primer_param(ts, id_inici);
 			while esvalid(it) loop 
-				put("Param");
+				cons_param(ts, it, id_param, d_param);
+				nv := nv + 1;
+				d_param.n_param := nv;
+				posa(ts, id_param, d_param, e);
 				it := seg_param(ts, it);
 			end loop;
       else

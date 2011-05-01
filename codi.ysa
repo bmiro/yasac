@@ -1,7 +1,9 @@
-procedure prova(a: in integer) is
-	a: integer;
-	b: constant integer := 2;
-	c: constant character := 'a';
+procedure prova(a: in integer; b: in integer; c: in out integer; d: out character) is
+	e: integer;
+	f: string;
+	g: constant integer := 2;
+	h: constant character := 'a';
+	i: boolean;
 begin
 	a:=0;
 end prova;
