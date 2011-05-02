@@ -322,12 +322,98 @@ package body semantica.comprovacio_tipus is
       end case;
    end ct_decs;
 
-	procedure ct_sent_buc(bucle: in ast; error: in out boolean) is
+	procedure ct_exp(exp: in ast; tsub: out tipus_sub; error: in out boolean) is
+		tsub_camp1, tsub_camp2 : tipus_sub;
+		d, dt : descripcio;
 	begin
-		put("Ct bucle"); new_line;
-		--bucle.sb_condicio;	
-		ct_sents(bucle.sb_sents, error);			
+		put("Ct expresio"); new_line;
+		case exp.tnd is
+			when n_lit_enter => tsub := tsenter; put("Literal enter"); 
+			when n_lit_caracter => tsub := tscar; put("Literal caracter");
+			when n_lit_string => tsub := tsstr; put("Literal string");
+			when n_identif => put("Expresio identificador"); 				
+			when n_ref => put("Expresio referencia"); 
+			when n_expr => 
+				if exp.e_camp1 /= null then
+					ct_exp(exp.e_camp1, tsub_camp1, error);
+				end if;
+				if exp.e_camp2 /= null then	
+					ct_exp(exp.e_camp2, tsub_camp2, error);				
+				end if;
+				case exp.e_operacio is
+					when o_mes | o_menys | o_producte | 
+						  o_divisio | o_modul =>
+						if tsub_camp1 /= tsenter then
+							put("Error: Tipus incorrecte");
+							error := true;
+						end if;
+						if tsub_camp2 /= tsenter then
+							put("Error: Tipus incorrecte");
+							error := true;
+						end if;
+						tsub := tsenter;
+						--TODO acabar
+						
+					when o_and | o_or => put("Cas 2");
+					when o_igual | o_diferent | o_menor |
+						  o_major | o_menor_igual | o_major_igual => put("Cas 3");
+					when o_menys_unitari => put("Menys unitari");
+					when o_not => put("Not");
+					when others => null;
+				end case;			
+				new_line;
+		when others => put("Camp null");
+		end case;
+		new_line;
+	end ct_exp; 
+
+	procedure ct_sent_buc(buc: in ast; error: in out boolean) is
+		tsubexp : tipus_sub;
+		error_sent_buc : exception; 	
+	begin
+		ct_exp(buc.sb_condicio, tsubexp, error); 
+		tsubexp := tsbool;
+		if tsubexp /= tsbool then
+			put("Error: La condicio del bucle no es un boolea");
+			raise error_sent_buc; 
+		end if;
+		ct_sents(buc.sb_sents, error);			
+		exception
+			when error_sent_buc => 
+				error := true;	
 	end ct_sent_buc; 
+
+	procedure ct_sent_fluxe(fluxe: in ast; error: in out boolean) is
+		tsubexp : tipus_sub;
+		error_sent_fluxe : exception;
+	begin
+		ct_exp(fluxe.sf_condicio, tsubexp, error);
+		tsubexp := tsbool;
+		if tsubexp /= tsbool then
+			put("Error: La condicio del if no es un boolea");
+			raise error_sent_fluxe; 
+		end if;
+		ct_sents(fluxe.sf_sents, error);	
+		if fluxe.sf_sents_else /= null then
+			ct_sents(fluxe.sf_sents_else, error); 
+		end if;		
+		exception
+			when error_sent_fluxe => 
+				error := true;	
+	end ct_sent_fluxe;
+
+	procedure ct_ref(ref: in ast; error: in out boolean) is
+	begin
+		put("Ct referencia"); new_line;
+	end ct_ref;
+	
+	procedure ct_sent_assig(assig: in ast; error: in out boolean) is 
+		tsub : tipus_sub;
+	begin
+		ct_ref(assig.sa_ref, error); 
+		ct_exp(assig.sa_expr, tsub, error);
+		--TODO Comprovar que el tipus de la referencia es el mateix que el tipus de l'expresio
+	end ct_sent_assig; 
 
    procedure ct_sents(sents: in ast; error: in out boolean) is
       sent: ast;
@@ -341,8 +427,8 @@ package body semantica.comprovacio_tipus is
 		
 		case sent.tnd is
 			when n_sent_buc => ct_sent_buc(sent, error);   
-			when n_sent_flux => put("If");  
-			when n_sent_assig => put("Assignacio"); 
+			when n_sent_flux => ct_sent_fluxe(sent, error);  
+			when n_sent_assig => ct_sent_assig(sent, error);
 			--when n_sent_proc => put("Crida procediment"); --TODO Revisar
 			when others => null; 
 		end case; 

@@ -233,35 +233,35 @@ SENT_FLUXE:
 
 EXPRESSIO:
           EXPRESSIO pc_and EXPRESSIO
-          {rs_expressio($$, $1, $2, o_and);}
+          {rs_expressio($$, $1, $3, o_and);}
         | EXPRESSIO pc_or EXPRESSIO
-          {rs_expressio($$, $1, $2, o_or);}
+          {rs_expressio($$, $1, $3, o_or);}
         | EXPRESSIO s_major EXPRESSIO
-          {rs_expressio($$, $1, $2, o_major);}
+          {rs_expressio($$, $1, $3, o_major);}
         | EXPRESSIO s_menor EXPRESSIO
-          {rs_expressio($$, $1, $2, o_menor);}
+          {rs_expressio($$, $1, $3, o_menor);}
         | EXPRESSIO s_major_igual EXPRESSIO
-          {rs_expressio($$, $1, $2, o_major_igual);}
+          {rs_expressio($$, $1, $3, o_major_igual);}
         | EXPRESSIO s_menor_igual EXPRESSIO
-          {rs_expressio($$, $1, $2, o_menor_igual);}
+          {rs_expressio($$, $1, $3, o_menor_igual);}
         | EXPRESSIO s_igual EXPRESSIO
-          {rs_expressio($$, $1, $2, o_igual);}
+          {rs_expressio($$, $1, $3, o_igual);}
         | EXPRESSIO s_diferent EXPRESSIO
-          {rs_expressio($$, $1, $2, o_diferent);}
+          {rs_expressio($$, $1, $3, o_diferent);}
         | EXPRESSIO s_mes EXPRESSIO
-          {rs_expressio($$, $1, $2, o_mes);}
+          {rs_expressio($$, $1, $3, o_mes);}
         | EXPRESSIO s_menys EXPRESSIO
-          {rs_expressio($$, $1, $2, o_menys);}
+          {rs_expressio($$, $1, $3, o_menys);}
         | EXPRESSIO s_producte EXPRESSIO
-          {rs_expressio($$, $1, $2, o_producte);}
+          {rs_expressio($$, $1, $3, o_producte);}
         | EXPRESSIO s_divisio EXPRESSIO
-          {rs_expressio($$, $1, $2, o_divisio);}
+          {rs_expressio($$, $1, $3, o_divisio);}
         | EXPRESSIO s_modul EXPRESSIO
-          {rs_expressio($$, $1, $2, o_modul);}
+          {rs_expressio($$, $1, $3, o_modul);}
         | pc_not EXPRESSIO %prec s_menys
-          {rs_expressio($$, $1, $2, o_not);}
+          {rs_expressio($$, $2, null, o_not);}
         | s_menys EXPRESSIO 
-          {rs_expressio($$, $1, null, o_menys_unitari);}
+          {rs_expressio($$, $2, null, o_menys_unitari);}
         | s_parentesi_obert EXPRESSIO s_parentesi_tancat
           {rs_expressio($$, $2);}
         | REF

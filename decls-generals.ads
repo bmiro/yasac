@@ -11,7 +11,7 @@ package decls.generals is
                                        maxstr*(long_mitja_str + 1);
 	ocup_int: constant integer:= integer'size/8;
 
-   type id_nom is new natural range 0..maxid; --TODO binet he passat de 1 a 0, esper que no tengui mes consequencies
+   type id_nom is new natural range 0..maxid; 
    idn_nul: constant id_nom := 0;
 
    subtype id_string is natural range 1..num_caracters;
@@ -20,8 +20,7 @@ package decls.generals is
 
    type t_operacio is (o_mes, o_menys, o_producte, o_divisio, o_modul, o_menys_unitari,
 		    o_and, o_or, o_not,
-		    o_igual, o_diferent, o_menor, o_major, o_menor_igual, o_major_igual,
-		    o_nul); -- TODO revisar si aixo va aqui (obersvacio Entrega2)
+		    o_igual, o_diferent, o_menor, o_major, o_menor_igual, o_major_igual);
    type t_mode is (m_in, m_out, m_in_out);
 
 	type num_var is new natural range 0..maxid;

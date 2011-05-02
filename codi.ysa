@@ -10,12 +10,15 @@ procedure prova(a: in integer; b: in integer; c: in out integer; d: out characte
 		r4:character;
 	end record;
 begin
-	a := 1;
+	a := -1;
+	b := c.a;
 	while a < b loop
 		a := a + 1;
 	end loop;
 	if a = 1 then
 		a := a - 1;
+	else
+		a := a + 1;
 	end if;  
 end prova;
 
