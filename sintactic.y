@@ -181,7 +181,7 @@ CAMPS:
       
 CAMP:
           identificador s_dos_punts identificador s_punt_i_coma
-          {rs_camp($$, $1, $2);}
+          {rs_camp($$, $1, $3);}
         ;
 
 DEC_SUBRANG:

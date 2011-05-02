@@ -7,7 +7,7 @@ package decls.nodes_arbre is
    type tnode is (n_dec_proc, n_encap, n_decs, n_sents, n_dec_params,
 		  n_dec_param, n_mode, n_dec_const, n_dec_var, n_dec_array,
 		  n_dec_rec, n_dec_subrang, n_llista_id, n_vconst, n_camps_rec,
-		  n_camp_rec, n_rang, n_lim,n_sent_buc, n_sent_flux,
+		  n_camp_rec, n_rang, n_lim, n_sent_buc, n_sent_flux,
 		  n_sent_assig, n_expr, n_ref, n_ref_comp, n_identif,
 		  n_lit_enter, n_lit_caracter, n_lit_string, n_atom
     );

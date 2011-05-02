@@ -1,12 +1,22 @@
 procedure prova(a: in integer; b: in integer; c: in out integer; d: out character) is
-	type valor is new integer range 1..11;		
+	type valor is new integer range 0..5;		
    v: valor;
+	type ar is array(character, character, valor) of integer;
 	e: integer;
-	f: string;
-	g: constant integer := 2;
-	h: constant character := 'a';
+	type r is record
+		r1:integer;
+		r2:integer;
+		r3:valor;
+		r4:character;
+	end record;
 begin
-	a:=0;
+	a := 1;
+	while a < b loop
+		a := a + 1;
+	end loop;
+	if a = 1 then
+		a := a - 1;
+	end if;  
 end prova;
 
 		

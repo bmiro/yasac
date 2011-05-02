@@ -12,9 +12,9 @@ package body semantica is
       tbuida(ts);
 	
 		posa_id(tn, "integer", id_int);
-      d := (d_tipus, (tsenter, ocup_int, valor'first, valor'last, id_int));
+      d := (d_tipus, (tsenter, ocup_int, valor(integer'first), valor(integer'last), id_int));
 		posa(ts, id_int, d, e);
-
+		
 		posa_id(tn, "character", id_car);
       d := (d_tipus, (tscar, ocup_int, valor(character'pos(character'first)), valor(character'pos(character'last)), id_car));
       posa(ts, id_car, d, e);
