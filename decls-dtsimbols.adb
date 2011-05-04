@@ -1,5 +1,4 @@
 with ada.text_io; use ada.text_io;
-with ada.integer_text_io; use ada.integer_text_io;
 package body decls.dtsimbols is
 
    procedure tbuida(ts: out tsimbols) is
@@ -11,7 +10,7 @@ package body decls.dtsimbols is
       prof := 1;
       ta(prof) := 0;
       for id in id_nom loop
-			td(id) := (0, d, id_nom'first);
+			td(id) := (0, d, idn_nul);
 		end loop;
    end tbuida;
 
@@ -28,7 +27,7 @@ package body decls.dtsimbols is
 			ta(prof) := ta(prof) + 1;
 			ne := ta(prof);
 			te(ne) := (td(id).profd, td(id).d, id, td(id).s);
-			td(id) := (prof, d, id_nom'first);
+			td(id) := (prof, d, idn_nul);
 		end if;
    end posa;
 
@@ -80,7 +79,7 @@ package body decls.dtsimbols is
          raise mal_us;
       end if;
       ie := td(idr).s;
-      while (ie /= 0 and then te(ie).ptd /= idc) loop
+      while ie /= 0 and then te(ie).ptd /= idc loop
          ie := te(ie).s;
       end loop;
       error := (ie /= 0);
@@ -94,8 +93,8 @@ package body decls.dtsimbols is
 
    function cons_camp(ts: in tsimbols; idr, idc: in id_nom)
 		      return descripcio is
-      dr: descripcio;
-      dc: descripcio(d_nul);
+		d: descripcio(d_nul);
+      dr, dc: descripcio;
       ie: id_nom;
       td: tdescripcions renames ts.td;
       te: texpansio renames ts.te;
@@ -105,11 +104,13 @@ package body decls.dtsimbols is
          raise mal_us;
       end if;
       ie := td(idr).s;
-      while (ie /= 0) loop
+      while ie /= 0 and then te(ie).ptd /= idc loop
          ie := te(ie).s;
       end loop;
-      if ie /= 0 then
-         dc := te(ie).d;
+      if ie = 0 then
+			dc := d;
+		else       
+		   dc := te(ie).d;
       end if;
       return dc;
    end cons_camp;

@@ -8,9 +8,9 @@ package body decls.dtnoms is
       idx_tcaracters : index_tcaracters renames tn.idx_tcaracters;
    begin
       for i in 0..tam_tdispersio loop
-         tdispersio(i) := id_nom'first;   --id_nom'first indica que no apunta enlloc
+         tdispersio(i) := idn_nul;   
       end loop;
-      idx_tblocs := id_nom'first+1;
+      idx_tblocs := idn_nul+1;
       idx_tcaracters := index_tcaracters'first;
    end tbuida;
 
@@ -81,25 +81,25 @@ package body decls.dtnoms is
 		tb: boolean;
    begin
    	p:= hash(s);
-      if tdispersio(p) = id_nom'first then
+      if tdispersio(p) = idn_nul then
          tdispersio(p) := idx_tblocs;
          id := idx_tblocs;
 			idx_tblocs := idx_tblocs + 1;
-			tblocs(id).ptblocs := id_nom'first;
+			tblocs(id).ptblocs := idn_nul;
 			tblocs(id).ptcaracters := idx_tcaracters;
          posa(tcaracters, idx_tcaracters, s);
       else
          idx := tdispersio(p);
          loop
             tb := compara(tcaracters, s, tblocs(idx).ptcaracters);
-            exit when tb or tblocs(idx).ptblocs = id_nom'first;
+            exit when tb or tblocs(idx).ptblocs = idn_nul;
             idx := tblocs(idx).ptblocs;
          end loop;
          if tb then
             id := idx;
          else
             tblocs(idx).ptblocs := idx_tblocs;
-	    		tblocs(idx_tblocs).ptblocs := id_nom'first;
+	    		tblocs(idx_tblocs).ptblocs := idn_nul;
 	   		tblocs(idx_tblocs).ptcaracters := idx_tcaracters;
             id := idx_tblocs;
             posa(tcaracters, idx_tcaracters, s);

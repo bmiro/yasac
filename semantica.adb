@@ -4,7 +4,7 @@ with decls.descripcions; use decls.descripcions;
 package body semantica is
 
    procedure inicia_analitzador is	  
-      id, id_int, id_car, id_str, id_bool: id_nom;
+      id, id_int, id_car, id_str: id_nom;
 		d: descripcio;
       e: boolean:= false;
 	begin
@@ -288,7 +288,6 @@ package body semantica is
       a.sa_expr:= expr;
    end rs_sent_assignacio;
 
-	--TODO Revisar
    procedure rs_sent_procedure(a: out ast; identif: in ast) is
    begin
       a:= identif;

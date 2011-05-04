@@ -71,5 +71,6 @@ private
 	ts: tsimbols;
 	np: num_proc := 0;
 	nv: num_var := 0;
+	id_bool: id_nom;
 
 end semantica;

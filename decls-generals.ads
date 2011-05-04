@@ -12,7 +12,7 @@ package decls.generals is
 	ocup_int: constant integer:= integer'size/8;
 
    type id_nom is new natural range 0..maxid; 
-   idn_nul: constant id_nom := 0;
+   idn_nul: constant id_nom := id_nom'first;
 
    subtype id_string is natural range 1..num_caracters;
 

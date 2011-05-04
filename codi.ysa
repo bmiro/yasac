@@ -1,25 +1,15 @@
-procedure prova(a: in integer; b: in integer; c: in out integer; d: out character) is
-	type valor is new integer range 0..5;		
-   v: valor;
-	type ar is array(character, character, valor) of integer;
+procedure prova(a: in character; b: in integer; c: in out integer; d: out character) is
+	type rang is new integer range 1..10;
+	type temp is array(rang) of integer;
+	t: temp;
 	e: integer;
-	type r is record
-		r1:integer;
-		r2:integer;
-		r3:valor;
-		r4:character;
-	end record;
+	r: rang;
 begin
-	a := -1;
-	b := c.a;
-	while a < b loop
-		a := a + 1;
-	end loop;
-	if a = 1 then
-		a := a - 1;
-	else
-		a := a + 1;
-	end if;  
+
+	if c < b then
+		c := c + 1;
+	end if;
+
 end prova;
 
 		
