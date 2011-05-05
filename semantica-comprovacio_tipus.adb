@@ -6,6 +6,7 @@ package body semantica.comprovacio_tipus is
 	procedure ct_sents(sents: in ast; error: in out boolean);
 	procedure ct_exp(exp: in ast; t: out id_nom; tsub: out tipus_sub; v: out valor; var, error: in out boolean);
 	procedure ct_ref(ref: in ast; t: out id_nom; tsub: out tipus_sub; var, error: in out boolean);
+	procedure ct_sent_proc(sent: in ast; error: in out boolean); 
 
 	procedure ct_param(param: in ast; id_proc: in id_nom; error: in out boolean) is
 		id_param, id_tipus : id_nom;
@@ -391,7 +392,6 @@ package body semantica.comprovacio_tipus is
 		da, dc : descripcio; 
 		error_ref_comp : exception;
 	begin	
-		put("Procediment o array"); 
 		if ref_comp.rc_llista_ref.tnd = n_ref_comp then
 			ct_ref_comp(ref_comp.rc_llista_ref, t, tsub, it, var, error); 
 			it := seg_index(ts, it);					
@@ -658,14 +658,91 @@ package body semantica.comprovacio_tipus is
 		end if; 
 	end ct_sent_assig; 
 
+	procedure ct_param(it: it_param; texpr: in id_nom; tsexpr: in tipus_sub; var, error: in out boolean) is
+		id_param, id_tipus_param : id_nom;		
+		d, dp: descripcio; 
+	begin 
+		cons_param(ts, it, id_param, dp);
+		id_tipus_param := dp.tp;		
+		if dp.mode = m_out and not var then
+			put("Error: No es pot asignar valor a aquest parametre de sortida"); new_line;
+			error := true; 
+		end if;	
+		if texpr = idn_nul then
+			d := cons(ts, id_tipus_param); 
+			if tsexpr /= d.dt.tsub then 	
+				put("Error: Tipus subjacents diferents"); new_line;
+				error := true; 
+			end if;	
+		else
+			if texpr /= id_tipus_param then
+				put("Error: Tipus diferents"); new_line;
+				error := true;
+			end if;		
+		end if; 
+	end ct_param; 
+              
+	procedure ct_params_proc(params: in ast; t: out id_nom; tsub: out tipus_sub; it: out it_param; var, error: in out boolean) is
+		texpr, tref : id_nom;
+		tsexpr, tsref : tipus_sub; 
+		v : valor;
+		varexpr, varref : boolean := false;
+		dt, da, dc : descripcio; 
+		error_params_proc : exception;
+	begin	
+		if params.rc_llista_ref.tnd = n_ref_comp then
+			ct_params_proc(params.rc_llista_ref, t, tsub, it, var, error); 
+			it := seg_param(ts, it);					
+		else
+			dt := cons(ts, params.rc_llista_ref.id);
+			if dt.td /= d_proc then
+				put("Error: Procediment inexistent."); new_line;
+				raise error_params_proc;  
+			end if; 		
+			it := primer_param(ts, params.rc_llista_ref.id); 
+			t := params.rc_llista_ref.id;  			
+			tsub := tsnul;		
+			var := false;		
+		end if; 
+
+		if not esvalid(it) then	
+			put("Error: Sobren parametres"); new_line;
+			raise error_params_proc;
+		end if; 
+		ct_exp(params.rc_expr, texpr, tsexpr, v, varexpr, error);
+		ct_param(it, texpr, tsexpr, varexpr, error); 
+
+		exception
+			when error_params_proc => 
+				error := true; 		
+	end ct_params_proc;
+
 	procedure ct_sent_proc(sent: in ast; error: in out boolean) is
 		t : id_nom; 
 		tsub : tipus_sub; 
 		var : boolean := false;
+		dt : descripcio;
+		it : it_param; 
 	begin
-		put("Crida procediment"); new_line; 
-		--put(sent.tnd'img); new_line;		
-		ct_ref(sent, t, tsub, var, error);
+		if sent.tnd = n_ref_comp then
+			ct_params_proc(sent, t, tsub, it, var, error); 
+			it := seg_param(ts, it); 
+			if esvalid(it) then	
+				put("Error: Falten parametres"); new_line;
+				error := true; 
+			end if; 		
+		else 
+			dt := cons(ts, sent.id);
+			if dt.td /= d_proc then
+				put("Error: Procediment inexistent"); new_line;
+				error := true;  
+			end if; 
+			it := primer_param(ts, sent.id);
+			if esvalid(it) then
+				put("Error: Falten parametres"); new_line;
+				error := true;
+			end if;
+		end if;			
 	end ct_sent_proc; 
 
    procedure ct_sents(sents: in ast; error: in out boolean) is

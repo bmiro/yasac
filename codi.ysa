@@ -4,17 +4,19 @@ procedure prova(a: in character; b: in integer; c: in out integer; d: out charac
 	t: temp;
 	e: integer;
 	r: rang;
-	procedure prog(put: in integer) is
+	procedure prog(b: in boolean; w: out integer) is
 		a : integer;
 	begin
-	 a := put;
+	 a := 1;
 	end prog;
+	bol : boolean;
 begin
 
 	if c < b then
 		c := c + 1;
 	end if;
 	e := t(r, r); 
+	prog(bol, c);
 end prova;
 
 		
