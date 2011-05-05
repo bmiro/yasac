@@ -1,15 +1,20 @@
 procedure prova(a: in character; b: in integer; c: in out integer; d: out character) is
-	type rang is new integer range 1..10;
-	type temp is array(rang) of integer;
+	type rang is new integer range 1..20;
+	type temp is array(rang, rang) of integer;
 	t: temp;
 	e: integer;
 	r: rang;
+	procedure prog(put: in integer) is
+		a : integer;
+	begin
+	 a := put;
+	end prog;
 begin
 
 	if c < b then
 		c := c + 1;
 	end if;
-
+	e := t(r, r); 
 end prova;
 
 		

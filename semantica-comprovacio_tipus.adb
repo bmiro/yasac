@@ -39,7 +39,6 @@ package body semantica.comprovacio_tipus is
 		end if;
 	end ct_params;
 
-	--TODO Constant booleana
 	procedure ct_vconst(lit: in ast; tsub: out tipus_sub; v: out valor) is
 	begin
 		case lit.tnd is 	
@@ -49,7 +48,6 @@ package body semantica.comprovacio_tipus is
 		end case;
 	end ct_vconst;
 
-	--TODO Constants booleanes? S'ha de canviar la gramatica?
 	procedure ct_dec_const(const: in ast; error: in out boolean) is
 		id_const, id_tipus: id_nom;
 		dt, dc: descripcio;
@@ -66,7 +64,7 @@ package body semantica.comprovacio_tipus is
 			raise error_dec_const;		
 		end if;
 		if dt.dt.tsub > tsenter then
-			put("Error: Nomes podem tenir constants enteres, booleanes o caracters"); 
+			put("Error: Nomes podem tenir constants enteres o caracters"); 
 			raise error_dec_const;
 		end if; 
 		if const.dc_vconst.tnd = n_vconst then
@@ -187,7 +185,6 @@ package body semantica.comprovacio_tipus is
 		case dt.dt.tsub is 
 			when tsenter => dt := (d_tipus, (tsenter, dt.dt.ocup, v_inf, v_sup, id_tipus)); 
 			when tscar => dt := (d_tipus, (tscar, dt.dt.ocup, v_inf, v_sup, id_tipus));
-			--when tsbool => dt := (d_tipus, (tsbool, dt.dt.ocup, v_inf, v_sup, id_tipus));
 			when others => null;
 		end case;
 		posa(ts, id_subrang, dt, e);
@@ -206,7 +203,7 @@ package body semantica.comprovacio_tipus is
 		dt : descripcio;
 		error_idx_array : exception; 
 	begin
-		if llista_idx.tnd = n_llista_id then 
+		if llista_idx.tnd = n_llista_id then	
          ct_idx_array(llista_idx.li_llista_id, id_array, nc, error);
 			id_idx := llista_idx.li_identif.id;
       else
@@ -234,7 +231,7 @@ package body semantica.comprovacio_tipus is
 		error_dec_array : exception; 
 	begin
 		id_array := ar.da_identif.id;
-		id_tipus := ar.da_id_tipus.id;
+		id_tipus := ar.da_id_tipus.id;			
 		dt := cons(ts, id_tipus); 
 		if dt.td /= d_tipus then
 			put("Error: No es una declaracio de tipus"); 
@@ -367,37 +364,84 @@ package body semantica.comprovacio_tipus is
 		end case;  
 	end ct_identif; 
 
-	--TODO Acabar referencies compostes
-	procedure ct_ref_comp(ref_comp: in ast; t: out id_nom; tsub: out tipus_sub; var, error: in out boolean) is
+	procedure ct_index(it: it_index; texpr: in id_nom; tsexpr: in tipus_sub; error: in out boolean) is
+		id_tipus_index : id_nom;		
+		d: descripcio; 
+	begin 
+		id_tipus_index := cons_index(ts, it);
+		if texpr = idn_nul then
+			d := cons(ts, id_tipus_index); 
+			if tsexpr /= d.dt.tsub then 	
+				put("Error: Tipus subjacents diferents"); new_line;
+				error := true; 
+			end if;	
+		else
+			if texpr /= id_tipus_index then
+				put("Error: Tipus subjacents diferents"); new_line;
+				error := true;
+			end if;		
+		end if; 
+	end ct_index; 
+
+	procedure ct_ref_comp(ref_comp: in ast; t: out id_nom; tsub: out tipus_sub; it: out it_index; var, error: in out boolean) is
 		texpr, tref : id_nom;
 		tsexpr, tsref : tipus_sub; 
 		v : valor;
 		varexpr, varref : boolean := false;
+		da, dc : descripcio; 
+		error_ref_comp : exception;
 	begin	
-		put("Referencia composta"); new_line;
+		put("Procediment o array"); 
 		if ref_comp.rc_llista_ref.tnd = n_ref_comp then
-			put("Hi ha mes parametres"); new_line; 
-			put(ref_comp.rc_expr.tnd'img);
+			ct_ref_comp(ref_comp.rc_llista_ref, t, tsub, it, var, error); 
+			it := seg_index(ts, it);					
 		else
-			put("Un unic parametre"); new_line;
-			ct_exp(ref_comp.rc_expr, texpr, tsexpr, v, varexpr, error);
 			ct_ref(ref_comp.rc_llista_ref, tref, tsref, varref, error); 
 			if tsref /= tsarray then
 				put("No es un array"); new_line;
+				error := true; 
 			end if; 
+			it := primer_index(ts, tref); 
+			t := tref;  			
+			tsub := tsref;		
+			var := varref;		
 		end if; 
+
+		if not esvalid(it) then	
+			put("Error: Sobren parametres"); new_line;
+			raise error_ref_comp;
+		end if; 
+		ct_exp(ref_comp.rc_expr, texpr, tsexpr, v, varexpr, error);
+		ct_index(it, texpr, tsexpr, error);		
+		
+		exception
+			when error_ref_comp => 
+				error := true; 		
 	end ct_ref_comp;
 
 	procedure ct_ref(ref: in ast; t: out id_nom; tsub: out tipus_sub; var, error: in out boolean) is
 		id : id_nom;
 		dt, dc : descripcio;
+		it : it_index;
 		error_ref : exception; 
 	begin
 		if ref.tnd = n_identif then
 			ct_identif(ref, t, tsub, var, error); 
 		elsif ref.tnd = n_ref_comp then
 			--Referencia composta
-			ct_ref_comp(ref, t, tsub, var, error); 
+			ct_ref_comp(ref, t, tsub, it, var, error);
+			--TODO Aquest bloc es comu a dues parts. Ficar dins un pocediment 
+			------------------------------------
+			it := seg_index(ts, it); 
+			if esvalid(it) then	
+				put("Error: Falten parametres"); new_line;
+				raise error_ref; 
+			end if; 		
+			dt := cons(ts, t); 
+			dc := cons(ts, dt.dt.tcomp);
+			t := dt.dt.tcomp; 
+	 		tsub := dc.dt.tsub;
+			---------------------------------
 		else  
 			--ref.id
 			ct_ref(ref.r_llista_ref, t, tsub, var, error); 
@@ -423,6 +467,8 @@ package body semantica.comprovacio_tipus is
 	procedure ct_exp(exp: in ast; t: out id_nom; tsub: out tipus_sub; v: out valor; var, error: in out boolean) is
 		t1, t2 : id_nom;		
 		tsub_camp1, tsub_camp2 : tipus_sub;
+		it : it_index;
+		dt, dc : descripcio;
 		error_exp : exception;
 	begin
 		case exp.tnd is
@@ -445,8 +491,17 @@ package body semantica.comprovacio_tipus is
 				ct_identif(exp, t, tsub, var, error); 
 			when n_ref =>   
 				ct_ref(exp, t, tsub, var, error);		
-			when n_ref_comp =>
-				ct_ref_comp(exp, t, tsub, var, error); 	
+			when n_ref_comp => 
+				ct_ref_comp(exp, t, tsub, it, var, error); 	
+				it := seg_index(ts, it); 
+				if esvalid(it) then	
+					put("Error: Falten parametres"); new_line;
+					raise error_exp; 
+				end if; 	
+				dt := cons(ts, t); 
+				dc := cons(ts, dt.dt.tcomp);
+				t := dt.dt.tcomp; 
+	 			tsub := dc.dt.tsub;
 			when n_expr => 
 				if exp.e_camp1 /= null then
 					ct_exp(exp.e_camp1, t1, tsub_camp1, v, var, error);
@@ -598,14 +653,19 @@ package body semantica.comprovacio_tipus is
 				end if;  
 			end if;
 		else 
-			put("Error: Component esquerra de l'assignacio incorrecte");
+			put("Error: Component esquerra de l'assignacio incorrecte"); new_line;
 			error := true;
 		end if; 
 	end ct_sent_assig; 
 
 	procedure ct_sent_proc(sent: in ast; error: in out boolean) is
+		t : id_nom; 
+		tsub : tipus_sub; 
+		var : boolean := false;
 	begin
-		null; 
+		put("Crida procediment"); new_line; 
+		--put(sent.tnd'img); new_line;		
+		ct_ref(sent, t, tsub, var, error);
 	end ct_sent_proc; 
 
    procedure ct_sents(sents: in ast; error: in out boolean) is
@@ -622,8 +682,7 @@ package body semantica.comprovacio_tipus is
 			when n_sent_buc => ct_sent_buc(sent, error);   
 			when n_sent_flux => ct_sent_fluxe(sent, error);  
 			when n_sent_assig => ct_sent_assig(sent, error);
-			--when n_sent_proc => ct_sent_proc(sent, error); put("Crida procediment"); --TODO Revisar
-			when others =>  null; 
+			when others => ct_sent_proc(sent, error);  
 		end case; 
    end ct_sents;
 
