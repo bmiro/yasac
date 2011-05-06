@@ -283,7 +283,7 @@ REF_COMP:
           REF_COMP s_coma EXPRESSIO
           {rs_ref_comp($$, $3, $1);}
         | REF s_parentesi_obert EXPRESSIO
-          {rs_ref_comp($$, $3, $1);} --TODO revisar si es la mateixa funcio
+          {rs_ref_comp($$, $3, $1);}
         ;    
 
 SENT_ASSIGNACIO: 

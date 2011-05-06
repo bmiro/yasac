@@ -6,5 +6,6 @@ with ada.text_io; use ada.text_io;
 package semantica.comprovacio_tipus is
 
    procedure comprova_tipus;
-	Error_semantic: exception;
-   end semantica.comprovacio_tipus;
+   Error_semantic: exception;
+
+end semantica.comprovacio_tipus;
