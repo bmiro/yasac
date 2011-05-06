@@ -5,29 +5,29 @@ package body semantica is
 
    procedure inicia_analitzador is	  
       id, id_int, id_car, id_str: id_nom;
-		d: descripcio;
+      d: descripcio;
       e: boolean:= false;
-	begin
+   begin
       tbuida(tn);
       tbuida(ts);
-	
-		posa_id(tn, "integer", id_int);
+
+      posa_id(tn, "integer", id_int);
       d := (d_tipus, (tsenter, ocup_int, valor(integer'first), valor(integer'last), id_int));
-		posa(ts, id_int, d, e);
-		
-		posa_id(tn, "character", id_car);
+      posa(ts, id_int, d, e);
+      
+      posa_id(tn, "character", id_car);
       d := (d_tipus, (tscar, ocup_int, valor(character'pos(character'first)), valor(character'pos(character'last)), id_car));
       posa(ts, id_car, d, e);
 
-		posa_id(tn, "string", id_str);
+      posa_id(tn, "string", id_str);
       d := (d_tipus, (tsstr, ocup_int, id_str));
       posa(ts, id_str, d, e);
-				
-		posa_id(tn, "boolean", id_bool);
+            
+      posa_id(tn, "boolean", id_bool);
       d := (d_tipus, (tsbool, ocup_int, 0, 1, id_bool));
       posa(ts, id_bool, d, e);
 
-		posa_id(tn,"true", id);
+      posa_id(tn,"true", id);
       d := (d_const, id_bool, 1);
       posa(ts, id, d, e);
 
@@ -54,7 +54,7 @@ package body semantica is
       a.dp_decls:= decls;
       a.dp_sents:= sents;
       a.dp_identif_inici:= identif_inici;
-		a.dp_identif_fi:= identif_fi;
+      a.dp_identif_fi:= identif_fi;
    end rs_dec_proc;
 
    procedure rs_encap(a: out ast; params: in ast) is
@@ -140,19 +140,19 @@ package body semantica is
 
    procedure rs_vconst(a: out ast; lit: in ast) is
    begin
-		a:= lit;
+      a:= lit;
    end rs_vconst;
 
    procedure rs_dec_var(a: out ast; identif_var, identif_tipus: in ast) is
    begin
       a:= new node(n_dec_var);
-		a.dv_id_var:= identif_var;
+      a.dv_id_var:= identif_var;
       a.dv_id_tipus:= identif_tipus;
    end rs_dec_var;
 
    procedure rs_dec_array(a: out ast; identif, llista_idx, tipus: in ast) is
    begin
-		a:= new node(n_dec_array);
+      a:= new node(n_dec_array);
       a.da_identif:= identif;
       a.da_llista_idx:= llista_idx;
       a.da_id_tipus:= tipus;
@@ -303,22 +303,22 @@ package body semantica is
    end rl_atom;
 
    procedure rl_id(a : out ast; yytext : in string;
-		   lin, col : in natural) is
+                   lin, col : in natural) is
       id : id_nom;
    begin
       posa_id(tn, yytext, id);
-		a := new node'(n_identif, lin, col, id);
+      a := new node'(n_identif, lin, col, id);
    end rl_id;
 
    procedure rl_lit_enter(a : out ast; yytext : in string;
-			  lin, col : in natural) is	
+                          lin, col : in natural) is	
    begin      		
-		a := new node'(n_lit_enter, lin, col, valor'value(yytext
-			(yytext'first..yytext'last)));
+      a := new node'(n_lit_enter, lin, col, valor'value(yytext
+                    (yytext'first..yytext'last)));
    end rl_lit_enter;
 
    procedure rl_lit_string(a : out ast; yytext : in string;
-			   lin, col : in natural) is
+                          lin, col : in natural) is
       id : id_string;
    begin
       posa_cad(tn, yytext(yytext'first+1..yytext'last-1), id);
@@ -326,10 +326,10 @@ package body semantica is
    end rl_lit_string;
 
    procedure rl_lit_caracter(a : out ast; yytext : in string;
-			     lin, col : in natural) is
+                             lin, col : in natural) is
    begin
       a := new node'(n_lit_caracter, lin, col,
-		 valor(character'pos(yytext(yytext'first+1))));
+                    valor(character'pos(yytext(yytext'first+1))));
    end rl_lit_caracter;
    
 end semantica;

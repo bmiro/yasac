@@ -19,32 +19,32 @@ package body decls.dtnoms is
   -- Març 2010, Albert Llemosí.
   -- Chapter 4, Section 10, subsection 6, paragraph Quadratic hashing.
    function hash (s: in String) return natural is
-  	   n: constant natural := s'last;
-     	m: constant natural := character'pos(character'last)+1;
-     	c: natural;
+      n: constant natural := s'last;
+      m: constant natural := character'pos(character'last)+1;
+      c: natural;
       k, l: integer;
       a: array (1..n) of natural;
       r: array(1..2*n) of natural;
-	begin
-		for i in s'range loop a(i) := character'pos(s(i)); end loop;
-	   for i in 1..2*n loop r(i) := 0; end loop;
-    	k := 2*n+1;
-    	for i in reverse 1..n loop
-  		   k := k-1; l := k; c := 0;
-			for j in reverse 1..n loop
-      	   c := c + r(l) + a(i)*a(j);
+   begin
+      for i in s'range loop a(i) := character'pos(s(i)); end loop;
+      for i in 1..2*n loop r(i) := 0; end loop;
+      k := 2*n+1;
+      for i in reverse 1..n loop
+         k := k-1; l := k; c := 0;
+         for j in reverse 1..n loop
+            c := c + r(l) + a(i)*a(j);
             r(l) := c mod m; c := c/m;
-      	   l := l-1;
-      	end loop;
+            l := l-1;
+         end loop;
          r(l) := c;
       end loop;
       c := (r(n)*m + r(n+1)) mod tam_tdispersio;
-   	return c;
+      return c;
    end hash;
-		
+
    --Insereix un string dins la taula de caracters
    procedure posa(tc: in out taula_caracters; idx_tc: in out index_tcaracters;
-		  s: in string) is
+      s: in string) is
    begin
       for i in s'first..s'last loop
          tc(idx_tc) := s(i);
@@ -56,11 +56,11 @@ package body decls.dtnoms is
 
    --Compara un string amb un altre ja introduit dins la taula de caracters
    --si son iguals retorna true, sino false
-	function compara(tc: in taula_caracters; s: in string;
+   function compara(tc: in taula_caracters; s: in string;
                     id: in index_tcaracters) return boolean is
-		idx_tcaracters : index_tcaracters := id;
-		idx_s : natural := s'first;
-	begin
+      idx_tcaracters : index_tcaracters := id;
+      idx_s : natural := s'first;
+   begin
       while tc(idx_tcaracters) = s(idx_s) and idx_s < s'last loop
          idx_tcaracters := index_tcaracters'succ(idx_tcaracters);
          idx_s := natural'succ(idx_s);
@@ -78,15 +78,15 @@ package body decls.dtnoms is
       tcaracters : taula_caracters renames tn.tcaracters;
       idx_tblocs : id_nom renames tn.idx_tblocs;
       idx_tcaracters : index_tcaracters renames tn.idx_tcaracters;
-		tb: boolean;
+      tb: boolean;
    begin
-   	p:= hash(s);
+      p:= hash(s);
       if tdispersio(p) = idn_nul then
          tdispersio(p) := idx_tblocs;
          id := idx_tblocs;
-			idx_tblocs := idx_tblocs + 1;
-			tblocs(id).ptblocs := idn_nul;
-			tblocs(id).ptcaracters := idx_tcaracters;
+         idx_tblocs := idx_tblocs + 1;
+         tblocs(id).ptblocs := idn_nul;
+         tblocs(id).ptcaracters := idx_tcaracters;
          posa(tcaracters, idx_tcaracters, s);
       else
          idx := tdispersio(p);
