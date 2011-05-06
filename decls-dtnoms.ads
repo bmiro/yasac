@@ -17,11 +17,14 @@ private
 
    type taula_dispersio is array(0..tam_tdispersio) of id_nom;
    subtype taula_caracters is string(id_string);
+
    type bloc is record
       ptblocs: id_nom; --posicio que apunta dins la mateixa taula de blocs
       ptcaracters: index_tcaracters; --posicio que apunta a la tc
    end record;
+
    type taula_blocs is array(id_nom'first+1..id_nom'last) of bloc;
+
    type Tnoms is record
       tdispersio: taula_dispersio;
       tcaracters: taula_caracters;

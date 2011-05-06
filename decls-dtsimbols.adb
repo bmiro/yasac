@@ -10,12 +10,12 @@ package body decls.dtsimbols is
       prof := 1;
       ta(prof) := 0;
       for id in id_nom loop
-			td(id) := (0, d, idn_nul);
-		end loop;
+         td(id) := (0, d, idn_nul);
+      end loop;
    end tbuida;
 
    procedure posa(ts: in out tsimbols; id: in id_nom; d: in descripcio;
-		error: out boolean) is
+      error: out boolean) is
       ne : id_nom;
       td: tdescripcions renames ts.td;
       ta: tambits renames ts.ta;
@@ -24,11 +24,11 @@ package body decls.dtsimbols is
    begin
       error := td(id).profd = prof;
       if not error then
-			ta(prof) := ta(prof) + 1;
-			ne := ta(prof);
-			te(ne) := (td(id).profd, td(id).d, id, td(id).s);
-			td(id) := (prof, d, idn_nul);
-		end if;
+         ta(prof) := ta(prof) + 1;
+         ne := ta(prof);
+         te(ne) := (td(id).profd, td(id).d, id, td(id).s);
+         td(id) := (prof, d, idn_nul);
+      end if;
    end posa;
 
    function cons(ts: in tsimbols; id: in id_nom) return descripcio is
@@ -66,7 +66,7 @@ package body decls.dtsimbols is
    end surtbloc;
 
    procedure posa_camp(ts: in out tsimbols; idr, idc: in id_nom;
-		       d: in descripcio; error: out boolean) is
+                      d: in descripcio; error: out boolean) is
       dr: descripcio;
       ie, ne: id_nom;
       td: tdescripcions renames ts.td;
@@ -92,8 +92,8 @@ package body decls.dtsimbols is
    end posa_camp;
 
    function cons_camp(ts: in tsimbols; idr, idc: in id_nom)
-		      return descripcio is
-		d: descripcio(d_nul);
+                     return descripcio is
+      d: descripcio(d_nul);
       dr, dc: descripcio;
       ie: id_nom;
       td: tdescripcions renames ts.td;
@@ -108,9 +108,9 @@ package body decls.dtsimbols is
          ie := te(ie).s;
       end loop;
       if ie = 0 then
-			dc := d;
-		else       
-		   dc := te(ie).d;
+         dc := d;
+      else       
+         dc := te(ie).d;
       end if;
       return dc;
    end cons_camp;
@@ -182,7 +182,7 @@ package body decls.dtsimbols is
    end cons_index;
 
    procedure posa_param(ts: in out tsimbols; idproc, idparf: in id_nom;
-			dparf: in descripcio; dperf: out boolean) is
+                        dparf: in descripcio; dperf: out boolean) is
       dproc : descripcio;
       ie, pie, ne : id_nom;
       td: tdescripcions renames ts.td;
@@ -213,7 +213,7 @@ package body decls.dtsimbols is
             te(pie).s := ne;
             te(ne).s := 0;
          end if;
-		end if;
+      end if;
    end posa_param;
 
    function primer_param(ts: in tsimbols; idproc: in id_nom)
@@ -239,11 +239,11 @@ package body decls.dtsimbols is
          return it /= 0;
    end esvalid;
 
-	procedure cons_param(ts: in tsimbols; it: in it_param;
-		idparf: out id_nom; dparf: out descripcio) is
-		te: texpansio renames ts.te;
-	begin
-		idparf := te(id_nom(it)).ptd;
-		dparf := te(id_nom(it)).d;
-	end cons_param;
+   procedure cons_param(ts: in tsimbols; it: in it_param;
+      idparf: out id_nom; dparf: out descripcio) is
+      te: texpansio renames ts.te;
+   begin
+      idparf := te(id_nom(it)).ptd;
+      dparf := te(id_nom(it)).d;
+   end cons_param;
 end decls.dtsimbols;

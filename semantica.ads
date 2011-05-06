@@ -59,11 +59,11 @@ package semantica is
    procedure rl_atom(a: out ast; lin, col: in natural);
    procedure rl_id(a: out ast; yytext: in string; lin, col: in natural);
    procedure rl_lit_enter(a: out ast; yytext: in string;
-			  lin, col: in natural);
+                          lin, col: in natural);
    procedure rl_lit_string(a: out ast; yytext: in string;
-			   lin, col: in natural);
+                           lin, col: in natural);
    procedure rl_lit_caracter(a: out ast; yytext: in string;
-			     lin, col: in natural);
+                             lin, col: in natural);
 private
 
    arrel: ast;
