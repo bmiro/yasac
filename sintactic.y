@@ -313,7 +313,7 @@ package body analitzador_sintactic is
 
     procedure yyerror(s: in string) is
     begin
-        text_io.put_line("Error de sintaxi. Lin: " & natural'image(yylval.lin) & " Col: " & natural'image(yylval.col));
+        text_io.put_line("Error de sintaxi. Lin:" & yylval.lin'img & " Col:" & yylval.col'img);
 		raise Error_sintactic;
     end yyerror;
 ##

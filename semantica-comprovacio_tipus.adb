@@ -20,13 +20,13 @@ package body semantica.comprovacio_tipus is
 		mode:= param.dpa_mode.mode;
 		dt:= cons(ts, id_tipus);
 		if dt.td /= d_tipus then
-			put("Error: El tipus del parametre "); put(con_id(tn, param.dpa_identif.id)); put(" es incorrecte"); 
+			put("Error: El tipus del parametre '"); put(con_id(tn, param.dpa_identif.id)); put("' es incorrecte."); 
 			raise error_param;
 		end if;
 		dp:= (d_param, id_tipus, mode, 0); 
 		posa_param(ts, id_proc, id_param, dp, e);
 		if e then 
-			put("Error: Ja existeix un parametre amb aquest nom"); 
+			put("Error: Conflicte amb el nom '"); put(con_id(tn, id_param)); put("'. "); 
 			raise error_param;
 		end if;
 		exception
@@ -70,18 +70,18 @@ package body semantica.comprovacio_tipus is
 		id_tipus:= const.dc_id_tipus.id;
 		dt:= cons(ts, id_tipus);
 		if dt.td /= d_tipus then
-			put("Error: No es una declaracio de tipus"); 
+			put("Error: Tipus de la constant '"); put(con_id(tn, id_const)); put("' incorrecte. "); 
 			raise error_dec_const;		
 		end if;
 		if dt.dt.tsub > tsenter then
-			put("Error: Nomes podem tenir constants enteres o caracters"); 
+			put("Error: Nomes podem tenir constants enteres o caracters. "); 
 			raise error_dec_const;
 		end if; 
 		if const.dc_vconst.tnd = n_vconst then
 			--Constant amb signe	
 			ct_vconst(const.dc_vconst.v_literal, tsub, v);
 			if tsub /= tsenter then
-				put("Error: Signe menys incompatible amb el tipus."); 
+				put("Error: Signe menys de la constant incompatible amb el tipus. "); 
 				raise error_dec_const;		
 			end if; 
 			v:= -v;
@@ -89,19 +89,19 @@ package body semantica.comprovacio_tipus is
 			ct_vconst(const.dc_vconst, tsub, v);
 		end if;
 		if tsub /= dt.dt.tsub then
-			put("Error: El valor de la constant no es del tipus que toca."); 
+			put("Error: El valor de la constant no es del tipus que toca. "); 
 			raise error_dec_const;		
 		end if;
 		if tsub = tsenter or tsub = tscar then
 			if v < dt.dt.linf or v > dt.dt.lsup then 
-				put("Error: El valor de la constant supera els limits"); 
+				put("Error: El valor de la constant supera els limits. "); 
 				raise error_dec_const;
 			end if;
 		end if;
 		dc:= (d_const, id_tipus, v); 
 		posa(ts, id_const, dc, e);
 		if e then
-			put("Error: Nom de la constant incorrecte"); 
+			put("Error: Conflicte amb el nom '"); put(con_id(tn, id_const)); put("'. "); 
 			raise error_dec_const;
 		end if;
 
@@ -121,14 +121,14 @@ package body semantica.comprovacio_tipus is
 		id_tipus:= var.dv_id_tipus.id;
 		dt:= cons(ts, id_tipus);
 		if dt.td /= d_tipus then
-			put("Error: No es una declaracio de tipus"); 
+			put("Error: Tipus de la variable '"); put(con_id(tn, id_var)); put("' incorrecte. "); 
 			raise error_dec_variable; 	
 		end if;
 		nv:= nv + 1;
 		dv:= (d_var, id_tipus, nv);
 		posa(ts, id_var, dv, e);
-		if e then
-			put("Error: Conflictes amb el nom de la variable"); 
+		if e then		
+			put("Error: Conflicte amb el nom '"); put(con_id(tn, id_var)); put("'. ");
 			raise error_dec_variable;		
 		end if;
 
@@ -145,7 +145,7 @@ package body semantica.comprovacio_tipus is
 			--Limit amb signe
 			ct_vconst(rang.lim, tsub, v);
 			if tsub /= tsenter then
-				put("Error: Signe menys incompatible amb el tipus."); 
+				put("Error: Signe menys incompatible amb el tipus del rang. "); 
 				raise error_rang; 
 			end if; 
 			v:= -v;
@@ -171,33 +171,33 @@ package body semantica.comprovacio_tipus is
 		id_tipus:= subrang.ds_id_tipus.id;
 		dt:= cons(ts, id_tipus); 
 		if dt.td /= d_tipus then
-			put("Error: No es una declaracio de tipus"); 
+			put("Error: Tipus del subrang '"); put(con_id(tn, id_subrang)); put("' incorrecte. "); 
 			raise error_dec_subrang; 
 		end if;
 		if dt.dt.tsub > tsenter then
-			put("Error: No es un escalar"); 
+			put("Error: No es un escalar. "); 
 			raise error_dec_subrang; 
 		end if;
 		ct_rang(subrang.ds_rang.r_lim_inf, tsub_inf, v_inf, error);
 		ct_rang(subrang.ds_rang.r_lim_sup, tsub_sup, v_sup, error);			
 		if tsub_inf /= dt.dt.tsub then
-			put("Error: Tipus del valor inferior incorrecte"); 
+			put("Error: Tipus del valor inferior incorrecte. "); 
 			raise error_dec_subrang; 
 		end if;
 		if tsub_sup /= dt.dt.tsub then
-			put("Error: Tipus del valor superior incorrecte"); 
+			put("Error: Tipus del valor superior incorrecte. "); 
 			raise error_dec_subrang; 
 		end if;
 		if v_inf < dt.dt.linf then 
-			put("Error: El valor inferior supera els limits"); 
+			put("Error: El valor inferior supera els limits. "); 
 			raise error_dec_subrang; 
 		end if;
 		if v_sup > dt.dt.lsup then 
-			put("Error: El valor superior supera els limits"); 
+			put("Error: El valor superior supera els limits. "); 
 			raise error_dec_subrang; 
 		end if;
 		if v_inf > v_sup then
-			put("Error: El valor inferior es major que el superior"); 
+			put("Error: El valor inferior es major que el superior. "); 
 			raise error_dec_subrang; 		
 		end if;
 		case dt.dt.tsub is 
@@ -207,7 +207,7 @@ package body semantica.comprovacio_tipus is
 		end case;
 		posa(ts, id_subrang, dt, e);
 		if e then
-			put("Error: Conflicte amb el nom del subrang");
+			put("Error: Conflicte amb el nom '"); put(con_id(tn, id_subrang)); put("'. ");			
 			raise error_dec_subrang; 		
 		end if;
 
@@ -230,11 +230,12 @@ package body semantica.comprovacio_tipus is
 		end if;	
 		dt:= cons(ts, id_idx);
 		if not (dt.td = d_tipus and then dt.dt.tsub <= tsenter) then			
-			put("Error: Tipus del parametre incorrecte"); 
+			put("Error: Tipus de l'index '"); put(con_id(tn, id_idx)); put("' incorrecte. "); 
 			raise error_idx_array; 
 		end if;
 		posa_index(ts, id_array, id_idx);
 		nc:= nc * (dt.dt.lsup - dt.dt.linf + 1);
+
 		exception
 			when error_idx_array => 
 				error:= true; 
@@ -253,20 +254,21 @@ package body semantica.comprovacio_tipus is
 		id_tipus:= ar.da_id_tipus.id;			
 		dt:= cons(ts, id_tipus); 
 		if dt.td /= d_tipus then
-			put("Error: No es una declaracio de tipus"); 
+			put("Error: Tipus de l'array '"); put(con_id(tn, id_array)); put("' incorrecte. "); 
 			raise error_dec_array; 		
 		end if;
 		da:= (tsarray, 0, id_tipus);
 		d:= (d_tipus, da); 
 		posa(ts, id_array, d, e); 
 		if e then
-			put("Error: Conflictes amb el nom de l'array");
+			put("Error: Conflicte amb el nom '"); put(con_id(tn, id_array)); put("'. "); 
 			raise error_dec_array; 		
 		end if;
 		ct_idx_array(ar.da_llista_idx, id_array, nc, error); 
 		da.ocup:= natural(nc) * dt.dt.ocup;	
 		d:= (d_tipus, da);		
 		actualitza(ts, id_array, d);
+
 		exception
 			when error_dec_array => 
 				error:= true; 
@@ -289,17 +291,17 @@ package body semantica.comprovacio_tipus is
 		end if;
 		dt:= cons(ts, id_tipus); 
 		if dt.td /= d_tipus then	
-			put("Error: No es una declaracio de tipus");
+			put("Error: Tipus del camp del record '"); put(con_id(tn, id_camp)); put("' incorrecte. "); 
 			raise error_record;		
 		end if;
 		if id_rec = id_tipus then 
-			put("Error: Tipus del camp incorrecte"); 
+			put("Error: Tipus del camp del record'"); put(con_id(tn, id_camp)); put("' incorrecte. ");  
 			raise error_record;
 		end if; 
 		dc:= (d_camp, ocup, id_tipus);
 		posa_camp(ts, id_rec, id_camp, dc, e);  
-		if e then
-			put("Error: Conflicte amb el nom d'un component del record"); 
+		if e then			
+			put("Error: Conflicte amb el nom '"); put(con_id(tn, id_camp)); put("'. "); 			
 			raise error_record;
 		end if; 
 		ocup:= ocup + dt.dt.ocup;		
@@ -322,7 +324,7 @@ package body semantica.comprovacio_tipus is
 		d:= (d_tipus, dr);
 		posa(ts, id_rec, d, e); 
 		if e then
-			put("Error: Ja existeix un record amb aquest nom"); 
+			put("Error: Conflicte amb el nom '"); put(con_id(tn, id_rec)); put("'. "); 
 			raise error_dec_rec; 
 		end if;
 		ct_camps_rec(rec.dr_camps, id_rec, ocup, error);
@@ -383,7 +385,7 @@ package body semantica.comprovacio_tipus is
 				tsub:= d.dt.tsub; 
 				var:= true;			
 			when others => 
-				put("Error amb l'identificador de la referencia"); new_line;
+				put("Error: L'identificador '"); put(con_id(tn, id.id)); put("' no existeix. "); new_line;
 				error := true; 
 		end case;  
 	end ct_identif; 
@@ -397,12 +399,12 @@ package body semantica.comprovacio_tipus is
 		if texpr = idn_nul then
 			d:= cons(ts, id_tipus_index); 
 			if tsexpr /= d.dt.tsub then 	
-				put("Error: Tipus subjacents diferents"); 
+				put("Error: Tipus subjacents diferents. "); 
 				raise error_index; 
 			end if;	
 		else
 			if texpr /= id_tipus_index then
-				put("Error: Tipus subjacents diferents"); 
+				put("Error: Tipus subjacents diferents. "); 
 				raise error_index;
 			end if;		
 		end if; 
@@ -426,7 +428,7 @@ package body semantica.comprovacio_tipus is
 		else
 			ct_ref(ref_comp.rc_llista_ref, tref, tsref, varref, error); 
 			if tsref /= tsarray then
-				put("No es un array"); 
+				put("Error: No es un array. "); 
 				raise error_ref_comp; 
 			end if; 
 			it:= primer_index(ts, tref); 
@@ -461,7 +463,7 @@ package body semantica.comprovacio_tipus is
 			ct_ref_comp(ref, t, tsub, it, var, error);
 			it:= seg_index(ts, it); 
 			if esvalid(it) then	
-				put("Error: Falten parametres");
+				put("Error: Falten parametres.");
 				raise error_ref; 
 			end if; 		
 			dt:= cons(ts, t); 
@@ -473,12 +475,12 @@ package body semantica.comprovacio_tipus is
 			ct_ref(ref.r_llista_ref, t, tsub, var, error); 
 			id:= ref.r_identif.id;
 			if tsub /= tsrec then
-				put("Error: Tipus subjacent incorrecte"); 
+				put("Error: Tipus subjacent incorrecte."); 
 				raise error_ref; 
 			end if;
 			dc:= cons_camp(ts, t, id);
 			if dc.td = d_nul then
-				put("Error: No es un camp del record"); 
+				put("Error: No es un camp del record."); 
 				raise error_ref;
 			end if; 
 			dt:= cons(ts, dc.tc);
@@ -523,7 +525,7 @@ package body semantica.comprovacio_tipus is
 				ct_ref_comp(exp, t, tsub, it, var, error); 	
 				it:= seg_index(ts, it); 
 				if esvalid(it) then	
-					put("Error: Falten parametres"); 
+					put("Error: Falten parametres. "); 
 					raise error_exp; 
 				end if; 	
 				dt:= cons(ts, t); 
@@ -541,11 +543,11 @@ package body semantica.comprovacio_tipus is
 					when o_mes | o_menys | o_producte | 
 						  o_divisio | o_modul =>
 						if tsub_camp1 /= tsenter then
-							put("Error: Tipus incorrecte"); 
+							put("Error: Tipus incorrecte. "); 
 							raise error_exp;
 						end if;
 						if tsub_camp2 /= tsenter then
-							put("Error: Tipus incorrecte"); 
+							put("Error: Tipus incorrecte. "); 
 							raise error_exp;
 						end if;
 						tsub:= tsenter;
@@ -554,7 +556,7 @@ package body semantica.comprovacio_tipus is
 						elsif t2 = idn_nul then
 							t:= t1;
 						elsif t1 /= t2 then
-							put("Error: Els components de l'expresio son de diferent tipus"); 
+							put("Error: Els components de l'expresio son de diferent tipus. "); 
 							raise error_exp; 
 						else 
 							t:= t1;
@@ -562,11 +564,11 @@ package body semantica.comprovacio_tipus is
 						var:= false; 			
 					when o_and | o_or => 
 						if t1 /= t2 then
-							put("Error: Els components de l'expresio son de diferent tipus"); 
+							put("Error: Els components de l'expresio son de diferent tipus. "); 
 							raise error_exp;
 						end if;
 						if tsub_camp1 /= tsbool then
-							put("Error: L'expresio no es booleana"); 
+							put("Error: L'expresio no es booleana. "); 
 							raise error_exp;
 						end if;
 						t:= t1;
@@ -575,17 +577,17 @@ package body semantica.comprovacio_tipus is
 					when o_igual | o_diferent | o_menor |
 						  o_major | o_menor_igual | o_major_igual => 
 						if tsub_camp1 /= tsub_camp2 then
-							put("Error: Els components de l'expresio son de diferent tipus"); 
+							put("Error: Els components de l'expresio son de diferent tipus. "); 
 							raise error_exp;
 						end if;
 						if t1 /= idn_nul or t2 /= idn_nul then
 							if t1 /= t2 then
-								put("Error: Els components de l'expresio son de diferent tipus");
+								put("Error: Els components de l'expresio son de diferent tipus. ");
 								raise error_exp;
 							end if;
 						end if; 					
 						if tsub_camp1 > tsenter then 
-							put("Error: El tipus a comparar no es un escalar"); 
+							put("Error: El tipus a comparar no es un escalar. "); 
 							raise error_exp;
 						end if; 
 						t:= id_bool; 							
@@ -593,7 +595,7 @@ package body semantica.comprovacio_tipus is
 						var:= false; 
 					when o_menys_unitari => 
 						if tsub_camp1 /= tsenter then
-							put("Error: Menys incompatible amb el tipus"); 
+							put("Error: Menys incompatible amb el tipus. "); 
 							raise error_exp;
 						end if;
 						t:= t1;
@@ -601,7 +603,7 @@ package body semantica.comprovacio_tipus is
 						var:= false;					
 					when o_not => 
 						if tsub_camp1 /= tsbool then
-							put("Error: Not incompatible amb el tipus"); 
+							put("Error: Not incompatible amb el tipus. "); 
 							raise error_exp;
 						end if;
 						t:= t1;
@@ -627,7 +629,7 @@ package body semantica.comprovacio_tipus is
 	begin
 		ct_exp(buc.sb_condicio, t, tsubexp, v, var, error); 
 		if tsubexp /= tsbool then
-			put("Error: La condicio del bucle no es un boolea");
+			put("Error: La condicio del bucle no es un boolea. ");
 			raise error_sent_buc; 
 		end if;
 		ct_sents(buc.sb_sents, error);			
@@ -646,7 +648,7 @@ package body semantica.comprovacio_tipus is
 	begin
 		ct_exp(fluxe.sf_condicio, t, tsubexp, v, var, error);
 		if tsubexp /= tsbool then
-			put("Error: La condicio del if no es un boolea");
+			put("Error: La condicio del if no es un boolea. ");
 			raise error_sent_fluxe; 
 		end if;
 		ct_sents(fluxe.sf_sents, error);	
@@ -671,17 +673,17 @@ package body semantica.comprovacio_tipus is
 		if var1 then
 			if t2 = idn_nul then
 				if tsub1 /= tsub2 then
-					put("Error: Tipus de les assignacions diferent"); 
+					put("Error: Tipus de les assignacions diferent. "); 
 					raise error_sent_assig;
 				end if; 
 			else 
 				if t1 /= t2 then
-					put("Error: Tipus de les assignacions diferent"); 
+					put("Error: Tipus de les assignacions diferent. "); 
 					raise error_sent_assig;
 				end if;  
 			end if;
 		else 
-			put("Error: Component esquerra de l'assignacio incorrecte"); 
+			put("Error: Component esquerra de l'assignacio incorrecte. "); 
 			raise error_sent_assig;
 		end if;
 
@@ -699,18 +701,18 @@ package body semantica.comprovacio_tipus is
 		cons_param(ts, it, id_param, dp);
 		id_tipus_param:= dp.tp;		
 		if dp.mode = m_out and not var then
-			put("Error: No es pot asignar valor a aquest parametre de sortida"); 
+			put("Error: No es pot asignar valor al parametre '"); put(con_id(tn, id_param)); put("' perque es de sortida. ");
 			raise error_param;
 		end if;	
 		if texpr = idn_nul then
 			d:= cons(ts, id_tipus_param); 
 			if tsexpr /= d.dt.tsub then 	
-				put("Error: Tipus subjacents diferents"); 
+				put("Error: El parametre '"); put(con_id(tn, id_param)); put("' no es del tipus correcte. "); 
 				raise error_param;
 			end if;	
 		else
 			if texpr /= id_tipus_param then
-				put("Error: Tipus diferents");
+				put("Error: El parametre '"); put(con_id(tn, id_param)); put("' no es del tipus correcte. ");
 				raise error_param;
 			end if;		
 		end if; 
@@ -735,7 +737,7 @@ package body semantica.comprovacio_tipus is
 		else
 			dt:= cons(ts, params.rc_llista_ref.id);
 			if dt.td /= d_proc then
-				put("Error: Procediment inexistent.");
+				put("Error: L'identificador '"); put(con_id(tn, params.rc_llista_ref.id)); put("' no es un procediment. ");
 				raise error_params_proc;  
 			end if; 		
 			it:= primer_param(ts, params.rc_llista_ref.id); 
@@ -745,12 +747,12 @@ package body semantica.comprovacio_tipus is
 		end if; 
 
 		if not esvalid(it) then	
-			put("Error: Sobren parametres");
+			put("Error: Sobren parametres al procediment."); 
 			raise error_params_proc;
 		end if; 
 		ct_exp(params.rc_expr, texpr, tsexpr, v, varexpr, error);
 		ct_param(it, texpr, tsexpr, varexpr, error); 
-
+		
 		exception
 			when error_params_proc => 
 				error:= true; 	
@@ -758,7 +760,7 @@ package body semantica.comprovacio_tipus is
 	end ct_params_proc;
 
 	procedure ct_sent_proc(sent: in ast; error: in out boolean) is
-		t : id_nom; 
+		t: id_nom; 
 		tsub: tipus_sub; 
 		dt: descripcio;
 		it: it_param; 	
@@ -769,18 +771,18 @@ package body semantica.comprovacio_tipus is
 			ct_params_proc(sent, t, tsub, it, var, error); 
 			it:= seg_param(ts, it); 
 			if esvalid(it) then	
-				put("Error: Falten parametres"); 
+				put("Error: Falten parametres al procediment '"); put(con_id(tn, t)); put("'. "); 
 				raise error_sent_proc;
 			end if; 		
 		else 
 			dt:= cons(ts, sent.id);
 			if dt.td /= d_proc then
-				put("Error: Procediment inexistent"); 
+				put("Error: El procediment '"); put(con_id(tn, sent.id)); put("' no esta declarat. "); 
 				raise error_sent_proc;
 			end if; 
 			it:= primer_param(ts, sent.id);
 			if esvalid(it) then
-				put("Error: Falten parametres"); 
+				put("Error: Falten parametres al procediment '"); put(con_id(tn, sent.id)); put("'. "); 
 				raise error_sent_proc;
 			end if;
 		end if;
@@ -818,7 +820,8 @@ package body semantica.comprovacio_tipus is
       id_inici:= proc.dp_identif_inici.id;
       id_fi:= proc.dp_identif_fi.id;
       if id_inici /= id_fi then
-			put("Error: Nom del procediment diferent"); new_line;
+			put("Error: Nom del procediment '"); put(con_id(tn, id_inici)); put("' diferent. "); 
+			new_line;
 			error:= true;      
 		end if;
       np:= np + 1;      
@@ -854,8 +857,6 @@ package body semantica.comprovacio_tipus is
    begin
       ct_dec_proc(arrel, error);
       if error then
-         put("Error semantic");
-         new_line;
          raise Error_semantic;
       end if;
    end comprova_tipus;

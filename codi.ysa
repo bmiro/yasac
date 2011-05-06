@@ -12,11 +12,10 @@ procedure prova(a: in character; b: in integer; c: in out integer; d: out charac
 	bol : boolean;
 begin
 
-	if c < b then
-		c := c + 1;
-	end if;
-	e := t(r, r); 
-	prog(bol, c);
+	while b-1 < b loop
+		d := a; 		
+	end loop; 
+
 end prova;
 
 		
