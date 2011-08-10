@@ -1,5 +1,4 @@
    with ada.integer_text_io; use ada.integer_text_io;
-   with ada.text_io; use ada.text_io;
    package body semantica.comprovacio_tipus is
 
    procedure ct_dec_proc(proc: in ast; error: in out boolean);
@@ -863,17 +862,20 @@
       it: it_param;
       e: boolean;
    begin   
+		md_dec_proc(inici);
       id_inici:= proc.dp_identif_inici.id;
       id_fi:= proc.dp_identif_fi.id;
       if id_inici /= id_fi then
-         put("Error: Nom del procediment '"); put(con_id(tn, id_inici));
-         put("' diferent. "); 
-         new_line;
+			--me_nom_proc();     
+			--put("Error: Nom del procediment '"); put(con_id(tn, id_inici));
+         --put("' diferent. "); 
+         --new_line;
          error:= true;      
       end if;
       np:= np + 1;      
       posa(ts, id_inici, (d_proc, np), e);
       if e then
+			--me_proc_existent();
          error:= true;
       end if;
       if proc.dp_encap /= null then
@@ -897,11 +899,13 @@
          ct_sents(proc.dp_sents, error);
       end if;
       surtbloc(ts);
+		md_dec_proc(fi);
    end ct_dec_proc;
       
    procedure comprova_tipus is
       error: boolean := False;
    begin
+		md_main;
       ct_dec_proc(arrel, error);
       if error then
          raise Error_semantic;
