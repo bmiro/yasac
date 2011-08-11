@@ -1,13 +1,45 @@
    with ada.integer_text_io; use ada.integer_text_io;
    package body semantica.comprovacio_tipus is
 
-   procedure ct_dec_proc(proc: in ast; error: in out boolean);
-   procedure ct_sents(sents: in ast; error: in out boolean);
-   procedure ct_exp(exp: in ast; t: out id_nom; tsub: out tipus_sub;
-                    v: out valor; var, error: in out boolean);
+	--declaracions anticipades
+	procedure ct_dec_param(param: in ast; id_proc: in id_nom; 
+				 				  	error: in out boolean);
+	procedure ct_dec_params(params: in ast; id_proc: in id_nom; 
+									error: in out boolean); 
+   procedure ct_vconst(lit: in ast; tsub: out tipus_sub; v: out valor);
+	procedure ct_dec_const(const: in ast; error: in out boolean);
+   procedure ct_dec_variable(var: in ast; error: in out boolean);
+   procedure ct_rang(rang: in ast; tsub: out tipus_sub; v: out valor; 
+									error: in out boolean);
+	procedure ct_dec_subrang(subrang: in ast; error: in out boolean);   
+   procedure ct_idx_array(llista_idx: in ast; id_array: in id_nom;
+	                          nc: in out valor; error: in out boolean);	
+   procedure ct_dec_array(ar: in ast; error: in out boolean);
+	procedure ct_camps_rec(camps: in ast; id_rec: in id_nom;
+ 	                         ocup: in out natural; error: in out boolean);
+	procedure ct_dec_rec(rec: in ast; error: in out boolean);
+	procedure ct_decs(decs: in ast; error: in out boolean);
+   procedure ct_identif(id: in ast; t: out id_nom; tsub: out tipus_sub;
+    	                    var, error: in out boolean);  
+	procedure ct_index(it: it_index; texpr: in id_nom; tsexpr: in tipus_sub;
+	                      error: in out boolean);
+	procedure ct_ref_comp(ref_comp: in ast; t: out id_nom; tsub: out tipus_sub;
+                            it: out it_index; var, error: in out boolean);
    procedure ct_ref(ref: in ast; t: out id_nom; tsub: out tipus_sub;
-                    var, error: in out boolean);
-   procedure ct_sent_proc(sent: in ast; error: in out boolean); 
+ 	                    var, error: in out boolean);
+	procedure ct_exp(exp: in ast; t: out id_nom; tsub: out tipus_sub;
+	                    v: out valor; var, error: in out boolean);
+	procedure ct_sent_buc(buc: in ast; error: in out boolean);
+   procedure ct_sent_fluxe(fluxe: in ast; error: in out boolean);
+   procedure ct_sent_assig(assig: in ast; error: in out boolean); 
+	procedure ct_param(it: it_param; texpr: in id_nom; tsexpr: in tipus_sub;
+	                      var, error: in out boolean);          
+   procedure ct_params_proc(params: in ast; t: out id_nom; tsub: out tipus_sub;
+	                            it: out it_param; var, error: in out boolean);
+	procedure ct_sent_proc(sent: in ast; error: in out boolean);
+	procedure ct_sents(sents: in ast; error: in out boolean);
+	procedure ct_dec_proc(proc: in ast; error: in out boolean);     
+   
 
    procedure ct_dec_param(param: in ast; id_proc: in id_nom;
                           error: in out boolean) is
@@ -812,21 +844,21 @@
       if sent.tnd = n_ref_comp then
          ct_params_proc(sent, t, tsub, it, var, error); 
          it:= seg_param(ts, it); 
-         if esvalid(it) then	
-            put("Error: Falten parametres al procediment '");
+         if esvalid(it) then	         
+				put("Error: Falten parametres al procediment '");
             put(con_id(tn, t)); put("'. "); 
             raise error_sent_proc;
          end if; 		
       else 
          dt:= cons(ts, sent.id);
          if dt.td /= d_proc then
-            put("Error: El procediment '"); put(con_id(tn, sent.id));
+			   put("Error: El procediment '"); put(con_id(tn, sent.id));
             put("' no esta declarat. "); 
             raise error_sent_proc;
          end if; 
          it:= primer_param(ts, sent.id);
          if esvalid(it) then
-            put("Error: Falten parametres al procediment '");
+				put("Error: Falten parametres al procediment '");
             put(con_id(tn, sent.id)); put("'. "); 
             raise error_sent_proc;
          end if;
@@ -866,10 +898,9 @@
       id_inici:= proc.dp_identif_inici.id;
       id_fi:= proc.dp_identif_fi.id;
       if id_inici /= id_fi then
-			--me_nom_proc();     
-			--put("Error: Nom del procediment '"); put(con_id(tn, id_inici));
-         --put("' diferent. "); 
-         --new_line;
+			put("Error: Nom del procediment '"); put(con_id(tn, id_inici));
+         put("' diferent. "); 
+         new_line;
          error:= true;      
       end if;
       np:= np + 1;      
