@@ -22,6 +22,7 @@ package decls.nodes_arbre is
          dp_sents: pnode;
          dp_identif_inici: pnode;
          dp_identif_fi: pnode;
+			np: num_proc;
       when n_encap =>
          e_params: pnode;
       when n_decs =>
@@ -37,6 +38,8 @@ package decls.nodes_arbre is
          dpa_identif: pnode;
          dpa_mode: pnode;
          dpa_tipus: pnode;
+         n_param: num_var;
+			ocup_param: natural;
       when n_mode =>
          mode: t_mode;
       when n_dec_const =>
@@ -46,6 +49,8 @@ package decls.nodes_arbre is
       when n_dec_var =>
          dv_id_var: pnode;
          dv_id_tipus: pnode;
+			nv: num_var;
+			ocup_var: natural;
       when n_dec_array =>
          da_identif: pnode;
          da_llista_idx: pnode;

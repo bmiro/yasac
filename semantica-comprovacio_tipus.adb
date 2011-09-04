@@ -2,10 +2,10 @@ with ada.integer_text_io; use ada.integer_text_io;
 package body semantica.comprovacio_tipus is
 
 	--declaracions anticipades
-	procedure ct_dec_param(param: in ast; id_proc: in id_nom; 
-						 				  	error: in out boolean);
+	procedure ct_dec_param(param: in ast; id_proc: in id_nom;  
+                          n_param: in out num_var; error: in out boolean);
 	procedure ct_dec_params(params: in ast; id_proc: in id_nom; 
-												error: in out boolean); 
+									n_param: in out num_var; error: in out boolean); 
 	procedure ct_vconst(lit: in ast; tsub: out tipus_sub; v: out valor);
 	procedure ct_dec_const(const: in ast; error: in out boolean);
 	procedure ct_dec_variable(var: in ast; error: in out boolean);
@@ -40,8 +40,8 @@ package body semantica.comprovacio_tipus is
 	procedure ct_sents(sents: in ast; error: in out boolean);
 	procedure ct_dec_proc(proc: in ast; error: in out boolean);     
 	  
-	procedure ct_dec_param(param: in ast; id_proc: in id_nom;
-                          error: in out boolean) is
+	procedure ct_dec_param(param: in ast; id_proc: in id_nom;  
+                          n_param: in out num_var; error: in out boolean) is
     id_param, id_tipus: id_nom;
     mode: t_mode;
     dt, dp: descripcio;
@@ -49,8 +49,8 @@ package body semantica.comprovacio_tipus is
 		error_param: exception;
 	begin
 		md_dec_param(inici);
-    id_param:= param.dpa_identif.id;
-    id_tipus:= param.dpa_tipus.id;
+    	id_param:= param.dpa_identif.id;
+    	id_tipus:= param.dpa_tipus.id;
       mode:= param.dpa_mode.mode;
       dt:= cons(ts, id_tipus);
       if dt.td /= d_tipus then
@@ -67,6 +67,9 @@ package body semantica.comprovacio_tipus is
          put("'. "); 
          raise error_param;
       end if;
+		n_param := n_param + 1;
+		param.n_param:= n_param;
+		param.ocup_param:= dt.dt.ocup;
 		md_dec_param(fi);
 
       exception
@@ -76,15 +79,15 @@ package body semantica.comprovacio_tipus is
 				md_dec_param(fi);
    end ct_dec_param;
 
-   procedure ct_dec_params(params: in ast; id_proc: in id_nom;
-                           error: in out boolean) is
+   procedure ct_dec_params(params: in ast; id_proc: in id_nom; 
+                           n_param: in out num_var; error: in out boolean) is
    begin   
 		md_dec_params(inici);
       if params.tnd = n_dec_params then
-         ct_dec_params(params.dpa_params, id_proc, error);
-         ct_dec_param(params.dpa_param, id_proc, error);
+         ct_dec_params(params.dpa_params, id_proc, n_param, error);
+         ct_dec_param(params.dpa_param, id_proc, n_param, error);
       else 
-         ct_dec_param(params, id_proc, error);
+         ct_dec_param(params, id_proc, n_param, error);
       end if;
 		md_dec_params(fi);
    end ct_dec_params;
@@ -189,6 +192,8 @@ package body semantica.comprovacio_tipus is
          put("'. ");
          raise error_dec_variable;		
       end if;
+		var.nv := nv;
+		var.ocup_var:= dt.dt.ocup; 
 		md_dec_variable(fi);
 
       exception
@@ -969,44 +974,46 @@ package body semantica.comprovacio_tipus is
 	  it: it_param;
 		e: boolean;
 		nproc: num_proc;
+		n_param: num_var;
 	begin   
 		md_dec_proc(inici);
-    id_inici:= proc.dp_identif_inici.id;
-    id_fi:= proc.dp_identif_fi.id;
-    if id_inici /= id_fi then
+	   id_inici:= proc.dp_identif_inici.id;
+   	id_fi:= proc.dp_identif_fi.id;
+   	if id_inici /= id_fi then
 			put("Error: Nom del procediment '"); put(con_id(tn, id_inici));
-      put("' diferent. "); 
-      new_line;
-    	error:= true;      
-    end if;
-    np:= np + 1;      
-		nproc:= np;
-    posa(ts, id_inici, (d_proc, np), e);
-    if e then
+   	   put("' diferent. "); 
+   	   new_line;
+   	 	error:= true;      
+   	 end if;
+   	 np:= np + 1;      
+		 nproc:= np;
+		 proc.np:= np;
+   	 posa(ts, id_inici, (d_proc, np), e);
+   	 if e then
 			--me_proc_existent();
-    	error:= true;
-    end if;
+    		error:= true;
+    	end if;
 		if proc.dp_encap /= null then
-      ct_dec_params(proc.dp_encap.e_params, id_inici, error);
-      entrabloc(ts);
-      it:= primer_param(ts, id_inici);
-      while esvalid(it) loop 
-         cons_param(ts, it, id_param, d_param);
-         nv:= nv + 1;
-         d_param.n_param:= nv;
-         posa(ts, id_param, d_param, e);
-    	   it:= seg_param(ts, it);
-    	end loop;
-    else
-    	entrabloc(ts);
-    end if;
+			n_param:= nv;
+      	ct_dec_params(proc.dp_encap.e_params, id_inici, n_param, error);
+      	entrabloc(ts);
+      	it:= primer_param(ts, id_inici);
+      	while esvalid(it) loop 
+      	   cons_param(ts, it, id_param, d_param);
+      	   nv:= nv + 1;
+      	   d_param.n_param:= nv;
+      	   posa(ts, id_param, d_param, e);
+    		   it:= seg_param(ts, it);
+    		end loop;
+    	else
+    		entrabloc(ts);
+    	end if;
     if proc.dp_decls /= null then
     	ct_decs(proc.dp_decls, error);
     end if;
     if proc.dp_sents /= null then
     	ct_sents(proc.dp_sents, error);
     end if;
-		pila_blocs(nproc):= ts;
 		surtbloc(ts);
 		md_dec_proc(fi);
 	end ct_dec_proc;
@@ -1016,7 +1023,6 @@ package body semantica.comprovacio_tipus is
 	begin
 		md_comprovacio_tipus(inici);
     	ct_dec_proc(arrel, error);
-		pila_blocs(num_proc'first):= ts; 
 		md_comprovacio_tipus(fi);  
 		if error then
 	    raise Error_semantic;

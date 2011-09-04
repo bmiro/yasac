@@ -67,8 +67,6 @@ package semantica is
    procedure rl_lit_caracter(a: out ast; yytext: in string;
                              lin, col: in natural);
 
-	type vblocs is array(num_proc) of tsimbols;
-
 private
 
    arrel: ast;
@@ -79,6 +77,5 @@ private
 	np: num_proc := num_proc'first;
 	nv: num_var := num_var'first;
 	id_bool: id_nom;
-	pila_blocs: vblocs;
 
 end semantica;

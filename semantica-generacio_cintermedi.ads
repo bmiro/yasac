@@ -16,7 +16,6 @@ package semantica.generacio_cintermedi is
    use pila_par;
 
 private
-
 	fbin_c3a: c3a_bin.file_type;
 	ftxt_c3a: ada.text_io.file_type;
 	prof: num_prof := num_prof'first;

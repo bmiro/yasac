@@ -9,13 +9,18 @@ procedure prova(a: in character; b: in integer; c: in out integer; d: out charac
 	begin
 	 a := 1;
 	end prog;
-	bol : boolean;
+	bol : boolean;		
 begin
 
 	while b-1 < b loop
 		d := a; 		
 	end loop; 
-
+	--prog(bol, e);
+	--if b-1 < b then
+	--	d:= a;
+	--else
+	--	d:= a;
+	--end if;
 end prova;
 
 		

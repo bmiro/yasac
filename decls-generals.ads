@@ -15,12 +15,9 @@ package decls.generals is
 	desp_pila: constant integer:= 8;
 
    type id_nom is new natural range 0..max_id; 
-   idn_nul: constant id_nom := id_nom'first;
-
    subtype id_string is natural range 1..num_caracters;
 
    type valor is new integer;
-
    type t_operacio is (o_mes, o_menys, o_producte, o_divisio, o_modul,
                        o_menys_unitari, o_and, o_or, o_not, o_igual,
                        o_diferent, o_menor, o_major, o_menor_igual,
@@ -33,6 +30,10 @@ package decls.generals is
 	type num_prof is new natural range 0..max_prof;
 
 	type v_prof is array(num_prof) of num_proc;
+
+	idn_nul: constant id_nom := id_nom'first;
+   op_nul: constant natural:= natural'first;
+   var_nul: constant num_var:= num_var'first;
 
 end decls.generals;
 
