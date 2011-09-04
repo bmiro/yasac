@@ -2,7 +2,7 @@ with decls.generals; use decls.generals;
 with decls.descripcions; use decls.descripcions;
 package decls.dtsimbols is
 
-   type tsimbols is limited private;
+   type tsimbols is private;
    type it_index is private;
    type it_param is private;
    mal_us: exception;
@@ -38,9 +38,9 @@ private
 
    subtype index_tdesp is id_nom;
    subtype index_texp is id_nom;
-   type index_tambit is new integer range -1..maxid;
-   type it_index is new natural range 0..maxid;
-   type it_param is new natural range 0..maxid;
+   type index_tambit is new integer range -1..max_id;
+   type it_index is new natural range 0..max_id;
+   type it_param is new natural range 0..max_id;
 
    type bloc_desc is record
       profd: index_tambit;

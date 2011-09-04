@@ -1,10 +1,11 @@
 with decls.generals; use decls.generals;
+with ada.text_io;
 package decls.descripcions is
-
-   pragma pure;
 
    type tipus_descripcio is (d_nul, d_const, d_var, d_tipus, d_proc, d_param, d_camp);
    type tipus_sub is (tsnul, tsbool, tscar, tsenter, tsstr, tsrec, tsarray);
+
+	package tipus_sub_enum is new ada.text_io.enumeration_io(tipus_sub);
 
    type descr_tipus(tsub: tipus_sub := tsnul) is record
       ocup: natural;

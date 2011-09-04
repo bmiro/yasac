@@ -1,56 +1,56 @@
-   with ada.integer_text_io; use ada.integer_text_io;
-   package body semantica.comprovacio_tipus is
+with ada.integer_text_io; use ada.integer_text_io;
+package body semantica.comprovacio_tipus is
 
 	--declaracions anticipades
 	procedure ct_dec_param(param: in ast; id_proc: in id_nom; 
-				 				  	error: in out boolean);
+						 				  	error: in out boolean);
 	procedure ct_dec_params(params: in ast; id_proc: in id_nom; 
-									error: in out boolean); 
-   procedure ct_vconst(lit: in ast; tsub: out tipus_sub; v: out valor);
+												error: in out boolean); 
+	procedure ct_vconst(lit: in ast; tsub: out tipus_sub; v: out valor);
 	procedure ct_dec_const(const: in ast; error: in out boolean);
-   procedure ct_dec_variable(var: in ast; error: in out boolean);
-   procedure ct_rang(rang: in ast; tsub: out tipus_sub; v: out valor; 
+	procedure ct_dec_variable(var: in ast; error: in out boolean);
+	procedure ct_rang(rang: in ast; tsub: out tipus_sub; v: out valor; 
 									error: in out boolean);
 	procedure ct_dec_subrang(subrang: in ast; error: in out boolean);   
-   procedure ct_idx_array(llista_idx: in ast; id_array: in id_nom;
-	                          nc: in out valor; error: in out boolean);	
-   procedure ct_dec_array(ar: in ast; error: in out boolean);
+	procedure ct_idx_array(llista_idx: in ast; id_array: in id_nom;
+	                       nc: in out valor; error: in out boolean);	
+	procedure ct_dec_array(ar: in ast; error: in out boolean);
 	procedure ct_camps_rec(camps: in ast; id_rec: in id_nom;
- 	                         ocup: in out natural; error: in out boolean);
+	                        ocup: in out natural; error: in out boolean);
 	procedure ct_dec_rec(rec: in ast; error: in out boolean);
 	procedure ct_decs(decs: in ast; error: in out boolean);
-   procedure ct_identif(id: in ast; t: out id_nom; tsub: out tipus_sub;
-    	                    var, error: in out boolean);  
+	procedure ct_identif(id: in ast; t: out id_nom; tsub: out tipus_sub;
+	                    var, error: in out boolean);  
 	procedure ct_index(it: it_index; texpr: in id_nom; tsexpr: in tipus_sub;
-	                      error: in out boolean);
+	                    error: in out boolean);
 	procedure ct_ref_comp(ref_comp: in ast; t: out id_nom; tsub: out tipus_sub;
-                            it: out it_index; var, error: in out boolean);
-   procedure ct_ref(ref: in ast; t: out id_nom; tsub: out tipus_sub;
- 	                    var, error: in out boolean);
+	                       it: out it_index; var, error: in out boolean);
+	procedure ct_ref(ref: in ast; t: out id_nom; tsub: out tipus_sub;
+	                  var, error: in out boolean);
 	procedure ct_exp(exp: in ast; t: out id_nom; tsub: out tipus_sub;
-	                    v: out valor; var, error: in out boolean);
+                    v: out valor; var, error: in out boolean);
 	procedure ct_sent_buc(buc: in ast; error: in out boolean);
-   procedure ct_sent_fluxe(fluxe: in ast; error: in out boolean);
-   procedure ct_sent_assig(assig: in ast; error: in out boolean); 
+	procedure ct_sent_fluxe(fluxe: in ast; error: in out boolean);
+	procedure ct_sent_assig(assig: in ast; error: in out boolean); 
 	procedure ct_param(it: it_param; texpr: in id_nom; tsexpr: in tipus_sub;
-	                      var, error: in out boolean);          
-   procedure ct_params_proc(params: in ast; t: out id_nom; tsub: out tipus_sub;
-	                            it: out it_param; var, error: in out boolean);
+                      var, error: in out boolean);          
+	procedure ct_params_proc(params: in ast; t: out id_nom; tsub: out tipus_sub;
+                            it: out it_param; var, error: in out boolean);
 	procedure ct_sent_proc(sent: in ast; error: in out boolean);
 	procedure ct_sents(sents: in ast; error: in out boolean);
 	procedure ct_dec_proc(proc: in ast; error: in out boolean);     
-   
-
-   procedure ct_dec_param(param: in ast; id_proc: in id_nom;
+	  
+	procedure ct_dec_param(param: in ast; id_proc: in id_nom;
                           error: in out boolean) is
-      id_param, id_tipus: id_nom;
-      mode: t_mode;
-      dt, dp: descripcio;
-      e: boolean;
-      error_param: exception;
-   begin
-      id_param:= param.dpa_identif.id;
-      id_tipus:= param.dpa_tipus.id;
+    id_param, id_tipus: id_nom;
+    mode: t_mode;
+    dt, dp: descripcio;
+    e: boolean;
+		error_param: exception;
+	begin
+		md_dec_param(inici);
+    id_param:= param.dpa_identif.id;
+    id_tipus:= param.dpa_tipus.id;
       mode:= param.dpa_mode.mode;
       dt:= cons(ts, id_tipus);
       if dt.td /= d_tipus then
@@ -67,26 +67,32 @@
          put("'. "); 
          raise error_param;
       end if;
+		md_dec_param(fi);
+
       exception
          when error_param =>
             error:= true;
             new_line;
+				md_dec_param(fi);
    end ct_dec_param;
 
    procedure ct_dec_params(params: in ast; id_proc: in id_nom;
                            error: in out boolean) is
    begin   
+		md_dec_params(inici);
       if params.tnd = n_dec_params then
          ct_dec_params(params.dpa_params, id_proc, error);
          ct_dec_param(params.dpa_param, id_proc, error);
       else 
          ct_dec_param(params, id_proc, error);
       end if;
+		md_dec_params(fi);
    end ct_dec_params;
 
    procedure ct_vconst(lit: in ast; tsub: out tipus_sub; v: out valor) is
    begin
-      case lit.tnd is 	
+		md_vconst(inici);      
+		case lit.tnd is 	
          when n_lit_enter => 
             tsub:= tsenter; 
             v:= lit.vl;			
@@ -95,6 +101,7 @@
             v:= lit.caracter;
          when others => null;
       end case;
+		md_vconst(fi);
    end ct_vconst;
 
    procedure ct_dec_const(const: in ast; error: in out boolean) is
@@ -105,6 +112,7 @@
       e: boolean;
       error_dec_const: exception; 
    begin	
+		md_dec_const(inici);
       id_const:= const.dc_identif.id;
       id_tipus:= const.dc_id_tipus.id;
       dt:= cons(ts, id_tipus);
@@ -147,11 +155,13 @@
          put("'. "); 
          raise error_dec_const;
       end if;
+		md_dec_const(fi);
 
       exception
          when error_dec_const => 
             error:= true;
             new_line;
+				md_dec_const(fi);
    end ct_dec_const;
 
    procedure ct_dec_variable(var: in ast; error: in out boolean) is
@@ -160,6 +170,7 @@
       e: boolean;
       error_dec_variable: exception; 
    begin
+		md_dec_variable(inici);
       id_var:= var.dv_id_var.id;
       id_tipus:= var.dv_id_tipus.id;
       dt:= cons(ts, id_tipus);
@@ -178,17 +189,20 @@
          put("'. ");
          raise error_dec_variable;		
       end if;
+		md_dec_variable(fi);
 
       exception
          when error_dec_variable => 
             error:= true; 
-            new_line;
+            new_line;	
+				md_dec_variable(fi);
    end ct_dec_variable;
 
    procedure ct_rang(rang: in ast; tsub: out tipus_sub;
                      v: out valor; error: in out boolean) is
       error_rang: exception;	
    begin
+		md_rang(inici);
       if rang.tnd = n_lim then			
          --Limit amb signe
          ct_vconst(rang.lim, tsub, v);
@@ -200,11 +214,13 @@
       else 
          ct_vconst(rang, tsub, v);
       end if;
+		md_rang(fi);
 
       exception 
          when error_rang => 
             error:= true; 
             new_line;
+				md_rang(fi);
    end ct_rang;
 
    procedure ct_dec_subrang(subrang: in ast; error: in out boolean) is
@@ -215,6 +231,7 @@
       e : boolean;
       error_dec_subrang : exception; 		
    begin
+		md_dec_subrang(inici);
       id_subrang:= subrang.ds_identif.id;
       id_tipus:= subrang.ds_id_tipus.id;
       dt:= cons(ts, id_tipus); 
@@ -262,11 +279,13 @@
          put("'. ");			
          raise error_dec_subrang; 		
       end if;
-
+		md_dec_subrang(fi);
+	
       exception
          when error_dec_subrang => 
             error:= true; 
             new_line;
+				md_dec_subrang(fi);
    end ct_dec_subrang;
 
    procedure ct_idx_array(llista_idx: in ast; id_array: in id_nom;
@@ -275,6 +294,7 @@
       dt: descripcio;
       error_idx_array: exception; 
    begin
+		md_idx_array(inici);
       if llista_idx.tnd = n_llista_id then	
          ct_idx_array(llista_idx.li_llista_id, id_array, nc, error);
          id_idx:= llista_idx.li_identif.id;
@@ -289,11 +309,14 @@
       end if;
       posa_index(ts, id_array, id_idx);
       nc:= nc * (dt.dt.lsup - dt.dt.linf + 1);
+		md_idx_array(fi);
 
       exception
          when error_idx_array => 
             error:= true; 
             new_line;
+				md_idx_array(fi);
+
    end ct_idx_array; 
 
    procedure ct_dec_array(ar: in ast; error: in out boolean) is
@@ -304,6 +327,7 @@
       nc: valor := 1; 
       error_dec_array: exception; 
    begin
+		md_dec_array(inici);
       id_array:= ar.da_identif.id;
       id_tipus:= ar.da_id_tipus.id;			
       dt:= cons(ts, id_tipus); 
@@ -324,11 +348,13 @@
       da.ocup:= natural(nc) * dt.dt.ocup;	
       d:= (d_tipus, da);		
       actualitza(ts, id_array, d);
+		md_dec_array(fi);
 
       exception
          when error_dec_array => 
             error:= true; 
             new_line;
+				md_dec_array(fi);
    end ct_dec_array;
 
    procedure ct_camps_rec(camps: in ast; id_rec: in id_nom;
@@ -338,6 +364,7 @@
       e: boolean; 
       error_record: exception; 
    begin
+		md_camps_rec(inici);
       if camps.tnd = n_camps_rec then
          ct_camps_rec(camps.csr_llista_camps, id_rec, ocup, error); 
          id_camp:= camps.csr_camp.cr_identif.id;
@@ -364,11 +391,14 @@
          put("'. "); 			
          raise error_record;
       end if; 
-      ocup:= ocup + dt.dt.ocup;		
+      ocup:= ocup + dt.dt.ocup;
+		md_camps_rec(fi);
+		
       exception
          when error_record =>
             error:= true;
             new_line;
+				md_camps_rec(fi);
    end ct_camps_rec; 
 
    procedure ct_dec_rec(rec: in ast; error: in out boolean) is
@@ -379,6 +409,7 @@
       e: boolean; 
       error_dec_rec: exception;
    begin
+		md_dec_rec(inici);
       id_rec:= rec.dr_identif.id;
       dr:= (tsrec, 0);
       d:= (d_tipus, dr);
@@ -391,15 +422,19 @@
       ct_camps_rec(rec.dr_camps, id_rec, ocup, error);
       dr:= (tsrec, ocup);
       d:= (d_tipus, dr);
-      actualitza(ts, id_rec, d); 
+      actualitza(ts, id_rec, d);
+		md_dec_rec(fi);
+		 
       exception 
          when error_dec_rec => 
             error:= true; 
             new_line;
+				md_dec_rec(fi);
    end ct_dec_rec; 
 
    procedure ct_decs(decs: in ast; error: in out boolean) is
    begin
+		md_decs(inici);
       if decs.d_decl /= null then
          ct_decs(decs.d_decl, error);
       end if;
@@ -412,6 +447,7 @@
          when n_dec_proc => ct_dec_proc(decs.d_decls, error);
          when others => null;
       end case;
+		md_decs(fi);
    end ct_decs;
 
    procedure ct_identif(id: in ast; t: out id_nom; tsub: out tipus_sub;
@@ -419,6 +455,7 @@
       id_tipus: id_nom; 
       d, dt: descripcio; 	
    begin 
+		md_identif(inici);
       id_tipus:= id.id;
       dt:= cons(ts, id_tipus); 
       case dt.td is 
@@ -451,6 +488,7 @@
             put("' no existeix. "); new_line;
             error := true; 
       end case;  
+		md_identif(fi);
    end ct_identif; 
 
    procedure ct_index(it: it_index; texpr: in id_nom; tsexpr: in tipus_sub;
@@ -459,6 +497,7 @@
       d: descripcio; 
       error_index: exception;
    begin 
+		md_index(inici);
       id_tipus_index:= cons_index(ts, it);
       if texpr = idn_nul then
          d:= cons(ts, id_tipus_index); 
@@ -472,10 +511,13 @@
             raise error_index;
          end if;		
       end if; 
+		md_index(fi);
+
       exception
          when error_index => 
             error:= true;
             new_line;
+				md_index(fi);
    end ct_index; 
 
    procedure ct_ref_comp(ref_comp: in ast; t: out id_nom; tsub: out tipus_sub;
@@ -487,6 +529,7 @@
       da, dc: descripcio; 
       error_ref_comp: exception;
    begin	
+		md_ref_comp(inici);
       if ref_comp.rc_llista_ref.tnd = n_ref_comp then
          ct_ref_comp(ref_comp.rc_llista_ref, t, tsub, it, var, error); 
          it:= seg_index(ts, it);					
@@ -508,11 +551,14 @@
       end if; 
       ct_exp(ref_comp.rc_expr, texpr, tsexpr, v, varexpr, error);
       ct_index(it, texpr, tsexpr, error);		
+		md_ref_comp(fi);
       
       exception
          when error_ref_comp => 
             error := true; 		
             new_line;
+				md_ref_comp(fi);
+
    end ct_ref_comp;
 
    procedure ct_ref(ref: in ast; t: out id_nom; tsub: out tipus_sub;
@@ -522,6 +568,7 @@
       it: it_index;
       error_ref: exception; 
    begin
+		md_ref(inici);
       if ref.tnd = n_identif then
          ct_identif(ref, t, tsub, var, error); 
       elsif ref.tnd = n_ref_comp then
@@ -553,11 +600,14 @@
          t:= dc.tc;				
          tsub:= dt.dt.tsub;	 			
       end if;	
-
+		md_ref(fi);
+		
       exception
          when error_ref => 
             error := true; 
             new_line;
+				md_ref(fi);
+
    end ct_ref; 
 
    procedure ct_exp(exp: in ast; t: out id_nom; tsub: out tipus_sub;
@@ -568,6 +618,7 @@
       dt, dc: descripcio;
       error_exp: exception;
    begin
+		md_exp(inici);
       case exp.tnd is
          when n_lit_enter => 
             t:= idn_nul;
@@ -680,11 +731,13 @@
             end case;			
          when others => null;
       end case;
+		md_exp(fi);
 
       exception
          when error_exp =>
             error := true; 
             new_line;
+				md_exp(fi);
    end ct_exp; 
 
    procedure ct_sent_buc(buc: in ast; error: in out boolean) is
@@ -694,16 +747,20 @@
       var: boolean := false; 
       error_sent_buc: exception; 	
    begin
+		md_sent_buc(inici);
       ct_exp(buc.sb_condicio, t, tsubexp, v, var, error); 
       if tsubexp /= tsbool then
          put("Error: La condicio del bucle no es un boolea. ");
          raise error_sent_buc; 
       end if;
       ct_sents(buc.sb_sents, error);			
-      exception
+		md_sent_buc(fi);
+
+		exception
          when error_sent_buc => 
             error := true;	
             new_line;
+				md_sent_buc(fi);
    end ct_sent_buc; 
 
    procedure ct_sent_fluxe(fluxe: in ast; error: in out boolean) is
@@ -713,6 +770,7 @@
       var: boolean := false;  
       error_sent_fluxe: exception;
    begin
+		md_sent_fluxe(inici);
       ct_exp(fluxe.sf_condicio, t, tsubexp, v, var, error);
       if tsubexp /= tsbool then
          put("Error: La condicio del if no es un boolea. ");
@@ -722,10 +780,13 @@
       if fluxe.sf_sents_else /= null then
          ct_sents(fluxe.sf_sents_else, error); 
       end if;		
+		md_sent_fluxe(fi);
+
       exception
          when error_sent_fluxe => 
             error := true;	
             new_line;
+				md_sent_fluxe(fi);
    end ct_sent_fluxe;
 
    procedure ct_sent_assig(assig: in ast; error: in out boolean) is 
@@ -735,6 +796,7 @@
       var1, var2: boolean := false;
       error_sent_assig: exception;
    begin
+		md_sent_assig(inici);
       ct_ref(assig.sa_ref, t1, tsub1, var1, error); 
       ct_exp(assig.sa_expr, t2, tsub2, v, var2, error);
       if var1 then
@@ -753,11 +815,13 @@
          put("Error: Component esquerra de l'assignacio incorrecte. "); 
          raise error_sent_assig;
       end if;
+		md_sent_assig(fi);
 
       exception
          when error_sent_assig => 
             error:= true;
-            new_line; 
+            new_line;
+				md_sent_assig(fi); 
    end ct_sent_assig; 
 
    procedure ct_param(it: it_param; texpr: in id_nom; tsexpr: in tipus_sub;
@@ -766,6 +830,7 @@
       d, dp: descripcio; 
       error_param: exception;
    begin 
+		md_param(inici);
       cons_param(ts, it, id_param, dp);
       id_tipus_param:= dp.tp;		
       if dp.mode = m_out and not var then
@@ -787,11 +852,13 @@
             raise error_param;
          end if;		
       end if; 
-
+		md_param(fi);
+	
       exception
          when error_param => 
             error:= true;
             new_line;
+				md_param(fi);
    end ct_param; 
                
    procedure ct_params_proc(params: in ast; t: out id_nom; tsub: out tipus_sub;
@@ -803,6 +870,7 @@
       dt: descripcio; 
       error_params_proc : exception;
    begin	
+		md_params_proc(inici);
       if params.rc_llista_ref.tnd = n_ref_comp then
          ct_params_proc(params.rc_llista_ref, t, tsub, it, var, error); 
          it:= seg_param(ts, it);					
@@ -826,11 +894,13 @@
       end if; 
       ct_exp(params.rc_expr, texpr, tsexpr, v, varexpr, error);
       ct_param(it, texpr, tsexpr, varexpr, error); 
-      
+		md_params_proc(fi);      
+
       exception
          when error_params_proc => 
             error:= true; 	
             new_line;	
+				md_params_proc(fi);
    end ct_params_proc;
 
    procedure ct_sent_proc(sent: in ast; error: in out boolean) is
@@ -841,6 +911,7 @@
       var: boolean := false;
       error_sent_proc: exception;
    begin
+		md_sent_proc(inici);
       if sent.tnd = n_ref_comp then
          ct_params_proc(sent, t, tsub, it, var, error); 
          it:= seg_param(ts, it); 
@@ -863,16 +934,19 @@
             raise error_sent_proc;
          end if;
       end if;
+		md_sent_proc(fi);		
 
       exception
          when error_sent_proc =>
             error:= true;
-            new_line;			
+            new_line;
+				md_sent_proc(fi);			
    end ct_sent_proc; 
 
    procedure ct_sents(sents: in ast; error: in out boolean) is
       sent: ast;
    begin
+		md_sents(inici);
       if sents.tnd = n_sents then 
          ct_sents(sents.s_sents, error);
          sent:= sents.s_sent;
@@ -886,61 +960,67 @@
          when n_sent_assig => ct_sent_assig(sent, error);
          when others => ct_sent_proc(sent, error);  
       end case; 
-   end ct_sents;
+		md_sents(fi);
+  end ct_sents;
 
-   procedure ct_dec_proc(proc: in ast; error: in out boolean) is
-      id_inici, id_fi, id_param: id_nom;
-      d_param: descripcio;
-      it: it_param;
-      e: boolean;
-   begin   
+	procedure ct_dec_proc(proc: in ast; error: in out boolean) is
+	  id_inici, id_fi, id_param: id_nom;
+	  d_param: descripcio;
+	  it: it_param;
+		e: boolean;
+		nproc: num_proc;
+	begin   
 		md_dec_proc(inici);
-      id_inici:= proc.dp_identif_inici.id;
-      id_fi:= proc.dp_identif_fi.id;
-      if id_inici /= id_fi then
+    id_inici:= proc.dp_identif_inici.id;
+    id_fi:= proc.dp_identif_fi.id;
+    if id_inici /= id_fi then
 			put("Error: Nom del procediment '"); put(con_id(tn, id_inici));
-         put("' diferent. "); 
-         new_line;
-         error:= true;      
-      end if;
-      np:= np + 1;      
-      posa(ts, id_inici, (d_proc, np), e);
-      if e then
+      put("' diferent. "); 
+      new_line;
+    	error:= true;      
+    end if;
+    np:= np + 1;      
+		nproc:= np;
+    posa(ts, id_inici, (d_proc, np), e);
+    if e then
 			--me_proc_existent();
-         error:= true;
-      end if;
-      if proc.dp_encap /= null then
-         ct_dec_params(proc.dp_encap.e_params, id_inici, error);
-         entrabloc(ts);
-         it:= primer_param(ts, id_inici);
-         while esvalid(it) loop 
-            cons_param(ts, it, id_param, d_param);
-            nv:= nv + 1;
-            d_param.n_param:= nv;
-            posa(ts, id_param, d_param, e);
-            it:= seg_param(ts, it);
-         end loop;
-      else
-         entrabloc(ts);
-      end if;
-      if proc.dp_decls /= null then
-            ct_decs(proc.dp_decls, error);
-      end if;
-      if proc.dp_sents /= null then
-         ct_sents(proc.dp_sents, error);
-      end if;
-      surtbloc(ts);
+    	error:= true;
+    end if;
+		if proc.dp_encap /= null then
+      ct_dec_params(proc.dp_encap.e_params, id_inici, error);
+      entrabloc(ts);
+      it:= primer_param(ts, id_inici);
+      while esvalid(it) loop 
+         cons_param(ts, it, id_param, d_param);
+         nv:= nv + 1;
+         d_param.n_param:= nv;
+         posa(ts, id_param, d_param, e);
+    	   it:= seg_param(ts, it);
+    	end loop;
+    else
+    	entrabloc(ts);
+    end if;
+    if proc.dp_decls /= null then
+    	ct_decs(proc.dp_decls, error);
+    end if;
+    if proc.dp_sents /= null then
+    	ct_sents(proc.dp_sents, error);
+    end if;
+		pila_blocs(nproc):= ts;
+		surtbloc(ts);
 		md_dec_proc(fi);
-   end ct_dec_proc;
+	end ct_dec_proc;
       
-   procedure comprova_tipus is
-      error: boolean := False;
-   begin
-		md_main;
-      ct_dec_proc(arrel, error);
-      if error then
-         raise Error_semantic;
-      end if;
-   end comprova_tipus;
+	procedure comprova_tipus is
+		error: boolean := false;
+	begin
+		md_comprovacio_tipus(inici);
+    ct_dec_proc(arrel, error);
+		pila_blocs(num_proc'first):= ts; 
+		md_comprovacio_tipus(fi);  
+		if error then
+	    raise Error_semantic;
+		end if;
+	end comprova_tipus;
 
-   end semantica.comprovacio_tipus;
+end semantica.comprovacio_tipus;

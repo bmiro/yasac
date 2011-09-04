@@ -5,7 +5,4 @@ Som el grup 3
 Alhora de seguent entrega presentar el sintactic a davant
 S'han de acursar els procediments llargs de ct.
 S'han de revisar els else dels procediments de ct.
-
-S'ha de fer un package de missatges per imprimir els errors.
-	En aquest package tot ha de sortir a un fitxer
-	Hi ha de haver rutines per printejar missatges de depuracio
+Pasar els put d'erros al package de missatges.

@@ -1,6 +1,8 @@
-with decls.generals, decls.nodes_arbre; use decls.generals, decls.nodes_arbre;
+with decls.generals; use decls.generals;
+with decls.nodes_arbre; use decls.nodes_arbre; 
 with decls.dtnoms; use decls.dtnoms;
 with decls.dtsimbols; use decls.dtsimbols;
+with decls.c3a; use decls.c3a;
 package semantica is
 
    procedure inicia_analitzador;
@@ -64,13 +66,19 @@ package semantica is
                            lin, col: in natural);
    procedure rl_lit_caracter(a: out ast; yytext: in string;
                              lin, col: in natural);
+
+	type vblocs is array(num_proc) of tsimbols;
+
 private
 
    arrel: ast;
    tn: tnoms; 
 	ts: tsimbols;
-	np: num_proc := 0;
-	nv: num_var := 0;
+	tv: tvariables; 
+   tp: tprocediments;
+	np: num_proc := num_proc'first;
+	nv: num_var := num_var'first;
 	id_bool: id_nom;
+	pila_blocs: vblocs;
 
 end semantica;
