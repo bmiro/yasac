@@ -1015,7 +1015,7 @@ package body semantica.comprovacio_tipus is
 		error: boolean := false;
 	begin
 		md_comprovacio_tipus(inici);
-    ct_dec_proc(arrel, error);
+    	ct_dec_proc(arrel, error);
 		pila_blocs(num_proc'first):= ts; 
 		md_comprovacio_tipus(fi);  
 		if error then
